@@ -1,12 +1,13 @@
-const destinationData = {
-  Nairobi: {
-    distance: "25 km",
-    eta: "1–2 days"
-  },
+const destinations = {
 
   Dubai: {
     distance: "4,100 km",
     eta: "2–5 days"
+  },
+
+  Nairobi: {
+    distance: "25 km",
+    eta: "1–2 days"
   },
 
   London: {
@@ -23,29 +24,30 @@ const destinationData = {
     distance: "7,300 km",
     eta: "5–8 days"
   }
+
 };
 
 
-let deliveryTimer;
+let progressTimer;
 
 
-/* =========================
+/* ==========================
    ADD TO CART
-========================= */
+========================== */
 
 function addToCart() {
 
-  const destinationSelect =
-    document.getElementById("destinationSelect");
-
   const destination =
-    destinationSelect.value;
+    document.getElementById("destinationSelect").value;
 
   const data =
-    destinationData[destination];
+    destinations[destination];
 
-  const transition =
+  const overlay =
     document.getElementById("logisticsTransition");
+
+
+  /* Destination */
 
   document.getElementById("routeDestination")
     .textContent = destination;
@@ -53,8 +55,14 @@ function addToCart() {
   document.getElementById("cardDestination")
     .textContent = destination;
 
+
+  /* Distance */
+
   document.getElementById("deliveryDistance")
     .textContent = data.distance;
+
+
+  /* ETA */
 
   document.getElementById("deliveryTime")
     .textContent = data.eta;
@@ -62,68 +70,77 @@ function addToCart() {
 
   /* Reset animation */
 
-  transition.classList.remove("active");
+  overlay.classList.remove("active");
 
-  void transition.offsetWidth;
+  document.getElementById("deliveryProgress").style.width = "0%";
+
+  document.getElementById("progressPercent").textContent = "0%";
 
 
-  /* Start cinematic sequence */
+  /*
+    Force browser to reset animation
+  */
 
-  transition.classList.add("active");
+  void overlay.offsetWidth;
+
+
+  /* Open cinematic screen */
+
+  overlay.classList.add("active");
 
   document.body.style.overflow = "hidden";
 
 
-  animateDeliveryProgress();
+  /* Start progress */
+
+  startProgress();
+
 }
 
 
-/* =========================
-   DELIVERY PROGRESS
-========================= */
+/* ==========================
+   PROGRESS
+========================== */
 
-function animateDeliveryProgress() {
+function startProgress() {
 
-  const progress =
+  clearInterval(progressTimer);
+
+  const bar =
     document.getElementById("deliveryProgress");
 
-  const percent =
+  const percentage =
     document.getElementById("progressPercent");
-
-
-  clearInterval(deliveryTimer);
-
-
-  progress.style.transition = "none";
-  progress.style.width = "0%";
-
-  percent.textContent = "0%";
-
-
-  requestAnimationFrame(() => {
-
-    progress.style.transition =
-      "width 3s linear";
-
-    progress.style.width = "100%";
-
-  });
 
 
   let value = 0;
 
 
-  deliveryTimer = setInterval(() => {
+  bar.style.transition = "none";
+  bar.style.width = "0%";
 
-    value++;
 
-    percent.textContent =
-      `${Math.min(value, 100)}%`;
+  setTimeout(() => {
+
+    bar.style.transition =
+      "width 3s linear";
+
+    bar.style.width = "100%";
+
+  }, 50);
+
+
+  progressTimer = setInterval(() => {
+
+    value += 1;
+
+    percentage.textContent =
+      value + "%";
 
 
     if (value >= 100) {
 
-      clearInterval(deliveryTimer);
+      clearInterval(progressTimer);
 
     }
 
@@ -132,26 +149,27 @@ function animateDeliveryProgress() {
 }
 
 
-/* =========================
-   CLOSE TRANSITION
-========================= */
+/* ==========================
+   CLOSE
+========================== */
 
 function closeLogisticsTransition() {
 
-  const transition =
+  const overlay =
     document.getElementById("logisticsTransition");
 
-  transition.classList.remove("active");
+  overlay.classList.remove("active");
 
   document.body.style.overflow = "";
 
-  clearInterval(deliveryTimer);
+  clearInterval(progressTimer);
+
 }
 
 
-/* =========================
+/* ==========================
    TRACK SHIPMENT
-========================= */
+========================== */
 
 function trackShipment() {
 
@@ -161,6 +179,7 @@ function trackShipment() {
   const result =
     document.getElementById("trackingResult");
 
+
   const trackingNumber =
     input.value.trim();
 
@@ -168,21 +187,29 @@ function trackShipment() {
   if (!trackingNumber) {
 
     result.textContent =
-      "Enter a tracking number.";
+      "Please enter a tracking number.";
 
     return;
+
   }
 
 
-  result.textContent =
-    `Shipment ${trackingNumber} located in the SmithX logistics network.`;
+  result.innerHTML =
+    `
+      Shipment <strong>${trackingNumber}</strong>
+      has been received by the SmithX network.
+      <br>
+      Status: <span style="color:#8dffba">
+      In Transit
+      </span>
+    `;
 
 }
 
 
-/* =========================
-   ESCAPE KEY
-========================= */
+/* ==========================
+   ESCAPE
+========================== */
 
 document.addEventListener(
   "keydown",
