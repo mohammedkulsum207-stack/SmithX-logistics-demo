@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="theme-color" content="#030305">
+  <meta name="theme-color" content="#050509">
+  <meta name="description" content="SmithX Logistics — intelligent global shipping.">
 
   <title>SmithX Logistics</title>
 
@@ -13,91 +14,63 @@
 
 <body>
 
+  <!-- NAVBAR -->
   <header class="navbar">
-
-    <div class="logo">
-      SMITH<span>X</span>
-    </div>
+    <div class="logo">SMITH<span>X</span></div>
 
     <nav>
-      <a href="#logistics">Logistics</a>
+      <a href="#home">Home</a>
       <a href="#tracking">Tracking</a>
       <a href="#network">Network</a>
       <a href="#fleet">Fleet</a>
     </nav>
 
-    <button class="track-button">
-      Track shipment
+    <button class="nav-button" onclick="document.getElementById('tracking').scrollIntoView()">
+      Track Shipment
     </button>
-
   </header>
 
 
-  <main>
+  <!-- HERO -->
+  <main id="home">
 
-    <!-- HERO -->
-
-    <section class="hero" id="logistics">
+    <section class="hero">
 
       <div class="hero-content">
 
-        <div class="eyebrow">
+        <div class="status">
           <span></span>
-          SMITHX GLOBAL LOGISTICS
+          SMITHX LOGISTICS NETWORK ONLINE
         </div>
 
         <h1>
           Moving the
-          <em>world</em>
-          smarter.
+          <em>world smarter.</em>
         </h1>
 
         <p>
-          Intelligent logistics connecting businesses,
-          sellers and customers across the world.
+          Intelligent logistics connecting businesses and customers
+          across the world with real-time shipment intelligence.
         </p>
 
-        <!-- QUICK ORDER -->
 
-        <div class="quick-order">
+        <!-- ORDER -->
+        <div class="order-box">
 
-          <div class="order-field">
-
-            <label>DELIVER TO</label>
+          <div class="field">
+            <label>DESTINATION</label>
 
             <select id="destinationSelect">
-
-              <option value="Dubai">
-                Dubai
-              </option>
-
-              <option value="Nairobi">
-                Nairobi
-              </option>
-
-              <option value="London">
-                London
-              </option>
-
-              <option value="New York">
-                New York
-              </option>
-
-              <option value="Singapore">
-                Singapore
-              </option>
-
+              <option value="Dubai">Dubai</option>
+              <option value="Nairobi">Nairobi</option>
+              <option value="London">London</option>
+              <option value="New York">New York</option>
+              <option value="Singapore">Singapore</option>
             </select>
-
           </div>
 
-
-          <button
-            class="add-cart-button"
-            onclick="addToCart()"
-          >
-            <span>＋</span>
-            Add to Cart
+          <button class="cart-button" onclick="addToCart()">
+            + Add to Cart
           </button>
 
         </div>
@@ -105,36 +78,36 @@
       </div>
 
 
-      <!-- 3D LOGISTICS WORLD -->
+      <!-- 3D PLANET -->
+      <div class="planet-area">
 
-      <div class="logistics-visual">
+        <div class="planet-glow"></div>
 
         <div class="planet">
 
-          <div class="planet-glow"></div>
+          <div class="continent c1"></div>
+          <div class="continent c2"></div>
+          <div class="continent c3"></div>
 
-          <div class="continent continent-one"></div>
-          <div class="continent continent-two"></div>
-          <div class="continent continent-three"></div>
+          <div class="planet-dot dot-nairobi"></div>
+          <div class="planet-dot dot-dubai"></div>
+          <div class="planet-dot dot-london"></div>
 
         </div>
 
         <div class="orbit orbit-one"></div>
         <div class="orbit orbit-two"></div>
 
-        <div class="location location-nairobi">
-          <span></span>
-          Nairobi
+        <div class="location location-one">
+          <span></span>Nairobi
         </div>
 
-        <div class="location location-dubai">
-          <span></span>
-          Dubai
+        <div class="location location-two">
+          <span></span>Dubai
         </div>
 
-        <div class="location location-london">
-          <span></span>
-          London
+        <div class="location location-three">
+          <span></span>London
         </div>
 
       </div>
@@ -142,79 +115,41 @@
     </section>
 
 
-    <!-- DASHBOARD -->
+    <!-- STATS -->
+    <section class="stats">
 
-    <section class="dashboard">
-
-      <div class="dashboard-card">
-
+      <div class="stat-card">
         <small>ACTIVE SHIPMENTS</small>
-
-        <strong>
-          24,892
-        </strong>
-
-        <span>
-          Worldwide
-        </span>
-
+        <strong>24,892</strong>
+        <span>Currently moving</span>
       </div>
 
-
-      <div class="dashboard-card">
-
+      <div class="stat-card">
         <small>ON-TIME DELIVERY</small>
-
-        <strong>
-          97.4%
-        </strong>
-
-        <span>
-          Current network
-        </span>
-
+        <strong>97.4%</strong>
+        <span>Network performance</span>
       </div>
 
-
-      <div class="dashboard-card">
-
+      <div class="stat-card">
         <small>GLOBAL FACILITIES</small>
-
-        <strong>
-          1,428
-        </strong>
-
-        <span>
-          Connected
-        </span>
-
+        <strong>1,428</strong>
+        <span>Connected locations</span>
       </div>
 
     </section>
 
 
     <!-- TRACKING -->
+    <section class="section" id="tracking">
 
-    <section
-      class="tracking-section"
-      id="tracking"
-    >
+      <div class="section-label">01 / TRACKING</div>
 
-      <div class="section-heading">
+      <h2>
+        Know where your
+        <span>shipment is.</span>
+      </h2>
 
-        <span>
-          LIVE TRACKING
-        </span>
-
-        <h2>
-          Know where your
-          shipment is.
-        </h2>
-
-      </div>
-
-
-      <div class="tracking-console">
+      <div class="tracking-box">
 
         <input
           id="trackingInput"
@@ -228,61 +163,36 @@
 
       </div>
 
-
-      <div
-        id="trackingResult"
-        class="tracking-result"
-      ></div>
+      <div id="trackingResult" class="tracking-result">
+        Enter a shipment number to begin.
+      </div>
 
     </section>
 
 
     <!-- NETWORK -->
+    <section class="section" id="network">
 
-    <section
-      class="network-section"
-      id="network"
-    >
+      <div class="section-label">02 / GLOBAL NETWORK</div>
 
-      <div class="section-heading">
+      <h2>
+        One network.
+        <span>Every destination.</span>
+      </h2>
 
-        <span>
-          GLOBAL NETWORK
-        </span>
+      <div class="network">
 
-        <h2>
-          One logistics
-          network.
-        </h2>
+        <div class="network-grid"></div>
 
-      </div>
+        <div class="city city-a">Nairobi</div>
+        <div class="city city-b">Dubai</div>
+        <div class="city city-c">London</div>
+        <div class="city city-d">New York</div>
+        <div class="city city-e">Singapore</div>
 
-
-      <div class="network-map">
-
-        <div class="network-city city-nairobi">
-          Nairobi
-        </div>
-
-        <div class="network-city city-dubai">
-          Dubai
-        </div>
-
-        <div class="network-city city-london">
-          London
-        </div>
-
-        <div class="network-city city-newyork">
-          New York
-        </div>
-
-        <div class="network-city city-singapore">
-          Singapore
-        </div>
-
-        <div class="network-route route-one"></div>
-        <div class="network-route route-two"></div>
-        <div class="network-route route-three"></div>
+        <div class="network-line line-a"></div>
+        <div class="network-line line-b"></div>
+        <div class="network-line line-c"></div>
 
       </div>
 
@@ -290,52 +200,44 @@
 
 
     <!-- FLEET -->
+    <section class="section" id="fleet">
 
-    <section
-      class="fleet-section"
-      id="fleet"
-    >
+      <div class="section-label">03 / SMART FLEET</div>
 
-      <div class="section-heading">
+      <h2>
+        Built for the
+        <span>next generation.</span>
+      </h2>
 
-        <span>
-          SMITHX FLEET
-        </span>
-
-        <h2>
-          Built for every
-          journey.
-        </h2>
-
-      </div>
-
-
-      <div class="fleet-grid">
+      <div class="fleet">
 
         <div class="fleet-card">
-          <small>AIR</small>
-          <h3>Air Freight</h3>
+          <small>01</small>
+          <div class="vehicle-icon">▰</div>
+          <h3>Road Freight</h3>
           <p>
-            High-speed international
-            delivery.
+            Intelligent ground transportation for
+            regional and long-distance deliveries.
           </p>
         </div>
 
         <div class="fleet-card">
-          <small>GROUND</small>
-          <h3>Ground Network</h3>
+          <small>02</small>
+          <div class="vehicle-icon">✈</div>
+          <h3>Air Cargo</h3>
           <p>
-            Intelligent road logistics
-            across regions.
+            Fast international shipping connected
+            to the SmithX logistics network.
           </p>
         </div>
 
         <div class="fleet-card">
-          <small>LAST MILE</small>
-          <h3>Final Delivery</h3>
+          <small>03</small>
+          <div class="vehicle-icon">◇</div>
+          <h3>Smart Warehousing</h3>
           <p>
-            Smart delivery directly
-            to your customer.
+            Intelligent fulfillment infrastructure
+            designed for modern commerce.
           </p>
         </div>
 
@@ -346,174 +248,112 @@
   </main>
 
 
-  <!-- =================================================
-       CINEMATIC LOGISTICS TRANSITION
-  ================================================= -->
-
-  <div
-    id="logisticsTransition"
-    class="logistics-transition"
-  >
+  <!-- CINEMATIC DELIVERY EXPERIENCE -->
+  <div id="logisticsTransition" class="logistics-transition">
 
     <div class="transition-grid"></div>
-
 
     <div class="transition-header">
 
       <div class="transition-brand">
-
-        <span class="transition-logo">
-          S
-        </span>
-
         SMITH<span>X</span> LOGISTICS
-
       </div>
 
-
-      <div class="transition-live">
-
+      <div class="live">
         <span></span>
-
-        LOGISTICS ACTIVATED
-
+        LIVE ROUTE
       </div>
 
     </div>
 
 
-    <div class="route-info">
+    <!-- ROUTE -->
+    <div class="route">
 
-      <div class="route-location origin">
-
+      <div class="route-place">
         <small>ORIGIN</small>
-
-        <strong>
-          Nairobi
-        </strong>
-
-        <span>
-          Kenya
-        </span>
-
+        <strong>Nairobi</strong>
+        <span>Kenya</span>
       </div>
 
-
-      <div class="route-line-animation">
-
+      <div class="route-line">
         <div class="route-progress"></div>
-
         <div class="route-dot"></div>
-
       </div>
 
-
-      <div class="route-location destination">
-
+      <div class="route-place destination">
         <small>DESTINATION</small>
-
-        <strong id="routeDestination">
-          Dubai
-        </strong>
-
-        <span>
-          Delivery destination
-        </span>
-
+        <strong id="routeDestination">Dubai</strong>
+        <span>International</span>
       </div>
 
     </div>
 
 
-    <!-- 3D ROAD -->
-
+    <!-- ROAD -->
     <div class="road">
 
-      <div class="road-line road-line-1"></div>
-      <div class="road-line road-line-2"></div>
-      <div class="road-line road-line-3"></div>
-
-
-      <!-- SMITHX TRAILER -->
-
-      <div class="truck">
-
-        <div class="truck-cabin">
-
-          <div class="windshield"></div>
-
-          <div class="truck-front">
-            SMITHX
-          </div>
-
-          <div class="truck-light light-one"></div>
-          <div class="truck-light light-two"></div>
-
-        </div>
-
-
-        <div class="truck-trailer">
-
-          <div class="trailer-logo">
-            SMITH<span>X</span>
-          </div>
-
-          <div class="trailer-subtitle">
-            GLOBAL LOGISTICS
-          </div>
-
-          <div class="trailer-stripe"></div>
-
-        </div>
-
-
-        <div class="truck-wheel wheel-one"></div>
-        <div class="truck-wheel wheel-two"></div>
-        <div class="truck-wheel wheel-three"></div>
-        <div class="truck-wheel wheel-four"></div>
-
-      </div>
+      <div class="road-line road-1"></div>
+      <div class="road-line road-2"></div>
+      <div class="road-line road-3"></div>
 
     </div>
 
 
-    <!-- DELIVERY INFORMATION -->
+    <!-- 3D TRAILER -->
+    <div class="truck">
 
-    <div class="delivery-card">
+      <div class="trailer">
 
-      <div class="delivery-top">
-
-        <div>
-
-          <small>
-            SHIPMENT ROUTE
-          </small>
-
-          <h2>
-
-            <span>
-              Nairobi
-            </span>
-
-            <b>
-              →
-            </b>
-
-            <span id="cardDestination">
-              Dubai
-            </span>
-
-          </h2>
-
+        <div class="trailer-logo">
+          SMITH<span>X</span>
         </div>
 
+        <div class="trailer-text">
+          GLOBAL LOGISTICS
+        </div>
+
+        <div class="trailer-stripe"></div>
+
+      </div>
+
+
+      <div class="cabin">
+
+        <div class="windshield"></div>
+
+        <div class="headlight"></div>
+        <div class="headlight headlight-two"></div>
+
+      </div>
+
+
+      <div class="wheel wheel-one"></div>
+      <div class="wheel wheel-two"></div>
+      <div class="wheel wheel-three"></div>
+      <div class="wheel wheel-four"></div>
+
+    </div>
+
+
+    <!-- DELIVERY CARD -->
+    <div class="delivery-card">
+
+      <div class="delivery-header">
+
+        <div>
+          <small>SHIPMENT ROUTE</small>
+
+          <h2>
+            Nairobi
+            <b>→</b>
+            <span id="cardDestination">Dubai</span>
+          </h2>
+        </div>
 
         <div class="delivery-status">
-
           <span></span>
-
-          READY FOR DISPATCH
-
+          IN TRANSIT
         </div>
 
       </div>
@@ -522,65 +362,32 @@
       <div class="delivery-data">
 
         <div>
-
-          <small>
-            DISTANCE
-          </small>
-
-          <strong id="deliveryDistance">
-            4,100 km
-          </strong>
-
+          <small>DISTANCE</small>
+          <strong id="deliveryDistance">4,100 km</strong>
         </div>
 
-
         <div>
-
-          <small>
-            ESTIMATED DELIVERY
-          </small>
-
-          <strong id="deliveryTime">
-            2–5 days
-          </strong>
-
+          <small>ESTIMATED ARRIVAL</small>
+          <strong id="deliveryTime">2–5 days</strong>
         </div>
 
-
         <div>
-
-          <small>
-            SHIPPING METHOD
-          </small>
-
-          <strong>
-            Express
-          </strong>
-
+          <small>TRANSPORT</small>
+          <strong>Road + Air</strong>
         </div>
 
       </div>
 
 
-      <div class="delivery-progress">
+      <div class="progress">
 
         <div class="progress-label">
-
-          <span>
-            LOGISTICS INITIALIZED
-          </span>
-
-          <span id="progressPercent">
-            0%
-          </span>
-
+          <span>ROUTE PROGRESS</span>
+          <span id="progressPercent">0%</span>
         </div>
 
-
         <div class="progress-track">
-
           <div id="deliveryProgress"></div>
-
         </div>
 
       </div>
@@ -589,25 +396,18 @@
 
 
     <button
-      class="continue-shopping"
+      class="close-button"
       onclick="closeLogisticsTransition()"
     >
-      Continue shopping →
+      Continue Shopping
     </button>
 
   </div>
 
 
   <footer>
-
-    <div class="logo">
-      SMITH<span>X</span>
-    </div>
-
-    <p>
-      Intelligent commerce. Intelligent logistics.
-    </p>
-
+    <div class="logo">SMITH<span>X</span></div>
+    <p>Future commerce. Intelligent logistics.</p>
   </footer>
 
 
