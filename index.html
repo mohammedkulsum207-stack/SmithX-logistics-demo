@@ -1,469 +1,503 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#02050a">
-
-  <title>SMITHX — Global Logistics</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: #02050a;
-      color: #fff;
-      font-family: Arial, Helvetica, sans-serif;
-      overflow-x: hidden;
-    }
-
-    /* BACKGROUND */
-    .stars {
-      position: fixed;
-      inset: 0;
-      z-index: -3;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(0,140,255,.12), transparent 30%),
-        radial-gradient(circle at 80% 60%, rgba(0,255,200,.08), transparent 30%),
-        #02050a;
-    }
-
-    .stars::before,
-    .stars::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(circle, rgba(255,255,255,.7) 1px, transparent 1px);
-      background-size: 90px 90px;
-      opacity: .25;
-    }
-
-    .stars::after {
-      background-size: 150px 150px;
-      opacity: .15;
-      transform: translate(30px, 50px);
-    }
-
-    /* NAVBAR */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 74px;
-      z-index: 1000;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      padding: 0 6%;
-      background: rgba(2,5,10,.72);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(255,255,255,.08);
-    }
-
-    .logo {
-      font-size: 25px;
-      font-weight: 900;
-      letter-spacing: 3px;
-    }
-
-    .logo span {
-      color: #00eaff;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: #cbd5e1;
-      text-decoration: none;
-      font-size: 14px;
-      transition: .25s;
-    }
-
-    .nav-links a:hover {
-      color: #00eaff;
-    }
-
-    .nav-button {
-      padding: 11px 18px;
-      border: 1px solid rgba(0,234,255,.5);
-      border-radius: 30px;
-      color: #00eaff;
-      background: rgba(0,234,255,.05);
-      cursor: pointer;
-    }
-
-    /* HERO */
-    .hero {
-      min-height: 100vh;
-      padding-top: 74px;
-
-      display: grid;
-      grid-template-columns: 42% 58%;
-      align-items: center;
-
-      position: relative;
-    }
-
-    .hero-content {
-      padding: 70px 0 70px 8%;
-      z-index: 10;
-    }
-
-    .eyebrow {
-      color: #00eaff;
-      font-size: 12px;
-      letter-spacing: 4px;
-      margin-bottom: 20px;
-      font-weight: 700;
-    }
-
-    h1 {
-      font-size: clamp(48px, 6vw, 86px);
-      line-height: .95;
-      letter-spacing: -4px;
-      margin-bottom: 25px;
-    }
-
-    h1 span {
-      color: #00eaff;
-    }
-
-    .hero-text {
-      max-width: 540px;
-      color: #94a3b8;
-      font-size: 17px;
-      line-height: 1.7;
-      margin-bottom: 32px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-
-    .primary-btn,
-    .secondary-btn {
-      padding: 15px 24px;
-      border-radius: 10px;
-      font-weight: 700;
-      cursor: pointer;
-      border: none;
-    }
-
-    .primary-btn {
-      background: #00eaff;
-      color: #001015;
-      box-shadow: 0 0 30px rgba(0,234,255,.25);
-    }
-
-    .secondary-btn {
-      color: #fff;
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.12);
-    }
-
-    /* GLOBE */
-    .globe-area {
-      height: calc(100vh - 74px);
-      min-height: 600px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    #earthCanvas {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    .globe-label {
-      position: absolute;
-      right: 8%;
-      bottom: 12%;
-      padding: 12px 16px;
-      border-radius: 10px;
-      background: rgba(0,10,20,.7);
-      border: 1px solid rgba(0,234,255,.2);
-      backdrop-filter: blur(10px);
-      font-size: 11px;
-      letter-spacing: 2px;
-      color: #00eaff;
-    }
-
-    /* STATS */
-    .stats {
-      position: absolute;
-      bottom: 40px;
-      left: 8%;
-      display: flex;
-      gap: 40px;
-    }
-
-    .stat strong {
-      display: block;
-      font-size: 25px;
-    }
-
-    .stat small {
-      color: #64748b;
-      font-size: 11px;
-      letter-spacing: 1px;
-    }
-
-    /* SECTION */
-    section {
-      padding: 100px 7%;
-      position: relative;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 55px;
-    }
-
-    .section-title p {
-      color: #00eaff;
-      font-size: 11px;
-      letter-spacing: 4px;
-      margin-bottom: 12px;
-    }
-
-    .section-title h2 {
-      font-size: clamp(35px, 5vw, 58px);
-    }
-
-    /* SHIPMENT */
-    .shipment-box {
-      max-width: 900px;
-      margin: auto;
-      padding: 35px;
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 20px;
-      background: rgba(255,255,255,.035);
-      backdrop-filter: blur(12px);
-    }
-
-    .shipment-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .field label {
-      display: block;
-      color: #64748b;
-      font-size: 11px;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
-    }
-
-    .field select,
-    .field input {
-      width: 100%;
-      padding: 15px;
-      border-radius: 9px;
-      background: #050b12;
-      border: 1px solid rgba(255,255,255,.12);
-      color: #fff;
-      outline: none;
-    }
-
-    .create-shipment {
-      width: 100%;
-      margin-top: 25px;
-      padding: 17px;
-      border: none;
-      border-radius: 10px;
-      background: #00eaff;
-      color: #001015;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    /* NETWORK */
-    .network {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 15px;
-    }
-
-    .network-card {
-      padding: 25px 18px;
-      border-radius: 15px;
-      background: rgba(255,255,255,.035);
-      border: 1px solid rgba(255,255,255,.08);
-      text-align: center;
-    }
-
-    .network-card .dot {
-      width: 9px;
-      height: 9px;
-      background: #00eaff;
-      border-radius: 50%;
-      margin: 0 auto 15px;
-      box-shadow: 0 0 15px #00eaff;
-    }
-
-    .network-card h3 {
-      margin-bottom: 7px;
-    }
-
-    .network-card p {
-      color: #64748b;
-      font-size: 12px;
-    }
-
-    /* FOOTER */
-    footer {
-      padding: 50px 7%;
-      border-top: 1px solid rgba(255,255,255,.08);
-      color: #64748b;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    footer strong {
-      color: #fff;
-    }
-
-    /* SHIPMENT OVERLAY */
-    #shipmentOverlay {
-      position: fixed;
-      inset: 0;
-      z-index: 2000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0,0,0,.72);
-      backdrop-filter: blur(12px);
-    }
-
-    .overlay-card {
-      width: min(500px, 90%);
-      padding: 35px;
-      border-radius: 20px;
-      background: #050b12;
-      border: 1px solid rgba(0,234,255,.3);
-      text-align: center;
-      box-shadow: 0 0 80px rgba(0,234,255,.12);
-    }
-
-    .success-icon {
-      font-size: 45px;
-      margin-bottom: 15px;
-    }
-
-    .overlay-card h2 {
-      margin-bottom: 10px;
-    }
-
-    .overlay-card p {
-      color: #94a3b8;
-      margin-bottom: 25px;
-    }
-
-    .progress {
-      height: 7px;
-      background: #111827;
-      border-radius: 20px;
-      overflow: hidden;
-    }
-
-    .progress-bar {
-      width: 0;
-      height: 100%;
-      background: #00eaff;
-      transition: width 3s ease;
-    }
-
-    .close-overlay {
-      margin-top: 22px;
-      background: transparent;
-      color: #94a3b8;
-      border: 1px solid rgba(255,255,255,.12);
-      padding: 10px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    /* MOBILE */
-    @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-content {
-        padding: 120px 7% 30px;
-        text-align: center;
-      }
-
-      .hero-text {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .hero-buttons {
-        justify-content: center;
-      }
-
-      .globe-area {
-        height: 600px;
-        min-height: 0;
-      }
-
-      .stats {
-        position: static;
-        justify-content: center;
-        margin: 20px 0 40px;
-      }
-
-      .network {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .nav-links {
-        display: none;
-      }
-    }
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 50px;
-      }
-
-      .shipment-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .network {
-        grid-template-columns: 1fr;
-      }
-
-      footer {
-        flex-direction: column;
-        gap: 15px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#02050a">
+
+<title>SMITHX — Global Logistics</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:#02050a;
+  color:#fff;
+  font-family:Arial,Helvetica,sans-serif;
+  overflow-x:hidden;
+}
+
+.stars{
+  position:fixed;
+  inset:0;
+  z-index:-5;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(0,150,255,.14),transparent 30%),
+    radial-gradient(circle at 80% 70%,rgba(0,255,200,.08),transparent 30%),
+    #02050a;
+}
+
+.stars:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:
+    radial-gradient(circle,rgba(255,255,255,.7) 1px,transparent 1px);
+  background-size:90px 90px;
+  opacity:.25;
+}
+
+/* NAV */
+
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:74px;
+  z-index:1000;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:0 6%;
+
+  background:rgba(2,5,10,.75);
+  backdrop-filter:blur(16px);
+
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.logo{
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:3px;
+}
+
+.logo span{
+  color:#00eaff;
+}
+
+.nav-links{
+  display:flex;
+  gap:28px;
+  list-style:none;
+}
+
+.nav-links a{
+  color:#cbd5e1;
+  text-decoration:none;
+  font-size:14px;
+}
+
+.nav-links a:hover{
+  color:#00eaff;
+}
+
+.nav-button{
+  padding:10px 18px;
+  border-radius:30px;
+  border:1px solid rgba(0,234,255,.5);
+  color:#00eaff;
+  background:rgba(0,234,255,.05);
+}
+
+/* HERO */
+
+.hero{
+  min-height:100vh;
+  padding-top:74px;
+
+  display:grid;
+  grid-template-columns:42% 58%;
+  align-items:center;
+}
+
+.hero-content{
+  padding:70px 0 70px 8%;
+  z-index:10;
+}
+
+.eyebrow{
+  color:#00eaff;
+  font-size:12px;
+  letter-spacing:4px;
+  margin-bottom:20px;
+  font-weight:bold;
+}
+
+h1{
+  font-size:clamp(48px,6vw,86px);
+  line-height:.95;
+  letter-spacing:-4px;
+  margin-bottom:25px;
+}
+
+h1 span{
+  color:#00eaff;
+}
+
+.hero-text{
+  max-width:540px;
+  color:#94a3b8;
+  font-size:17px;
+  line-height:1.7;
+  margin-bottom:32px;
+}
+
+.hero-buttons{
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.primary-btn,
+.secondary-btn{
+  padding:15px 24px;
+  border-radius:10px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.primary-btn{
+  background:#00eaff;
+  color:#001015;
+  border:0;
+  box-shadow:0 0 30px rgba(0,234,255,.25);
+}
+
+.secondary-btn{
+  color:#fff;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.12);
+}
+
+/* EARTH */
+
+.globe-area{
+  height:calc(100vh - 74px);
+  min-height:600px;
+  position:relative;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+#earthCanvas{
+  width:100%;
+  height:100%;
+  display:block;
+}
+
+.globe-label{
+  position:absolute;
+  right:8%;
+  bottom:12%;
+
+  padding:12px 16px;
+
+  border-radius:10px;
+
+  background:rgba(0,10,20,.7);
+  border:1px solid rgba(0,234,255,.2);
+
+  color:#00eaff;
+  font-size:11px;
+  letter-spacing:2px;
+}
+
+/* STATS */
+
+.stats{
+  display:flex;
+  gap:40px;
+  margin-top:40px;
+}
+
+.stat strong{
+  display:block;
+  font-size:25px;
+}
+
+.stat small{
+  color:#64748b;
+  font-size:11px;
+  letter-spacing:1px;
+}
+
+/* SECTIONS */
+
+section{
+  padding:100px 7%;
+  position:relative;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:55px;
+}
+
+.section-title p{
+  color:#00eaff;
+  font-size:11px;
+  letter-spacing:4px;
+  margin-bottom:12px;
+}
+
+.section-title h2{
+  font-size:clamp(35px,5vw,58px);
+}
+
+/* SHIPMENT */
+
+.shipment-box{
+  max-width:900px;
+  margin:auto;
+
+  padding:35px;
+
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:20px;
+
+  background:rgba(255,255,255,.035);
+  backdrop-filter:blur(12px);
+}
+
+.shipment-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+.field label{
+  display:block;
+  color:#64748b;
+  font-size:11px;
+  letter-spacing:1px;
+  margin-bottom:8px;
+}
+
+.field input,
+.field select{
+  width:100%;
+  padding:15px;
+
+  border-radius:9px;
+
+  background:#050b12;
+  border:1px solid rgba(255,255,255,.12);
+
+  color:#fff;
+  outline:none;
+}
+
+.create-shipment{
+  width:100%;
+  margin-top:25px;
+  padding:17px;
+
+  border:0;
+  border-radius:10px;
+
+  background:#00eaff;
+  color:#001015;
+
+  font-weight:800;
+  cursor:pointer;
+}
+
+/* NETWORK */
+
+.network{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:15px;
+}
+
+.network-card{
+  padding:25px 18px;
+
+  border-radius:15px;
+
+  background:rgba(255,255,255,.035);
+  border:1px solid rgba(255,255,255,.08);
+
+  text-align:center;
+}
+
+.dot{
+  width:9px;
+  height:9px;
+
+  margin:0 auto 15px;
+
+  border-radius:50%;
+
+  background:#00eaff;
+  box-shadow:0 0 15px #00eaff;
+}
+
+.network-card h3{
+  margin-bottom:7px;
+}
+
+.network-card p{
+  color:#64748b;
+  font-size:12px;
+}
+
+/* FOOTER */
+
+footer{
+  padding:50px 7%;
+
+  border-top:1px solid rgba(255,255,255,.08);
+
+  color:#64748b;
+
+  display:flex;
+  justify-content:space-between;
+}
+
+footer strong{
+  color:#fff;
+}
+
+/* SHIPMENT POPUP */
+
+#shipmentOverlay{
+  position:fixed;
+  inset:0;
+  z-index:2000;
+
+  display:none;
+
+  align-items:center;
+  justify-content:center;
+
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(12px);
+}
+
+.overlay-card{
+  width:min(500px,90%);
+
+  padding:35px;
+
+  border-radius:20px;
+
+  background:#050b12;
+  border:1px solid rgba(0,234,255,.3);
+
+  text-align:center;
+
+  box-shadow:0 0 80px rgba(0,234,255,.12);
+}
+
+.success-icon{
+  font-size:45px;
+  margin-bottom:15px;
+}
+
+.overlay-card h2{
+  margin-bottom:10px;
+}
+
+.overlay-card p{
+  color:#94a3b8;
+  margin-bottom:25px;
+}
+
+.progress{
+  height:7px;
+  background:#111827;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  width:0;
+  height:100%;
+  background:#00eaff;
+  transition:width 3s ease;
+}
+
+.close-overlay{
+  margin-top:22px;
+
+  background:transparent;
+  color:#94a3b8;
+
+  border:1px solid rgba(255,255,255,.12);
+
+  padding:10px 20px;
+
+  border-radius:8px;
+
+  cursor:pointer;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+  .hero{
+    grid-template-columns:1fr;
+  }
+
+  .hero-content{
+    padding:120px 7% 30px;
+    text-align:center;
+  }
+
+  .hero-text{
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .hero-buttons{
+    justify-content:center;
+  }
+
+  .globe-area{
+    height:600px;
+    min-height:0;
+  }
+
+  .stats{
+    justify-content:center;
+  }
+
+  .network{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .nav-links{
+    display:none;
+  }
+}
+
+@media(max-width:600px){
+
+  h1{
+    font-size:50px;
+  }
+
+  .shipment-grid{
+    grid-template-columns:1fr;
+  }
+
+  .network{
+    grid-template-columns:1fr;
+  }
+
+  footer{
+    flex-direction:column;
+    gap:15px;
+  }
+
+}
+</style>
 </head>
 
 <body>
@@ -471,219 +505,285 @@
 <div class="stars"></div>
 
 <!-- NAVIGATION -->
+
 <nav>
-  <div class="logo">SMITH<span>X</span></div>
+
+  <div class="logo">
+    SMITH<span>X</span>
+  </div>
 
   <ul class="nav-links">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#shipment">Shipments</a></li>
-    <li><a href="#network">Network</a></li>
+
+    <li>
+      <a href="#home">Home</a>
+    </li>
+
+    <li>
+      <a href="#shipment">Shipments</a>
+    </li>
+
+    <li>
+      <a href="#network">Network</a>
+    </li>
+
   </ul>
 
-  <button class="nav-button" onclick="scrollToShipment()">
+  <button
+    class="nav-button"
+    onclick="scrollToShipment()">
     Track
   </button>
+
 </nav>
 
 
 <!-- HERO -->
+
 <main id="home">
 
-  <section class="hero">
+<section class="hero">
 
-    <div class="hero-content">
+  <div class="hero-content">
 
-      <div class="eyebrow">
-        GLOBAL LOGISTICS NETWORK
-      </div>
-
-      <h1>
-        MOVE THE<br>
-        <span>WORLD.</span>
-      </h1>
-
-      <p class="hero-text">
-        SmithX connects businesses, sellers and customers
-        through an intelligent global logistics network.
-        Track movement across the planet in real time.
-      </p>
-
-      <div class="hero-buttons">
-        <button class="primary-btn" onclick="scrollToShipment()">
-          CREATE SHIPMENT
-        </button>
-
-        <button class="secondary-btn" onclick="scrollToNetwork()">
-          EXPLORE NETWORK
-        </button>
-      </div>
-
-      <div class="stats">
-
-        <div class="stat">
-          <strong>180+</strong>
-          <small>COUNTRIES</small>
-        </div>
-
-        <div class="stat">
-          <strong>24/7</strong>
-          <small>MONITORING</small>
-        </div>
-
-        <div class="stat">
-          <strong>LIVE</strong>
-          <small>TRACKING</small>
-        </div>
-
-      </div>
-
+    <div class="eyebrow">
+      GLOBAL LOGISTICS NETWORK
     </div>
 
+    <h1>
+      MOVE THE<br>
+      <span>WORLD.</span>
+    </h1>
 
-    <!-- REAL 3D EARTH -->
-    <div class="globe-area">
-      <canvas id="earthCanvas"></canvas>
+    <p class="hero-text">
+      SmithX connects businesses, sellers and customers
+      through an intelligent global logistics network.
+      Track movement across the planet in real time.
+    </p>
 
-      <div class="globe-label">
-        ● LIVE GLOBAL NETWORK
-      </div>
-    </div>
-
-  </section>
-
-
-  <!-- SHIPMENT -->
-  <section id="shipment">
-
-    <div class="section-title">
-      <p>SHIP WITH SMITHX</p>
-      <h2>Create a Shipment</h2>
-    </div>
-
-    <div class="shipment-box">
-
-      <div class="shipment-grid">
-
-        <div class="field">
-          <label>ORIGIN</label>
-
-          <input
-            type="text"
-            value="Nairobi, Kenya"
-            readonly
-          >
-        </div>
-
-        <div class="field">
-          <label>DESTINATION</label>
-
-          <select id="destination">
-
-            <option value="Dubai, UAE">
-              Dubai, UAE
-            </option>
-
-            <option value="London, UK">
-              London, UK
-            </option>
-
-            <option value="New York, USA">
-              New York, USA
-            </option>
-
-            <option value="Singapore">
-              Singapore
-            </option>
-
-          </select>
-
-        </div>
-
-      </div>
+    <div class="hero-buttons">
 
       <button
-        class="create-shipment"
-        onclick="createShipment()"
-      >
-        CREATE LIVE SHIPMENT
+        class="primary-btn"
+        onclick="scrollToShipment()">
+        CREATE SHIPMENT
+      </button>
+
+      <button
+        class="secondary-btn"
+        onclick="scrollToNetwork()">
+        EXPLORE NETWORK
       </button>
 
     </div>
 
-  </section>
+    <div class="stats">
 
-
-  <!-- NETWORK -->
-  <section id="network">
-
-    <div class="section-title">
-      <p>SMITHX NETWORK</p>
-      <h2>Connected Globally</h2>
-    </div>
-
-    <div class="network">
-
-      <div class="network-card">
-        <div class="dot"></div>
-        <h3>Nairobi</h3>
-        <p>East Africa Hub</p>
+      <div class="stat">
+        <strong>180+</strong>
+        <small>COUNTRIES</small>
       </div>
 
-      <div class="network-card">
-        <div class="dot"></div>
-        <h3>Dubai</h3>
-        <p>Middle East Hub</p>
+      <div class="stat">
+        <strong>24/7</strong>
+        <small>MONITORING</small>
       </div>
 
-      <div class="network-card">
-        <div class="dot"></div>
-        <h3>London</h3>
-        <p>Europe Hub</p>
-      </div>
-
-      <div class="network-card">
-        <div class="dot"></div>
-        <h3>New York</h3>
-        <p>North America Hub</p>
-      </div>
-
-      <div class="network-card">
-        <div class="dot"></div>
-        <h3>Singapore</h3>
-        <p>Asia Hub</p>
+      <div class="stat">
+        <strong>LIVE</strong>
+        <small>TRACKING</small>
       </div>
 
     </div>
 
-  </section>
+  </div>
+
+
+  <!-- 3D EARTH -->
+
+  <div class="globe-area">
+
+    <canvas id="earthCanvas"></canvas>
+
+    <div class="globe-label">
+      ● LIVE GLOBAL NETWORK
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SHIPMENT -->
+
+<section id="shipment">
+
+  <div class="section-title">
+
+    <p>SHIP WITH SMITHX</p>
+
+    <h2>Create a Shipment</h2>
+
+  </div>
+
+  <div class="shipment-box">
+
+    <div class="shipment-grid">
+
+      <div class="field">
+
+        <label>ORIGIN</label>
+
+        <input
+          type="text"
+          value="Nairobi, Kenya"
+          readonly>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>DESTINATION</label>
+
+        <select id="destination">
+
+          <option>Dubai, UAE</option>
+
+          <option>London, UK</option>
+
+          <option>New York, USA</option>
+
+          <option>Singapore</option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="create-shipment"
+      onclick="createShipment()">
+
+      CREATE LIVE SHIPMENT
+
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- NETWORK -->
+
+<section id="network">
+
+  <div class="section-title">
+
+    <p>SMITHX NETWORK</p>
+
+    <h2>Connected Globally</h2>
+
+  </div>
+
+
+  <div class="network">
+
+    <div class="network-card">
+
+      <div class="dot"></div>
+
+      <h3>Nairobi</h3>
+
+      <p>East Africa Hub</p>
+
+    </div>
+
+
+    <div class="network-card">
+
+      <div class="dot"></div>
+
+      <h3>Dubai</h3>
+
+      <p>Middle East Hub</p>
+
+    </div>
+
+
+    <div class="network-card">
+
+      <div class="dot"></div>
+
+      <h3>London</h3>
+
+      <p>Europe Hub</p>
+
+    </div>
+
+
+    <div class="network-card">
+
+      <div class="dot"></div>
+
+      <h3>New York</h3>
+
+      <p>North America Hub</p>
+
+    </div>
+
+
+    <div class="network-card">
+
+      <div class="dot"></div>
+
+      <h3>Singapore</h3>
+
+      <p>Asia Hub</p>
+
+    </div>
+
+  </div>
+
+</section>
 
 </main>
 
 
 <!-- SHIPMENT POPUP -->
+
 <div id="shipmentOverlay">
 
   <div class="overlay-card">
 
-    <div class="success-icon">🌍</div>
+    <div class="success-icon">
+      🌍
+    </div>
 
-    <h2>Shipment Created</h2>
+    <h2>
+      Shipment Created
+    </h2>
 
     <p id="shipmentMessage">
       Your SmithX shipment is being processed.
     </p>
 
     <div class="progress">
+
       <div
         id="progressBar"
         class="progress-bar">
       </div>
+
     </div>
 
     <button
       class="close-overlay"
       onclick="closeOverlay()">
+
       CLOSE
+
     </button>
 
   </div>
@@ -692,6 +792,7 @@
 
 
 <!-- FOOTER -->
+
 <footer>
 
   <div>
@@ -707,501 +808,557 @@
 
 
 <!-- THREE.JS -->
+
 <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 
 
 <script>
 
-  /* =========================================
-     SMITHX REAL 3D EARTH
-  ========================================= */
+/* ==========================================
+   SMITHX 3D EARTH
+========================================== */
 
-  const canvas = document.getElementById("earthCanvas");
+const canvas =
+  document.getElementById("earthCanvas");
 
-  const scene = new THREE.Scene();
+const scene =
+  new THREE.Scene();
 
-  const camera = new THREE.PerspectiveCamera(
+
+const camera =
+  new THREE.PerspectiveCamera(
     38,
     1,
     0.1,
-    1000
+    100
   );
 
-  camera.position.z = 3.2;
+camera.position.z = 3.2;
 
 
-  const renderer = new THREE.WebGLRenderer({
-    canvas: canvas,
-    antialias: true,
-    alpha: true
+const renderer =
+  new THREE.WebGLRenderer({
+
+    canvas:canvas,
+
+    antialias:true,
+
+    alpha:true
+
   });
 
-  renderer.setPixelRatio(
-    Math.min(window.devicePixelRatio, 2)
-  );
+
+renderer.setPixelRatio(
+  Math.min(
+    window.devicePixelRatio,
+    2
+  )
+);
 
 
-  /* RESIZE */
+/* RESIZE */
 
-  function resizeGlobe() {
+function resizeGlobe(){
 
-    const width = canvas.clientWidth;
-    const height = canvas.clientHeight;
+  const width =
+    canvas.clientWidth;
 
-    if (width === 0 || height === 0) return;
+  const height =
+    canvas.clientHeight;
 
-    renderer.setSize(
-      width,
-      height,
-      false
-    );
-
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
+  if(!width || !height){
+    return;
   }
 
-  window.addEventListener(
-    "resize",
-    resizeGlobe
+  renderer.setSize(
+    width,
+    height,
+    false
   );
 
-  resizeGlobe();
+  camera.aspect =
+    width / height;
+
+  camera.updateProjectionMatrix();
+
+}
+
+window.addEventListener(
+  "resize",
+  resizeGlobe
+);
+
+resizeGlobe();
 
 
-  /* LIGHT */
+/* LIGHTING */
 
-  const ambientLight =
-    new THREE.AmbientLight(
-      0xffffff,
-      1.8
-    );
-
-  scene.add(ambientLight);
-
-
-  const sunLight =
-    new THREE.DirectionalLight(
-      0xffffff,
-      3
-    );
-
-  sunLight.position.set(
-    5,
-    3,
-    5
+const ambient =
+  new THREE.AmbientLight(
+    0xffffff,
+    1.8
   );
 
-  scene.add(sunLight);
+scene.add(ambient);
 
 
-  /* EARTH GROUP */
+const sun =
+  new THREE.DirectionalLight(
+    0xffffff,
+    3
+  );
 
-  const earthGroup =
-    new THREE.Group();
+sun.position.set(
+  5,
+  3,
+  5
+);
 
-  scene.add(earthGroup);
-
-
-  /* EARTH TEXTURE */
-
-  const textureLoader =
-    new THREE.TextureLoader();
-
-  const earthTexture =
-    textureLoader.load(
-      "assets/earth.jpg",
-      function(texture) {
-
-        texture.colorSpace =
-          THREE.SRGBColorSpace;
-
-      },
-      undefined,
-      function(error) {
-
-        console.error(
-          "SmithX Earth texture failed:",
-          error
-        );
-
-      }
-    );
+scene.add(sun);
 
 
-  /* EARTH */
+/* EARTH GROUP */
 
-  const earthGeometry =
-    new THREE.SphereGeometry(
-      1,
-      96,
-      96
-    );
+const earthGroup =
+  new THREE.Group();
 
-  const earthMaterial =
-    new THREE.MeshPhongMaterial({
-      map: earthTexture,
-      shininess: 12,
-      specular: new THREE.Color(
+scene.add(earthGroup);
+
+
+/* EARTH TEXTURE */
+
+const loader =
+  new THREE.TextureLoader();
+
+const earthTexture =
+  loader.load(
+    "assets/earth.jpg",
+
+    function(texture){
+
+      texture.colorSpace =
+        THREE.SRGBColorSpace;
+
+    },
+
+    undefined,
+
+    function(){
+
+      console.error(
+        "ERROR: assets/earth.jpg could not be loaded."
+      );
+
+    }
+  );
+
+
+/* EARTH */
+
+const earthGeometry =
+  new THREE.SphereGeometry(
+    1,
+    96,
+    96
+  );
+
+
+const earthMaterial =
+  new THREE.MeshPhongMaterial({
+
+    map:earthTexture,
+
+    shininess:12,
+
+    specular:
+      new THREE.Color(
         0x222222
       )
-    });
-
-  const earth =
-    new THREE.Mesh(
-      earthGeometry,
-      earthMaterial
-    );
-
-  earthGroup.add(earth);
-
-
-  /* ATMOSPHERE */
-
-  const atmosphereGeometry =
-    new THREE.SphereGeometry(
-      1.045,
-      64,
-      64
-    );
-
-  const atmosphereMaterial =
-    new THREE.MeshBasicMaterial({
-      color: 0x159fff,
-      transparent: true,
-      opacity: 0.12,
-      side: THREE.BackSide
-    });
-
-  const atmosphere =
-    new THREE.Mesh(
-      atmosphereGeometry,
-      atmosphereMaterial
-    );
-
-  earthGroup.add(atmosphere);
-
-
-  /* OUTER GLOW */
-
-  const glowGeometry =
-    new THREE.SphereGeometry(
-      1.09,
-      64,
-      64
-    );
-
-  const glowMaterial =
-    new THREE.MeshBasicMaterial({
-      color: 0x00c8ff,
-      transparent: true,
-      opacity: 0.045,
-      side: THREE.BackSide
-    });
-
-  const glow =
-    new THREE.Mesh(
-      glowGeometry,
-      glowMaterial
-    );
-
-  earthGroup.add(glow);
-
-
-  /* =========================================
-     CITY MARKERS
-  ========================================= */
-
-  const cities = [
-
-    {
-      name: "Nairobi",
-      lat: -1.2864,
-      lon: 36.8172
-    },
-
-    {
-      name: "Dubai",
-      lat: 25.2048,
-      lon: 55.2708
-    },
-
-    {
-      name: "London",
-      lat: 51.5074,
-      lon: -0.1278
-    },
-
-    {
-      name: "New York",
-      lat: 40.7128,
-      lon: -74.006
-    },
-
-    {
-      name: "Singapore",
-      lat: 1.3521,
-      lon: 103.8198
-    }
-
-  ];
-
-
-  function latLonToVector3(
-    lat,
-    lon,
-    radius = 1.015
-  ) {
-
-    const phi =
-      (90 - lat) *
-      Math.PI /
-      180;
-
-    const theta =
-      (lon + 180) *
-      Math.PI /
-      180;
-
-    return new THREE.Vector3(
-      -radius *
-        Math.sin(phi) *
-        Math.cos(theta),
-
-      radius *
-        Math.cos(phi),
-
-      radius *
-        Math.sin(phi) *
-        Math.sin(theta)
-    );
-
-  }
-
-
-  cities.forEach(city => {
-
-    const position =
-      latLonToVector3(
-        city.lat,
-        city.lon
-      );
-
-    const markerGeometry =
-      new THREE.SphereGeometry(
-        0.025,
-        16,
-        16
-      );
-
-    const markerMaterial =
-      new THREE.MeshBasicMaterial({
-        color: 0x00ffff
-      });
-
-    const marker =
-      new THREE.Mesh(
-        markerGeometry,
-        markerMaterial
-      );
-
-    marker.position.copy(
-      position
-    );
-
-    earthGroup.add(marker);
 
   });
 
 
-  /* =========================================
-     ROUTES
-  ========================================= */
+const earth =
+  new THREE.Mesh(
+    earthGeometry,
+    earthMaterial
+  );
 
-  function createRoute(
-    cityA,
-    cityB
-  ) {
+earthGroup.add(earth);
 
-    const start =
-      latLonToVector3(
-        cityA.lat,
-        cityA.lon,
-        1.025
-      );
 
-    const end =
-      latLonToVector3(
-        cityB.lat,
-        cityB.lon,
-        1.025
-      );
+/* ATMOSPHERE */
 
-    const middle =
-      start.clone()
-        .add(end)
-        .normalize()
-        .multiplyScalar(1.35);
+const atmosphereGeometry =
+  new THREE.SphereGeometry(
+    1.045,
+    64,
+    64
+  );
 
-    const curve =
-      new THREE.QuadraticBezierCurve3(
-        start,
-        middle,
-        end
-      );
 
-    const points =
-      curve.getPoints(80);
+const atmosphereMaterial =
+  new THREE.MeshBasicMaterial({
 
-    const geometry =
-      new THREE.BufferGeometry()
-        .setFromPoints(points);
+    color:0x159fff,
 
-    const material =
-      new THREE.LineBasicMaterial({
-        color: 0x00eaff,
-        transparent: true,
-        opacity: 0.55
-      });
+    transparent:true,
 
-    const line =
-      new THREE.Line(
-        geometry,
-        material
-      );
+    opacity:.12,
 
-    earthGroup.add(line);
+    side:THREE.BackSide
 
+  });
+
+
+const atmosphere =
+  new THREE.Mesh(
+    atmosphereGeometry,
+    atmosphereMaterial
+  );
+
+earthGroup.add(atmosphere);
+
+
+/* OUTER GLOW */
+
+const glowGeometry =
+  new THREE.SphereGeometry(
+    1.09,
+    64,
+    64
+  );
+
+
+const glowMaterial =
+  new THREE.MeshBasicMaterial({
+
+    color:0x00c8ff,
+
+    transparent:true,
+
+    opacity:.045,
+
+    side:THREE.BackSide
+
+  });
+
+
+const glow =
+  new THREE.Mesh(
+    glowGeometry,
+    glowMaterial
+  );
+
+earthGroup.add(glow);
+
+
+/* ==========================================
+   GLOBAL HUBS
+========================================== */
+
+const cities = [
+
+  {
+    name:"Nairobi",
+    lat:-1.2864,
+    lon:36.8172
+  },
+
+  {
+    name:"Dubai",
+    lat:25.2048,
+    lon:55.2708
+  },
+
+  {
+    name:"London",
+    lat:51.5074,
+    lon:-0.1278
+  },
+
+  {
+    name:"New York",
+    lat:40.7128,
+    lon:-74.006
+  },
+
+  {
+    name:"Singapore",
+    lat:1.3521,
+    lon:103.8198
   }
 
+];
 
-  createRoute(
-    cities[0],
-    cities[1]
+
+function latLonToVector3(
+  lat,
+  lon,
+  radius=1.02
+){
+
+  const phi =
+    (90-lat) *
+    Math.PI /
+    180;
+
+  const theta =
+    (lon+180) *
+    Math.PI /
+    180;
+
+  return new THREE.Vector3(
+
+    -radius *
+    Math.sin(phi) *
+    Math.cos(theta),
+
+    radius *
+    Math.cos(phi),
+
+    radius *
+    Math.sin(phi) *
+    Math.sin(theta)
+
   );
 
-  createRoute(
-    cities[0],
-    cities[2]
-  );
-
-  createRoute(
-    cities[0],
-    cities[3]
-  );
-
-  createRoute(
-    cities[0],
-    cities[4]
-  );
+}
 
 
-  /* =========================================
-     ROTATION
-  ========================================= */
+/* HUB MARKERS */
 
-  let rotationSpeed = 0.0018;
+cities.forEach(city => {
 
-  function animate() {
-
-    requestAnimationFrame(
-      animate
+  const position =
+    latLonToVector3(
+      city.lat,
+      city.lon
     );
 
-    earthGroup.rotation.y +=
-      rotationSpeed;
 
-    renderer.render(
-      scene,
-      camera
+  const geometry =
+    new THREE.SphereGeometry(
+      .025,
+      16,
+      16
     );
 
-  }
 
-  animate();
+  const material =
+    new THREE.MeshBasicMaterial({
 
+      color:0x00ffff
 
-  /* =========================================
-     PAGE FUNCTIONS
-  ========================================= */
-
-  function scrollToShipment() {
-
-    document
-      .getElementById("shipment")
-      .scrollIntoView({
-        behavior: "smooth"
-      });
-
-  }
+    });
 
 
-  function scrollToNetwork() {
-
-    document
-      .getElementById("network")
-      .scrollIntoView({
-        behavior: "smooth"
-      });
-
-  }
+  const marker =
+    new THREE.Mesh(
+      geometry,
+      material
+    );
 
 
-  /* =========================================
-     CREATE SHIPMENT
-  ========================================= */
-
-  function createShipment() {
-
-    const destination =
-      document.getElementById(
-        "destination"
-      ).value;
-
-    const overlay =
-      document.getElementById(
-        "shipmentOverlay"
-      );
-
-    const message =
-      document.getElementById(
-        "shipmentMessage"
-      );
-
-    const progress =
-      document.getElementById(
-        "progressBar"
-      );
-
-    message.textContent =
-      "Nairobi → " +
-      destination +
-      " has been added to the SmithX live network.";
-
-    overlay.style.display =
-      "flex";
-
-    progress.style.width =
-      "0%";
-
-    setTimeout(() => {
-
-      progress.style.width =
-        "100%";
-
-    }, 100);
-
-  }
+  marker.position.copy(
+    position
+  );
 
 
-  function closeOverlay() {
+  earthGroup.add(marker);
 
+});
+
+
+/* ==========================================
+   ROUTES
+========================================== */
+
+function createRoute(
+  cityA,
+  cityB
+){
+
+  const start =
+    latLonToVector3(
+      cityA.lat,
+      cityA.lon,
+      1.025
+    );
+
+
+  const end =
+    latLonToVector3(
+      cityB.lat,
+      cityB.lon,
+      1.025
+    );
+
+
+  const middle =
+    start.clone()
+      .add(end)
+      .normalize()
+      .multiplyScalar(1.35);
+
+
+  const curve =
+    new THREE.QuadraticBezierCurve3(
+      start,
+      middle,
+      end
+    );
+
+
+  const points =
+    curve.getPoints(80);
+
+
+  const geometry =
+    new THREE.BufferGeometry()
+      .setFromPoints(points);
+
+
+  const material =
+    new THREE.LineBasicMaterial({
+
+      color:0x00eaff,
+
+      transparent:true,
+
+      opacity:.55
+
+    });
+
+
+  const line =
+    new THREE.Line(
+      geometry,
+      material
+    );
+
+
+  earthGroup.add(line);
+
+}
+
+
+createRoute(cities[0],cities[1]);
+createRoute(cities[0],cities[2]);
+createRoute(cities[0],cities[3]);
+createRoute(cities[0],cities[4]);
+
+
+/* ==========================================
+   EARTH ROTATION
+========================================== */
+
+function animate(){
+
+  requestAnimationFrame(
+    animate
+  );
+
+  earthGroup.rotation.y += .0018;
+
+  renderer.render(
+    scene,
+    camera
+  );
+
+}
+
+animate();
+
+
+/* ==========================================
+   NAVIGATION
+========================================== */
+
+function scrollToShipment(){
+
+  document
+    .getElementById("shipment")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+
+function scrollToNetwork(){
+
+  document
+    .getElementById("network")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+
+/* ==========================================
+   SHIPMENT
+========================================== */
+
+function createShipment(){
+
+  const destination =
+    document.getElementById(
+      "destination"
+    ).value;
+
+
+  const overlay =
     document.getElementById(
       "shipmentOverlay"
-    ).style.display =
-      "none";
+    );
 
-  }
 
+  const message =
+    document.getElementById(
+      "shipmentMessage"
+    );
+
+
+  const progress =
+    document.getElementById(
+      "progressBar"
+    );
+
+
+  message.textContent =
+    "Nairobi → " +
+    destination +
+    " has been added to the SmithX live network.";
+
+
+  overlay.style.display =
+    "flex";
+
+
+  progress.style.width =
+    "0%";
+
+
+  setTimeout(function(){
+
+    progress.style.width =
+      "100%";
+
+  },100);
+
+}
+
+
+function closeOverlay(){
+
+  document.getElementById(
+    "shipmentOverlay"
+  ).style.display =
+    "none";
+
+}
 
 </script>
 
