@@ -16,8 +16,8 @@ body {
 }
 
 button,
-select,
-input {
+input,
+select {
   font: inherit;
 }
 
@@ -26,14 +26,12 @@ button {
 }
 
 a {
-  color: inherit;
   text-decoration: none;
+  color: inherit;
 }
 
 
-/* =========================
-   NAVBAR
-========================= */
+/* NAVBAR */
 
 .navbar {
   position: fixed;
@@ -41,18 +39,18 @@ a {
   left: 0;
   right: 0;
 
-  height: 76px;
+  height: 72px;
+
+  padding: 0 6vw;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  padding: 0 6vw;
+  background: rgba(3,3,5,.8);
+  backdrop-filter: blur(18px);
 
-  background: rgba(3, 3, 5, .72);
-  backdrop-filter: blur(20px);
-
-  border-bottom: 1px solid rgba(255,255,255,.06);
+  border-bottom: 1px solid #17171d;
 
   z-index: 100;
 }
@@ -60,7 +58,7 @@ a {
 .logo {
   font-size: 18px;
   font-weight: 900;
-  letter-spacing: .12em;
+  letter-spacing: .14em;
 }
 
 .logo span {
@@ -73,42 +71,38 @@ a {
 }
 
 .navbar nav a {
-  color: #85858f;
-  font-size: 12px;
-  transition: .3s;
+  color: #777780;
+  font-size: 11px;
 }
 
 .navbar nav a:hover {
   color: white;
 }
 
-.track-button {
-  border: 1px solid #33333d;
-  background: transparent;
-  color: white;
-
+.nav-button {
   padding: 11px 17px;
-  border-radius: 10px;
 
-  font-size: 11px;
+  color: white;
+  background: transparent;
+
+  border: 1px solid #303039;
+  border-radius: 9px;
+
+  font-size: 10px;
 }
 
 
-/* =========================
-   HERO
-========================= */
+/* HERO */
 
 .hero {
-  min-height: 820px;
-
   position: relative;
+
+  min-height: 850px;
 
   display: flex;
   align-items: center;
 
-  padding:
-    130px 7vw
-    80px;
+  padding: 130px 7vw 80px;
 
   overflow: hidden;
 }
@@ -117,23 +111,23 @@ a {
   position: relative;
   z-index: 5;
 
-  width: 50%;
+  width: 52%;
 }
 
-.eyebrow {
+.status {
   display: flex;
   align-items: center;
   gap: 9px;
 
-  color: #898995;
+  margin-bottom: 25px;
+
+  color: #777781;
 
   font-size: 9px;
-  letter-spacing: .2em;
-
-  margin-bottom: 25px;
+  letter-spacing: .18em;
 }
 
-.eyebrow span {
+.status span {
   width: 7px;
   height: 7px;
 
@@ -141,29 +135,28 @@ a {
 
   background: #8dffba;
 
-  box-shadow:
-    0 0 15px #8dffba;
+  box-shadow: 0 0 15px #8dffba;
 }
 
 .hero h1 {
-  max-width: 650px;
+  max-width: 700px;
 
-  font-size: clamp(55px, 7vw, 105px);
-
+  font-size: clamp(55px, 7vw, 100px);
   line-height: .9;
 
   letter-spacing: -.07em;
 }
 
 .hero h1 em {
+  display: block;
+
   font-style: normal;
 
-  background:
-    linear-gradient(
-      90deg,
-      #fff,
-      #7774ff
-    );
+  background: linear-gradient(
+    90deg,
+    white,
+    #716aff
+  );
 
   -webkit-background-clip: text;
   background-clip: text;
@@ -176,18 +169,16 @@ a {
 
   margin-top: 30px;
 
-  color: #7b7b86;
+  color: #777781;
 
   font-size: 15px;
   line-height: 1.8;
 }
 
 
-/* =========================
-   QUICK ORDER
-========================= */
+/* ORDER */
 
-.quick-order {
+.order-box {
   display: flex;
   align-items: end;
   gap: 12px;
@@ -195,195 +186,212 @@ a {
   margin-top: 35px;
 }
 
-.order-field {
+.field {
   display: flex;
   flex-direction: column;
   gap: 7px;
 }
 
-.order-field label {
-  color: #666671;
+.field label {
+  color: #62626d;
 
   font-size: 8px;
   letter-spacing: .15em;
 }
 
-.order-field select {
-  min-width: 170px;
+.field select {
+  min-width: 190px;
 
   padding: 14px;
 
-  border: 1px solid #2a2a32;
+  color: white;
+  background: #0b0b0f;
+
+  border: 1px solid #292930;
   border-radius: 10px;
 
   outline: none;
-
-  color: white;
-  background: #0b0b0f;
 }
 
-.add-cart-button {
+.cart-button {
   height: 46px;
 
-  padding: 0 22px;
-
-  border: none;
-  border-radius: 10px;
+  padding: 0 23px;
 
   color: #050507;
   background: white;
+
+  border: none;
+  border-radius: 10px;
 
   font-size: 11px;
   font-weight: 800;
 
   transition: .3s;
-
-  box-shadow:
-    0 10px 35px rgba(255,255,255,.08);
 }
 
-.add-cart-button:hover {
+.cart-button:hover {
   transform: translateY(-3px);
 
-  box-shadow:
-    0 15px 45px rgba(255,255,255,.15);
-}
-
-.add-cart-button span {
-  margin-right: 5px;
+  box-shadow: 0 15px 40px rgba(255,255,255,.15);
 }
 
 
-/* =========================
-   3D PLANET
-========================= */
+/* PLANET */
 
-.logistics-visual {
+.planet-area {
   position: absolute;
 
   right: -5%;
-  top: 16%;
+  top: 12%;
 
-  width: 58vw;
-  height: 58vw;
+  width: 60vw;
+  height: 60vw;
 
-  max-width: 760px;
-  max-height: 760px;
+  max-width: 780px;
+  max-height: 780px;
+}
 
-  perspective: 1000px;
+.planet-glow {
+  position: absolute;
+
+  width: 70%;
+  height: 70%;
+
+  left: 15%;
+  top: 15%;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(100,90,255,.25),
+    transparent 68%
+  );
+
+  filter: blur(20px);
 }
 
 .planet {
   position: absolute;
 
-  width: 55%;
-  height: 55%;
-
   left: 22%;
   top: 20%;
 
+  width: 55%;
+  height: 55%;
+
   border-radius: 50%;
 
   background:
     radial-gradient(
-      circle at 35% 30%,
-      #33335c,
-      #111125 38%,
-      #05050c 72%
+      circle at 30% 25%,
+      #454477,
+      #14142a 45%,
+      #050509 75%
     );
 
   box-shadow:
-    inset -35px -30px 80px rgba(0,0,0,.9),
-    0 0 80px rgba(94,82,255,.15);
+    inset -35px -25px 70px #000,
+    0 0 70px rgba(90,80,255,.2);
 
-  animation: planetFloat 7s ease-in-out infinite;
+  animation: floatPlanet 7s ease-in-out infinite;
 }
 
-.planet-glow {
-  position: absolute;
-  inset: -15%;
-
-  border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(91,84,255,.16),
-      transparent 68%
-    );
-}
-
-.continent {
-  position: absolute;
-
-  background: rgba(125,120,255,.12);
-
-  filter: blur(2px);
-}
-
-.continent-one {
-  width: 90px;
-  height: 130px;
-
-  left: 28%;
-  top: 20%;
-
-  border-radius: 60% 40% 60% 35%;
-  transform: rotate(25deg);
-}
-
-.continent-two {
-  width: 130px;
-  height: 80px;
-
-  right: 12%;
-  top: 42%;
-
-  border-radius: 40% 60% 35% 60%;
-  transform: rotate(-25deg);
-}
-
-.continent-three {
-  width: 80px;
-  height: 100px;
-
-  left: 20%;
-  bottom: 12%;
-
-  border-radius: 60% 35% 50% 40%;
-}
-
-@keyframes planetFloat {
-  0%,100% {
-    transform: translateY(0) rotate(0deg);
-  }
-
+@keyframes floatPlanet {
   50% {
     transform: translateY(-15px) rotate(2deg);
   }
 }
 
+.continent {
+  position: absolute;
+
+  background: rgba(140,135,255,.13);
+
+  filter: blur(2px);
+}
+
+.c1 {
+  width: 90px;
+  height: 130px;
+
+  left: 25%;
+  top: 18%;
+
+  border-radius: 60%;
+  transform: rotate(25deg);
+}
+
+.c2 {
+  width: 130px;
+  height: 75px;
+
+  right: 10%;
+  top: 45%;
+
+  border-radius: 50%;
+  transform: rotate(-20deg);
+}
+
+.c3 {
+  width: 80px;
+  height: 100px;
+
+  left: 18%;
+  bottom: 10%;
+
+  border-radius: 50%;
+}
+
 .orbit {
   position: absolute;
 
-  left: 8%;
-  top: 31%;
+  left: 7%;
+  top: 30%;
 
-  width: 84%;
-  height: 34%;
+  width: 86%;
+  height: 35%;
 
-  border:
-    1px solid rgba(140,130,255,.18);
+  border: 1px solid rgba(130,120,255,.2);
 
   border-radius: 50%;
+}
 
-  transform:
-    rotate(-20deg);
+.orbit-one {
+  transform: rotate(-20deg);
 }
 
 .orbit-two {
-  transform:
-    rotate(65deg);
+  transform: rotate(65deg);
+}
+
+.planet-dot {
+  position: absolute;
+
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: #8dffba;
+
+  box-shadow: 0 0 14px #8dffba;
+}
+
+.dot-nairobi {
+  left: 29%;
+  top: 46%;
+}
+
+.dot-dubai {
+  left: 58%;
+  top: 36%;
+}
+
+.dot-london {
+  left: 48%;
+  top: 24%;
 }
 
 .location {
@@ -393,93 +401,75 @@ a {
   align-items: center;
   gap: 7px;
 
-  color: #888895;
+  color: #777781;
 
   font-size: 9px;
 }
 
 .location span {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
 
   border-radius: 50%;
 
   background: #8dffba;
-
-  box-shadow:
-    0 0 15px #8dffba;
 }
 
-.location-nairobi {
+.location-one {
   left: 28%;
   top: 46%;
 }
 
-.location-dubai {
+.location-two {
   left: 58%;
   top: 35%;
 }
 
-.location-london {
+.location-three {
   left: 48%;
   top: 23%;
 }
 
 
-/* =========================
-   DASHBOARD
-========================= */
+/* STATS */
 
-.dashboard {
+.stats {
   display: grid;
-
-  grid-template-columns:
-    repeat(3, 1fr);
+  grid-template-columns: repeat(3,1fr);
 
   gap: 15px;
 
-  padding:
-    30px 7vw
-    100px;
+  padding: 30px 7vw 100px;
 }
 
-.dashboard-card {
+.stat-card {
   padding: 30px;
 
-  background:
-    linear-gradient(
-      145deg,
-      #0c0c11,
-      #07070a
-    );
-
-  border:
-    1px solid #19191f;
-
+  border: 1px solid #19191f;
   border-radius: 18px;
+
+  background: #08080c;
 }
 
-.dashboard-card small {
-  display: block;
-
-  color: #666671;
+.stat-card small {
+  color: #64646f;
 
   font-size: 8px;
-  letter-spacing: .16em;
+  letter-spacing: .15em;
 }
 
-.dashboard-card strong {
+.stat-card strong {
   display: block;
 
   margin-top: 14px;
 
-  font-size: 35px;
+  font-size: 36px;
 }
 
-.dashboard-card span {
+.stat-card span {
   display: block;
 
-  margin-top: 5px;
+  margin-top: 6px;
 
   color: #555560;
 
@@ -487,42 +477,39 @@ a {
 }
 
 
-/* =========================
-   SECTIONS
-========================= */
+/* SECTIONS */
 
-.tracking-section,
-.network-section,
-.fleet-section {
-  padding:
-    120px 7vw;
+.section {
+  padding: 120px 7vw;
 }
 
-.section-heading span {
-  color: #777783;
+.section-label {
+  color: #7770ff;
 
   font-size: 8px;
   letter-spacing: .2em;
 }
 
-.section-heading h2 {
-  max-width: 600px;
+.section h2 {
+  max-width: 650px;
 
   margin-top: 15px;
 
-  font-size: clamp(40px, 5vw, 70px);
+  font-size: clamp(40px,5vw,70px);
 
   line-height: .95;
 
-  letter-spacing: -.05em;
+  letter-spacing: -.06em;
+}
+
+.section h2 span {
+  color: #777781;
 }
 
 
-/* =========================
-   TRACKING
-========================= */
+/* TRACKING */
 
-.tracking-console {
+.tracking-box {
   display: flex;
 
   max-width: 700px;
@@ -530,33 +517,30 @@ a {
   margin-top: 45px;
 }
 
-.tracking-console input {
+.tracking-box input {
   flex: 1;
 
   padding: 18px;
 
   color: white;
-  background: #0a0a0e;
+  background: #09090d;
 
-  border:
-    1px solid #24242d;
+  border: 1px solid #27272f;
 
   outline: none;
 
-  border-radius:
-    12px 0 0 12px;
+  border-radius: 12px 0 0 12px;
 }
 
-.tracking-console button {
+.tracking-box button {
   padding: 0 30px;
-
-  border: none;
 
   color: black;
   background: white;
 
-  border-radius:
-    0 12px 12px 0;
+  border: none;
+
+  border-radius: 0 12px 12px 0;
 }
 
 .tracking-result {
@@ -564,165 +548,121 @@ a {
 
   margin-top: 15px;
 
-  color: #858591;
+  color: #777781;
 
   font-size: 12px;
 }
 
 
-/* =========================
-   NETWORK
-========================= */
+/* NETWORK */
 
-.network-map {
+.network {
   position: relative;
 
   height: 500px;
 
   margin-top: 60px;
 
-  border:
-    1px solid #17171d;
-
-  border-radius: 25px;
-
   overflow: hidden;
 
-  background:
-    radial-gradient(
-      circle at center,
-      rgba(82,74,255,.09),
-      transparent 50%
-    );
+  border: 1px solid #19191f;
+  border-radius: 25px;
+
+  background: radial-gradient(
+    circle,
+    rgba(90,80,255,.12),
+    transparent 60%
+  );
 }
 
-.network-map::before {
-  content: "";
-
+.network-grid {
   position: absolute;
   inset: 0;
 
   background-image:
-    linear-gradient(
-      rgba(255,255,255,.025) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(255,255,255,.025) 1px,
-      transparent 1px
-    );
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
 
   background-size: 45px 45px;
 }
 
-.network-city {
+.city {
   position: absolute;
 
   z-index: 3;
 
-  padding: 8px 12px;
+  padding: 9px 13px;
 
-  border:
-    1px solid #292932;
+  color: white;
+  background: rgba(5,5,8,.85);
 
+  border: 1px solid #292932;
   border-radius: 8px;
-
-  background: rgba(5,5,8,.8);
 
   font-size: 9px;
 }
 
-.city-nairobi {
-  left: 38%;
-  top: 55%;
-}
+.city-a { left: 38%; top: 55%; }
+.city-b { left: 53%; top: 42%; }
+.city-c { left: 46%; top: 25%; }
+.city-d { left: 18%; top: 30%; }
+.city-e { left: 75%; top: 64%; }
 
-.city-dubai {
-  left: 53%;
-  top: 42%;
-}
-
-.city-london {
-  left: 46%;
-  top: 25%;
-}
-
-.city-newyork {
-  left: 18%;
-  top: 30%;
-}
-
-.city-singapore {
-  left: 75%;
-  top: 64%;
-}
-
-.network-route {
+.network-line {
   position: absolute;
 
   height: 1px;
 
   transform-origin: left;
 
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(125,117,255,.8),
-      transparent
-    );
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #7770ff,
+    transparent
+  );
 
-  animation: routePulse 3s infinite;
+  animation: pulseLine 3s infinite;
 }
 
-.route-one {
-  width: 180px;
-
+.line-a {
+  width: 200px;
   left: 39%;
   top: 56%;
-
   transform: rotate(-25deg);
 }
 
-.route-two {
-  width: 270px;
-
+.line-b {
+  width: 300px;
   left: 40%;
   top: 55%;
-
   transform: rotate(-38deg);
 }
 
-.route-three {
+.line-c {
   width: 400px;
-
   left: 40%;
   top: 55%;
-
   transform: rotate(-7deg);
 }
 
-@keyframes routePulse {
-  0%,100% {
-    opacity: .25;
-  }
-
+@keyframes pulseLine {
   50% {
     opacity: 1;
+  }
+
+  0%,100% {
+    opacity: .25;
   }
 }
 
 
-/* =========================
-   FLEET
-========================= */
+/* FLEET */
 
-.fleet-grid {
+.fleet {
   display: grid;
 
-  grid-template-columns:
-    repeat(3, 1fr);
+  grid-template-columns: repeat(3,1fr);
 
   gap: 15px;
 
@@ -730,45 +670,39 @@ a {
 }
 
 .fleet-card {
-  min-height: 270px;
+  min-height: 280px;
 
   padding: 30px;
 
-  border:
-    1px solid #19191f;
-
+  border: 1px solid #19191f;
   border-radius: 20px;
 
-  background:
-    linear-gradient(
-      145deg,
-      #0c0c11,
-      #050507
-    );
+  background: #08080c;
 
-  transition: .35s;
+  transition: .3s;
 }
 
 .fleet-card:hover {
-  transform: translateY(-8px);
-
-  border-color: #353541;
+  transform: translateY(-7px);
+  border-color: #3a3a45;
 }
 
 .fleet-card small {
-  color: #686873;
+  color: #666671;
+}
 
-  font-size: 8px;
+.vehicle-icon {
+  margin-top: 45px;
 
-  letter-spacing: .18em;
+  color: #7770ff;
+
+  font-size: 40px;
 }
 
 .fleet-card h3 {
-  margin-top: 70px;
+  margin-top: 20px;
 
-  font-size: 28px;
-
-  letter-spacing: -.04em;
+  font-size: 26px;
 }
 
 .fleet-card p {
@@ -777,14 +711,13 @@ a {
   color: #666671;
 
   font-size: 12px;
-
   line-height: 1.6;
 }
 
 
-/* =====================================================
-   CINEMATIC LOGISTICS TRANSITION
-===================================================== */
+/* ==================================================
+   LOGISTICS TRANSITION
+================================================== */
 
 .logistics-transition {
   position: fixed;
@@ -793,26 +726,20 @@ a {
 
   z-index: 9999;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
   overflow: hidden;
 
   background:
     radial-gradient(
-      circle at 50% 45%,
-      rgba(94,82,255,.13),
-      transparent 35%
+      circle at center,
+      rgba(90,80,255,.14),
+      transparent 45%
     ),
     #030305;
 
   opacity: 0;
   visibility: hidden;
 
-  transition:
-    opacity .5s ease,
-    visibility .5s ease;
+  transition: opacity .4s ease;
 }
 
 .logistics-transition.active {
@@ -822,105 +749,50 @@ a {
 
 .transition-grid {
   position: absolute;
-
   inset: 0;
 
   background-image:
-    linear-gradient(
-      rgba(255,255,255,.025) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(255,255,255,.025) 1px,
-      transparent 1px
-    );
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
 
   background-size: 45px 45px;
-
-  mask-image:
-    linear-gradient(
-      to bottom,
-      transparent,
-      black 30%,
-      black 70%,
-      transparent
-    );
 }
 
 .transition-header {
   position: absolute;
 
-  top: 35px;
-
-  left: 5vw;
-  right: 5vw;
+  top: 30px;
+  left: 5%;
+  right: 5%;
 
   display: flex;
-
   justify-content: space-between;
-  align-items: center;
 
-  opacity: 0;
-
-  transform: translateY(-15px);
-
-  transition:
-    opacity .6s .3s ease,
-    transform .6s .3s ease;
-}
-
-.logistics-transition.active
-.transition-header {
-  opacity: 1;
-
-  transform: translateY(0);
+  z-index: 10;
 }
 
 .transition-brand {
-  font-size: 12px;
-
+  font-size: 13px;
   font-weight: 900;
-
-  letter-spacing: .18em;
+  letter-spacing: .15em;
 }
 
 .transition-brand span {
   font-weight: 400;
 }
 
-.transition-logo {
-  display: inline-grid;
-
-  place-items: center;
-
-  width: 27px;
-  height: 27px;
-
-  margin-right: 8px;
-
-  border: 1px solid #44444c;
-
-  border-radius: 7px;
-
-  font-size: 10px;
-}
-
-.transition-live {
+.live {
   display: flex;
-
   align-items: center;
-
-  gap: 8px;
+  gap: 7px;
 
   color: #8dffba;
 
   font-size: 8px;
-
-  letter-spacing: .16em;
+  letter-spacing: .15em;
 }
 
-.transition-live span {
+.live span {
   width: 6px;
   height: 6px;
 
@@ -928,69 +800,45 @@ a {
 
   background: #8dffba;
 
-  box-shadow:
-    0 0 12px #8dffba;
+  box-shadow: 0 0 12px #8dffba;
 }
 
 
 /* ROUTE */
 
-.route-info {
+.route {
   position: absolute;
 
-  top: 19%;
-
-  left: 10%;
-  right: 10%;
+  top: 20%;
+  left: 8%;
+  right: 8%;
 
   display: flex;
-
   align-items: center;
 
-  justify-content: space-between;
-
-  z-index: 4;
+  z-index: 10;
 }
 
-.route-location {
-  display: flex;
-  flex-direction: column;
-
-  gap: 5px;
-
+.route-place {
   min-width: 130px;
 
-  opacity: 0;
-
-  transform: translateY(15px);
-
-  transition:
-    opacity .7s .8s ease,
-    transform .7s .8s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.logistics-transition.active
-.route-location {
-  opacity: 1;
-
-  transform: translateY(0);
-}
-
-.route-location small {
-  color: #5f5f69;
+.route-place small {
+  color: #60606a;
 
   font-size: 8px;
-
-  letter-spacing: .18em;
+  letter-spacing: .15em;
 }
 
-.route-location strong {
+.route-place strong {
   font-size: 25px;
-
-  letter-spacing: -.04em;
 }
 
-.route-location span {
+.route-place span {
   color: #666671;
 
   font-size: 9px;
@@ -998,80 +846,63 @@ a {
 
 .destination {
   text-align: right;
-
   align-items: flex-end;
 }
 
-
-/* ROUTE LINE */
-
-.route-line-animation {
+.route-line {
   position: relative;
 
   flex: 1;
 
   height: 2px;
 
-  margin: 0 40px;
+  margin: 0 35px;
 
-  background: #202027;
-
-  overflow: hidden;
+  background: #24242c;
 }
 
 .route-progress {
   position: absolute;
 
-  left: 0;
-  top: 0;
-
-  width: 0%;
+  width: 0;
   height: 100%;
 
-  background:
-    linear-gradient(
-      90deg,
-      white,
-      #8c7cff
-    );
+  background: linear-gradient(
+    90deg,
+    white,
+    #7770ff
+  );
 
-  box-shadow:
-    0 0 15px rgba(140,124,255,.7);
+  box-shadow: 0 0 15px #7770ff;
 
-  transition:
-    width 3s cubic-bezier(.4,0,.2,1);
-}
-
-.logistics-transition.active
-.route-progress {
-  width: 100%;
+  transition: width 3s ease;
 }
 
 .route-dot {
   position: absolute;
 
-  top: 50%;
   left: 0;
+  top: 50%;
 
-  width: 8px;
-  height: 8px;
+  width: 9px;
+  height: 9px;
 
   border-radius: 50%;
 
   background: white;
 
-  transform:
-    translate(-50%,-50%);
+  transform: translate(-50%,-50%);
 
-  box-shadow:
-    0 0 15px white;
+  box-shadow: 0 0 15px white;
 
-  transition:
-    left 3s cubic-bezier(.4,0,.2,1);
+  transition: left 3s ease;
 }
 
-.logistics-transition.active
-.route-dot {
+.logistics-transition.active .route-progress {
+  width: 100%;
+}
+
+.logistics-transition.active .route-dot {
   left: 100%;
 }
 
@@ -1083,146 +914,113 @@ a {
 
   left: -10%;
   right: -10%;
-
   bottom: 22%;
 
   height: 180px;
 
-  transform:
-    perspective(600px)
-    rotateX(65deg);
+  transform: perspective(600px) rotateX(65deg);
 
-  background:
-    linear-gradient(
-      to bottom,
-      #08080b,
-      #111116
-    );
+  background: linear-gradient(
+    #08080b,
+    #121217
+  );
 
-  border-top:
-    1px solid rgba(255,255,255,.08);
-
-  border-bottom:
-    1px solid rgba(255,255,255,.04);
+  border-top: 1px solid #25252c;
 }
 
 .road-line {
   position: absolute;
 
-  height: 2px;
+  height: 3px;
 
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(255,255,255,.7),
-      transparent
-    );
+  background: rgba(255,255,255,.65);
 
-  animation:
-    roadMove 1s linear infinite;
+  animation: roadMove 1s linear infinite;
 }
 
-.road-line-1 {
-  width: 180px;
-  top: 40px;
+.road-1 {
+  width: 170px;
+  top: 45px;
 }
 
-.road-line-2 {
-  width: 280px;
-  top: 80px;
-
+.road-2 {
+  width: 250px;
+  top: 90px;
   animation-delay: -.3s;
 }
 
-.road-line-3 {
-  width: 220px;
-  top: 120px;
-
+.road-3 {
+  width: 200px;
+  top: 130px;
   animation-delay: -.6s;
 }
 
 @keyframes roadMove {
-
   from {
-    left: -250px;
+    left: -300px;
   }
 
   to {
     left: 110%;
   }
-
 }
 
 
-/* =========================
-   3D TRAILER
-========================= */
+/* TRUCK */
 
 .truck {
   position: absolute;
 
-  left: -430px;
+  left: -500px;
+  bottom: 30%;
 
-  bottom: 55px;
+  width: 400px;
+  height: 110px;
 
-  width: 390px;
-  height: 100px;
-
-  transform:
-    rotateX(-4deg)
-    rotateY(-4deg);
-
-  filter:
-    drop-shadow(
-      0 30px 25px
-      rgba(0,0,0,.7)
-    );
+  z-index: 8;
 
   transition:
-    left 3.8s
-    cubic-bezier(.15,.75,.2,1);
+    left 3.8s cubic-bezier(.15,.75,.2,1);
+
+  filter: drop-shadow(
+    0 25px 20px rgba(0,0,0,.8)
+  );
 }
 
-.logistics-transition.active
-.truck {
-  left: calc(100% + 40px);
+.logistics-transition.active .truck {
+  left: calc(100% + 30px);
 }
 
-.truck-trailer {
+.trailer {
   position: absolute;
 
   left: 0;
-  top: 0;
+  top: 10px;
 
   width: 300px;
   height: 78px;
 
+  border: 1px solid #393942;
   border-radius: 8px;
 
-  border:
-    1px solid #363640;
-
-  background:
-    linear-gradient(
-      145deg,
-      #17171d,
-      #08080b
-    );
+  background: linear-gradient(
+    145deg,
+    #1b1b22,
+    #08080b
+  );
 
   box-shadow:
-    inset 0 1px rgba(255,255,255,.08),
-    0 0 30px rgba(100,90,255,.08);
+    inset 0 1px rgba(255,255,255,.1),
+    0 0 30px rgba(100,90,255,.12);
 }
 
 .trailer-logo {
   position: absolute;
 
-  left: 28px;
+  left: 27px;
   top: 18px;
 
   font-size: 24px;
-
   font-weight: 900;
 
   letter-spacing: .08em;
@@ -1232,17 +1030,16 @@ a {
   font-weight: 400;
 }
 
-.trailer-subtitle {
+.trailer-text {
   position: absolute;
 
-  left: 31px;
-  top: 49px;
+  left: 29px;
+  top: 50px;
 
-  color: #777782;
+  color: #777781;
 
   font-size: 7px;
-
-  letter-spacing: .25em;
+  letter-spacing: .22em;
 }
 
 .trailer-stripe {
@@ -1254,124 +1051,94 @@ a {
 
   height: 2px;
 
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      #7770ff,
-      transparent
-    );
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #7770ff,
+    transparent
+  );
 }
 
-.truck-cabin {
+.cabin {
   position: absolute;
 
   left: 300px;
-  top: 17px;
+  top: 27px;
 
   width: 75px;
   height: 61px;
 
-  border-radius:
-    5px 12px 8px 5px;
+  border: 1px solid #393942;
+  border-radius: 5px 13px 8px 5px;
 
-  background:
-    linear-gradient(
-      135deg,
-      #282832,
-      #0b0b0f
-    );
-
-  border:
-    1px solid #363640;
+  background: linear-gradient(
+    135deg,
+    #292933,
+    #0b0b0f
+  );
 }
 
 .windshield {
   position: absolute;
 
+  left: 11px;
   top: 8px;
-  left: 12px;
 
-  width: 48px;
+  width: 49px;
   height: 23px;
 
+  border: 1px solid #4b4a5c;
   border-radius: 4px;
 
-  background:
-    linear-gradient(
-      135deg,
-      #3e3d5b,
-      #080810
-    );
-
-  border:
-    1px solid #4a495b;
+  background: linear-gradient(
+    135deg,
+    #464565,
+    #07070d
+  );
 }
 
-.truck-front {
+.headlight {
   position: absolute;
 
-  right: -3px;
-  bottom: 15px;
+  right: -4px;
+  top: 30px;
 
-  font-size: 7px;
-
-  font-weight: 900;
-
-  writing-mode:
-    vertical-rl;
-
-  color: #aaa8ff;
-}
-
-.truck-light {
-  position: absolute;
-
-  right: -3px;
-
-  width: 5px;
+  width: 6px;
   height: 8px;
 
   border-radius: 2px;
 
-  background: #e8edff;
+  background: white;
 
-  box-shadow:
-    0 0 10px #aabaff;
+  box-shadow: 0 0 12px white;
 }
 
-.light-one {
-  top: 28px;
-}
-
-.light-two {
-  top: 40px;
+.headlight-two {
+  top: 43px;
 }
 
 
 /* WHEELS */
 
-.truck-wheel {
+.wheel {
   position: absolute;
 
-  bottom: -18px;
+  bottom: -10px;
 
-  width: 38px;
-  height: 38px;
+  width: 39px;
+  height: 39px;
 
   border-radius: 50%;
 
-  background:
-    radial-gradient(
-      circle,
-      #45454d 0 20%,
-      #09090b 22% 55%,
-      #202027 57% 70%,
-      #050507 72%
-    );
+  border: 2px solid #17171d;
 
-  border:
-    2px solid #17171d;
+  background: radial-gradient(
+    circle,
+    #555 0 18%,
+    #08080a 20% 52%,
+    #303038 54% 68%,
+    #050507 70%
+  );
 }
 
 .wheel-one {
@@ -1379,11 +1146,11 @@ a {
 }
 
 .wheel-two {
-  left: 235px;
+  left: 225px;
 }
 
 .wheel-three {
-  left: 315px;
+  left: 305px;
 }
 
 .wheel-four {
@@ -1397,127 +1164,89 @@ a {
   position: absolute;
 
   left: 50%;
-
   bottom: 6%;
 
-  width: min(760px, 88%);
-
-  transform:
-    translateX(-50%)
-    translateY(30px);
+  width: min(760px, 90%);
 
   padding: 25px;
 
-  border:
-    1px solid rgba(255,255,255,.1);
+  z-index: 20;
 
+  border: 1px solid rgba(255,255,255,.1);
   border-radius: 18px;
 
-  background:
-    rgba(10,10,14,.82);
+  background: rgba(10,10,14,.88);
 
-  backdrop-filter:
-    blur(20px);
+  backdrop-filter: blur(20px);
 
-  box-shadow:
-    0 30px 80px rgba(0,0,0,.5);
+  box-shadow: 0 30px 80px rgba(0,0,0,.6);
 
   opacity: 0;
 
+  transform: translate(-50%,30px);
+
   transition:
-    opacity .7s 2.6s ease,
-    transform .7s 2.6s ease;
+    opacity .7s 2.5s ease,
+    transform .7s 2.5s ease;
 }
 
-.logistics-transition.active
-.delivery-card {
+.logistics-transition.active .delivery-card {
   opacity: 1;
 
-  transform:
-    translateX(-50%)
-    translateY(0);
+  transform: translate(-50%,0);
 }
 
-.delivery-top {
+.delivery-header {
   display: flex;
 
   justify-content: space-between;
   align-items: center;
-
-  gap: 20px;
 }
 
-.delivery-top small {
-  color: #656570;
+.delivery-header small {
+  color: #666671;
 
   font-size: 7px;
-
-  letter-spacing: .16em;
+  letter-spacing: .15em;
 }
 
-.delivery-top h2 {
+.delivery-header h2 {
   margin-top: 8px;
 
   font-size: 22px;
-
-  letter-spacing: -.04em;
 }
 
-.delivery-top h2 b {
+.delivery-header h2 b {
   margin: 0 10px;
 
   color: #7770ff;
 }
 
 .delivery-status {
-  display: flex;
-
-  align-items: center;
-
-  gap: 7px;
-
   color: #8dffba;
 
-  font-size: 7px;
-
-  letter-spacing: .12em;
-}
-
-.delivery-status span {
-  width: 6px;
-  height: 6px;
-
-  border-radius: 50%;
-
-  background: #8dffba;
-
-  box-shadow:
-    0 0 10px #8dffba;
+  font-size: 8px;
+  letter-spacing: .1em;
 }
 
 .delivery-data {
   display: grid;
-
-  grid-template-columns:
-    repeat(3, 1fr);
+  grid-template-columns: repeat(3,1fr);
 
   gap: 15px;
 
   margin-top: 25px;
-
   padding-top: 20px;
 
-  border-top:
-    1px solid #1e1e25;
+  border-top: 1px solid #202027;
 }
 
 .delivery-data small {
   display: block;
 
-  color: #5d5d67;
+  color: #60606a;
 
   font-size: 7px;
-
   letter-spacing: .12em;
 }
 
@@ -1529,19 +1258,17 @@ a {
   font-size: 16px;
 }
 
-.delivery-progress {
+.progress {
   margin-top: 22px;
 }
 
 .progress-label {
   display: flex;
-
   justify-content: space-between;
 
-  color: #55555f;
+  color: #60606a;
 
   font-size: 7px;
-
   letter-spacing: .1em;
 }
 
@@ -1550,81 +1277,51 @@ a {
 
   margin-top: 8px;
 
-  background: #19191f;
-
-  border-radius: 10px;
-
   overflow: hidden;
+
+  background: #19191f;
 }
 
 #deliveryProgress {
-  width: 0%;
+  width: 0;
   height: 100%;
 
-  background:
-    linear-gradient(
-      90deg,
-      #8dffba,
-      #7770ff
-    );
-
-  transition:
-    width 3s linear;
+  background: linear-gradient(
+    90deg,
+    #8dffba,
+    #7770ff
+  );
 }
 
-.logistics-transition.active
-#deliveryProgress {
-  width: 100%;
-}
-
-.continue-shopping {
+.close-button {
   position: absolute;
 
-  bottom: 2.5%;
-
   left: 50%;
+  bottom: 2%;
 
-  transform: translateX(-50%);
+  z-index: 30;
 
   padding: 9px 16px;
 
-  border:
-    1px solid #292931;
-
-  border-radius: 8px;
-
-  color: #777780;
-
+  color: #777781;
   background: transparent;
 
-  font-size: 9px;
+  border: 1px solid #292931;
+  border-radius: 8px;
 
-  opacity: 0;
-
-  transition:
-    opacity .5s 3.2s ease;
-}
-
-.logistics-transition.active
-.continue-shopping {
-  opacity: 1;
+  transform: translateX(-50%);
 }
 
 
-/* =========================
-   FOOTER
-========================= */
+/* FOOTER */
 
 footer {
   display: flex;
-
-  align-items: center;
   justify-content: space-between;
 
   padding: 45px 7vw;
 
-  border-top:
-    1px solid #16161c;
+  border-top: 1px solid #17171d;
 }
 
 footer p {
@@ -1634,11 +1331,9 @@ footer p {
 }
 
 
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
-@media (max-width: 850px) {
+@media(max-width:850px) {
 
   .navbar nav {
     display: none;
@@ -1646,101 +1341,87 @@ footer p {
 
   .hero {
     min-height: 900px;
-
-    padding-top: 150px;
   }
 
   .hero-content {
     width: 100%;
   }
 
-  .logistics-visual {
+  .planet-area {
     width: 100vw;
     height: 100vw;
 
-    right: -20%;
-    top: 50%;
+    right: -25%;
+    top: 52%;
   }
 
-  .dashboard {
+  .stats {
     grid-template-columns: 1fr;
   }
 
-  .fleet-grid {
+  .fleet {
     grid-template-columns: 1fr;
-  }
-
-  .route-info {
-    left: 5%;
-    right: 5%;
-  }
-
-  .route-line-animation {
-    margin: 0 15px;
-  }
-
-  .delivery-card {
-    width: 94%;
   }
 
   .truck {
-    transform: scale(.75);
+    transform: scale(.7);
+    transform-origin: center bottom;
   }
+
 }
 
 
-@media (max-width: 520px) {
+@media(max-width:520px) {
 
-  .navbar {
-    padding: 0 5vw;
-  }
-
-  .track-button {
+  .nav-button {
     display: none;
   }
 
   .hero {
-    padding:
-      130px 5vw
-      60px;
+    padding-left: 5vw;
+    padding-right: 5vw;
   }
 
   .hero h1 {
-    font-size: 58px;
+    font-size: 57px;
   }
 
-  .quick-order {
-    align-items: stretch;
-
+  .order-box {
     flex-direction: column;
+    align-items: stretch;
   }
 
-  .order-field select,
-  .add-cart-button {
+  .field select,
+  .cart-button {
     width: 100%;
   }
 
-  .route-location strong {
+  .route {
+    left: 5%;
+    right: 5%;
+  }
+
+  .route-place strong {
     font-size: 17px;
   }
 
-  .route-location span {
+  .route-place span {
     display: none;
   }
 
-  .route-line-animation {
-    margin: 0 8px;
+  .route-line {
+    margin: 0 10px;
   }
 
   .delivery-card {
-    bottom: 7%;
+    width: 94%;
     padding: 17px;
   }
 
-  .delivery-top {
+  .delivery-header {
     align-items: flex-start;
-
     flex-direction: column;
+    gap: 15px;
   }
 
   .delivery-data {
@@ -1749,10 +1430,7 @@ footer p {
 
   .delivery-data div {
     display: flex;
-
     justify-content: space-between;
-
-    align-items: center;
   }
 
   .delivery-data strong {
@@ -1761,20 +1439,11 @@ footer p {
 
   .truck {
     transform: scale(.55);
-
-    transform-origin:
-      center bottom;
-  }
-
-  .network-map {
-    height: 400px;
   }
 
   footer {
-    align-items: flex-start;
-
     flex-direction: column;
-
     gap: 15px;
   }
+
 }
