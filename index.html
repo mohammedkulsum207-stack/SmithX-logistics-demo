@@ -2,504 +2,238 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#02050a">
-<title>SMITHX Logistics</title>
-<link rel="stylesheet" href="styles.css?v=4">
-</head>
-
-<body>
-
-<div class="bg-grid"></div>
-<div class="glow glow1"></div>
-<div class="glow glow2"></div>
-
-<header>
-  <a href="#home" class="logo">
-    <b>S</b> SMITH<span>X</span>
-  </a>
-
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#tracking">Tracking</a>
-    <a href="#network">Network</a>
-    <a href="#fleet">Fleet</a>
-  </nav>
-
-  <button class="nav-btn" onclick="openShipment()">
-    Track Shipment
-  </button>
-</header>
-
-
-<main>
-
-<!-- HERO -->
-<section id="home" class="hero">
-
-  <div class="hero-text reveal">
-
-    <div class="eyebrow">
-      <i></i> SMITHX GLOBAL LOGISTICS
-    </div>
-
-    <h1>
-      Moving the<br>
-      <span>world</span> smarter.
-    </h1>
-
-    <p>
-      Intelligent logistics powered by AI.
-      Track, move and manage shipments across
-      the global SmithX network.
-    </p>
-
-    <div class="buttons">
-      <button class="primary" onclick="openShipment()">
-        Start Shipment <b>→</b>
-      </button>
-
-      <button class="secondary" onclick="goTracking()">
-        Track shipment
-      </button>
-    </div>
-
-    <div class="stats">
-
-      <div>
-        <strong class="counter" data-target="148">148</strong>
-        <small>Countries</small>
-      </div>
-
-      <div>
-        <strong class="counter" data-target="24">24</strong>
-        <small>Global Hubs</small>
-      </div>
-
-      <div>
-        <strong class="counter" data-target="98">98</strong>
-        <small>% On Time</small>
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- PLANET -->
-  <div class="planet-wrap">
-
-    <div class="orbit orbit1"></div>
-    <div class="orbit orbit2"></div>
-    <div class="orbit orbit3"></div>
-
-    <div class="planet">
-
-      <div class="continent c1"></div>
-      <div class="continent c2"></div>
-      <div class="continent c3"></div>
-
-      <i class="dot d1"></i>
-      <i class="dot d2"></i>
-      <i class="dot d3"></i>
-      <i class="dot d4"></i>
-      <i class="dot d5"></i>
-
-    </div>
-
-    <div class="satellite"></div>
-
-  </div>
-
-</section>
-
-
-<!-- SHIPMENT -->
-<section class="section reveal">
-
-  <div class="heading">
-
-    <div>
-      <label>SHIPMENT CONTROL</label>
-
-      <h2>
-        Move anything.<br>
-        <span>Anywhere.</span>
-      </h2>
-    </div>
-
-    <p>
-      Select your destination and watch
-      the SmithX logistics engine activate.
-    </p>
-
-  </div>
-
-
-  <div class="shipment-box">
-
-    <div class="box-top">
-      <span>NEW SHIPMENT</span>
-      <b>● NETWORK ONLINE</b>
-    </div>
-
-
-    <div class="shipment-form">
-
-      <div class="field">
-
-        <label>ORIGIN</label>
-
-        <div class="field-display">
-          <span>●</span>
-          Nairobi, Kenya
-        </div>
-
-      </div>
-
-
-      <div class="arrow">→</div>
-
-
-      <div class="field">
-
-        <label>DESTINATION</label>
-
-        <select id="destination">
-          <option value="Dubai">Dubai, UAE</option>
-          <option value="Nairobi">Nairobi, Kenya</option>
-          <option value="London">London, UK</option>
-          <option value="New York">New York, USA</option>
-          <option value="Singapore">Singapore</option>
-        </select>
-
-      </div>
-
-
-      <button class="ship-btn" onclick="openShipment()">
-        ADD TO CART →
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- NETWORK -->
-<section id="network" class="section reveal">
-
-  <div class="heading">
-
-    <div>
-      <label>LIVE NETWORK</label>
-
-      <h2>
-        One network.<br>
-        <span>Infinite routes.</span>
-      </h2>
-    </div>
-
-  </div>
-
-
-  <div class="network">
-
-    <div class="map-lines"></div>
-
-    <div class="route r1"></div>
-    <div class="route r2"></div>
-    <div class="route r3"></div>
-    <div class="route r4"></div>
-
-    <div class="node n1">
-      <i></i>Nairobi
-    </div>
-
-    <div class="node n2">
-      <i></i>Dubai
-    </div>
-
-    <div class="node n3">
-      <i></i>London
-    </div>
-
-    <div class="node n4">
-      <i></i>New York
-    </div>
-
-    <div class="node n5">
-      <i></i>Singapore
-    </div>
-
-    <div class="network-core">
-      <strong>SMITHX</strong>
-      <small>GLOBAL NETWORK</small>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- TRACKING -->
-<section id="tracking" class="tracking section reveal">
-
-  <div>
-
-    <label>REAL-TIME TRACKING</label>
-
-    <h2>
-      Know where your<br>
-      shipment is.<br>
-      <span>Always.</span>
-    </h2>
-
-    <p>
-      Enter a SmithX tracking number
-      to access shipment status.
-    </p>
-
-  </div>
-
-
-  <div class="tracking-box">
-
-    <div class="track-top">
-      <span>TRACK SHIPMENT</span>
-      <b>● LIVE</b>
-    </div>
-
-    <div class="track-input">
-
-      <input
-        id="trackingNumber"
-        placeholder="Enter tracking number">
-
-      <button onclick="trackShipment()">
-        TRACK
-      </button>
-
-    </div>
-
-    <div id="trackingResult">
-      Waiting for tracking number...
-    </div>
-
-    <div class="tracking-bar">
-      <span></span>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- FLEET -->
-<section id="fleet" class="section reveal">
-
-  <div class="heading">
-
-    <div>
-      <label>SMITHX FLEET</label>
-
-      <h2>
-        Built to <span>move.</span>
-      </h2>
-    </div>
-
-  </div>
-
-
-  <div class="fleet">
-
-    <article class="fleet-card">
-
-      <div class="fleet-image">
-
-        <div class="mini-truck">
-
-          <div class="mini-cabin"></div>
-          <div class="mini-trailer"></div>
-
-          <i></i>
-          <i></i>
-          <i></i>
-
-        </div>
-
-      </div>
-
-      <div class="fleet-info">
-        <small>01</small>
-        <h3>AI FREIGHT</h3>
-        <p>Long-distance intelligent freight.</p>
-      </div>
-
-    </article>
-
-
-    <article class="fleet-card">
-
-      <div class="fleet-image">
-        <div class="plane">✈</div>
-      </div>
-
-      <div class="fleet-info">
-        <small>02</small>
-        <h3>AIR CARGO</h3>
-        <p>Rapid international delivery.</p>
-      </div>
-
-    </article>
-
-
-    <article class="fleet-card">
-
-      <div class="fleet-image">
-        <div class="ship">▰</div>
-      </div>
-
-      <div class="fleet-info">
-        <small>03</small>
-        <h3>OCEAN FREIGHT</h3>
-        <p>Global high-volume transportation.</p>
-      </div>
-
-    </article>
-
-  </div>
-
-</section>
-
-
-<!-- FINAL -->
-<section class="final reveal">
-
-  <label>THE FUTURE OF LOGISTICS</label>
-
-  <h2>
-    The world is moving.<br>
-    <span>Move with SmithX.</span>
-  </h2>
-
-  <button class="primary" onclick="openShipment()">
-    Launch Shipment →
-  </button>
-
-</section>
-
-</main>
-
-
-<!-- CINEMATIC SHIPMENT -->
-
-<div id="shipmentOverlay">
-
-  <div class="overlay-stars"></div>
-
-  <div class="overlay-header">
-
-    <div class="logo">
-      <b>S</b> SMITH<span>X</span>
-    </div>
-
-    <span>AI LOGISTICS ENGINE</span>
-
-    <button onclick="closeShipment()">×</button>
-
-  </div>
-
-
-  <div class="route-info">
-
-    <div>
-      <small>ORIGIN</small>
-      <strong>NAIROBI</strong>
-    </div>
-
-    <div class="route-progress">
-      <span></span>
-    </div>
-
-    <div>
-      <small>DESTINATION</small>
-      <strong id="routeDestination">DUBAI</strong>
-    </div>
-
-  </div>
-
-
-  <div class="road">
-
-    <div class="road-motion"></div>
-
-    <div class="truck">
-
-      <div class="truck-shadow"></div>
-
-      <div class="cabin">
-        <div class="window"></div>
-        <div class="blue-stripe"></div>
-      </div>
-
-      <div class="trailer">
-        <strong>SMITH<span>X</span></strong>
-      </div>
-
-      <i class="wheel w1"></i>
-      <i class="wheel w2"></i>
-      <i class="wheel w3"></i>
-
-    </div>
-
-  </div>
-
-
-  <div class="delivery">
-
-    <div class="delivery-top">
-      <span>SHIPMENT ACTIVATED</span>
-      <b>●</b>
-    </div>
-
-    <h3 id="deliveryDestination">Dubai</h3>
-
-    <div class="delivery-details">
-
-      <div>
-        <small>DISTANCE</small>
-        <strong id="distance">4,100 km</strong>
-      </div>
-
-      <div>
-        <small>EST. DELIVERY</small>
-        <strong id="eta">2–5 days</strong>
-      </div>
-
-      <div>
-        <small>TRANSPORT</small>
-        <strong>AI FREIGHT</strong>
-      </div>
-
-    </div>
-
-    <div class="progress-text">
-      <span>ROUTE INITIALIZATION</span>
-      <b id="percent">0%</b>
-    </div>
-
-    <div class="progress">
-      <span id="progress"></span>
-    </div>
-
-  </div>
-
-</div>
-
-
-<script src="script.js?v=4"></script>
-
-</body>
-</html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#020308">
+
+<title>SMITHX — Global Logistics</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#020308;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
+    overflow-x:hidden;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:22px 6%;
+    background:rgba(2,3,8,.55);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.logo{
+    font-size:22px;
+    font-weight:900;
+    letter-spacing:4px;
+}
+
+.logo span{
+    color:#4da3ff;
+}
+
+.nav-btn{
+    border:1px solid rgba(255,255,255,.2);
+    background:rgba(255,255,255,.05);
+    color:white;
+    padding:10px 18px;
+    border-radius:30px;
+    cursor:pointer;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:100vh;
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    padding:120px 7% 70px;
+}
+
+.space{
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(circle at 75% 50%,rgba(0,110,255,.16),transparent 30%),
+      radial-gradient(circle at 20% 20%,rgba(0,170,255,.08),transparent 25%),
+      #020308;
+}
+
+.stars{
+    position:absolute;
+    inset:0;
+    opacity:.8;
+    background-image:
+      radial-gradient(circle,#fff 1px,transparent 1px),
+      radial-gradient(circle,#fff .7px,transparent .7px);
+    background-size:110px 110px,170px 170px;
+    background-position:20px 30px,70px 100px;
+    animation:stars 40s linear infinite;
+}
+
+@keyframes stars{
+    from{transform:translateY(0)}
+    to{transform:translateY(-110px)}
+}
+
+.hero-content{
+    width:48%;
+    position:relative;
+    z-index:10;
+}
+
+.eyebrow{
+    color:#61b1ff;
+    letter-spacing:4px;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:18px;
+}
+
+h1{
+    font-size:clamp(48px,7vw,100px);
+    line-height:.9;
+    letter-spacing:-5px;
+    margin-bottom:28px;
+}
+
+h1 span{
+    color:#5caeff;
+}
+
+.hero p{
+    color:#aeb8c9;
+    font-size:18px;
+    line-height:1.7;
+    max-width:560px;
+}
+
+.actions{
+    display:flex;
+    gap:14px;
+    margin-top:35px;
+    flex-wrap:wrap;
+}
+
+.primary{
+    border:0;
+    background:#fff;
+    color:#05070c;
+    padding:15px 25px;
+    border-radius:30px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.secondary{
+    border:1px solid rgba(255,255,255,.2);
+    background:rgba(255,255,255,.05);
+    color:white;
+    padding:15px 25px;
+    border-radius:30px;
+    cursor:pointer;
+}
+
+/* =========================
+   REAL EARTH
+========================= */
+
+.earth-stage{
+    position:absolute;
+    right:-8%;
+    top:50%;
+    transform:translateY(-50%);
+    width:min(62vw,780px);
+    aspect-ratio:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.earth-glow{
+    position:absolute;
+    width:94%;
+    height:94%;
+    border-radius:50%;
+    background:#168dff;
+    filter:blur(45px);
+    opacity:.22;
+    animation:pulseGlow 5s ease-in-out infinite;
+}
+
+@keyframes pulseGlow{
+    0%,100%{transform:scale(.96);opacity:.18}
+    50%{transform:scale(1.04);opacity:.30}
+}
+
+/*
+  Real Earth texture.
+
+  NASA Blue Marble is mapped around a sphere
+  using CSS 3D layers.
+*/
+
+.earth{
+    width:82%;
+    height:82%;
+    border-radius:50%;
+    position:relative;
+    overflow:hidden;
+    background-image:url("assets/earth.jpg");
+    background-size:auto 100%;
+    background-repeat:repeat-x;
+
+    box-shadow:
+      inset -55px -10px 90px rgba(0,0,0,.9),
+      inset 35px 0 55px rgba(255,255,255,.08),
+      0 0 30px rgba(0,150,255,.4),
+      0 0 100px rgba(0,100,255,.2);
+
+    animation:earthRotate 24s linear infinite;
+}
+
+@keyframes earthRotate{
+    from{
+        background-position:0 0;
+    }
+    to{
+        background-position:-100% 0;
+    }
+}
+
+/* atmospheric rim */
+
+.earth::before{
+    content:"";
+    position:absolute;
+    inset:-2px;
+    border-radius:50%;
+    box-shadow:
+      inset 12px 0 18px rgba(100,190,255,.35),
+      inset -
