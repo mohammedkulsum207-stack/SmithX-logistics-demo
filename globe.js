@@ -1,147 +1,152 @@
-/* =========================================================
-   SMITHX — REAL 3D EARTH
-   ========================================================= */
+// SMITHX — TRUE 3D EARTH
+// Requires Three.js to be loaded by index.html
 
-const canvas = document.getElementById("smithx-globe");
+const container = document.querySelector(".earth-stage");
 
-if (canvas) {
+if (!container) {
+  console.error("SmithX: .earth-stage not found.");
+} else if (typeof THREE === "undefined") {
+  console.error("SmithX: Three.js is not loaded.");
+} else {
+
+  // -----------------------------
+  // SCENE
+  // -----------------------------
+
   const scene = new THREE.Scene();
 
-  // Camera
+  // -----------------------------
+  // CAMERA
+  // -----------------------------
+
   const camera = new THREE.PerspectiveCamera(
-    45,
-    canvas.clientWidth / canvas.clientHeight,
+    35,
+    container.clientWidth / container.clientHeight,
     0.1,
-    1000
+    100
   );
 
-  camera.position.z = 3.2;
+  camera.position.set(0, 0, 3.2);
 
-  // Renderer
+  // -----------------------------
+  // RENDERER
+  // -----------------------------
+
   const renderer = new THREE.WebGLRenderer({
-    canvas: canvas,
     antialias: true,
     alpha: true
   });
 
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+  renderer.setPixelRatio(
+    Math.min(window.devicePixelRatio, 2)
+  );
 
-  // Lighting
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
+  renderer.setSize(
+    container.clientWidth,
+    container.clientHeight
+  );
+
+  renderer.outputColorSpace =
+    THREE.SRGBColorSpace;
+
+  container.appendChild(renderer.domElement);
+
+  renderer.domElement.style.position = "absolute";
+  renderer.domElement.style.inset = "0";
+  renderer.domElement.style.width = "100%";
+  renderer.domElement.style.height = "100%";
+
+  // -----------------------------
+  // LIGHTING
+  // -----------------------------
+
+  const ambientLight =
+    new THREE.AmbientLight(
+      0xffffff,
+      0.35
+    );
+
   scene.add(ambientLight);
 
-  const sunLight = new THREE.DirectionalLight(0xffffff, 3);
-  sunLight.position.set(5, 3, 5);
-  scene.add(sunLight);
+  const sun =
+    new THREE.DirectionalLight(
+      0xffffff,
+      3
+    );
 
-  // Earth texture
-  const loader = new THREE.TextureLoader();
+  sun.position.set(5, 2, 5);
 
-  loader.load(
+  scene.add(sun);
+
+  // -----------------------------
+  // EARTH TEXTURE
+  // -----------------------------
+
+  const textureLoader =
+    new THREE.TextureLoader();
+
+  textureLoader.load(
     "assets/earth.jpg",
     function (earthTexture) {
 
-      earthTexture.colorSpace = THREE.SRGBColorSpace;
+      earthTexture.colorSpace =
+        THREE.SRGBColorSpace;
 
-      const earthGeometry = new THREE.SphereGeometry(
-        1,
-        128,
-        128
-      );
+      // -----------------------------
+      // EARTH
+      // -----------------------------
 
-      const earthMaterial = new THREE.MeshPhongMaterial({
-        map: earthTexture,
-        shininess: 8
-      });
+      const earthGeometry =
+        new THREE.SphereGeometry(
+          1,
+          128,
+          128
+        );
 
-      const earth = new THREE.Mesh(
-        earthGeometry,
-        earthMaterial
-      );
+      const earthMaterial =
+        new THREE.MeshPhongMaterial({
+          map: earthTexture,
+          shininess: 12
+        });
+
+      const earth =
+        new THREE.Mesh(
+          earthGeometry,
+          earthMaterial
+        );
 
       scene.add(earth);
 
-      // Atmosphere
+      // -----------------------------
+      // ATMOSPHERE
+      // -----------------------------
+
       const atmosphereGeometry =
-        new THREE.SphereGeometry(1.035, 128, 128);
+        new THREE.SphereGeometry(
+          1.045,
+          128,
+          128
+        );
 
       const atmosphereMaterial =
         new THREE.MeshBasicMaterial({
-          color: 0x3da9ff,
+          color: 0x3ca9ff,
           transparent: true,
-          opacity: 0.13,
+          opacity: 0.12,
           side: THREE.BackSide
         });
 
-      const atmosphere = new THREE.Mesh(
-        atmosphereGeometry,
-        atmosphereMaterial
-      );
+      const atmosphere =
+        new THREE.Mesh(
+          atmosphereGeometry,
+          atmosphereMaterial
+        );
 
       scene.add(atmosphere);
 
-      // SmithX logistics route
-      const routeMaterial =
-        new THREE.LineBasicMaterial({
-          color: 0x00d9ff,
-          transparent: true,
-          opacity: 0.8
-        });
-
-      const routePoints = [];
-
-      for (let i = 0; i <= 100; i++) {
-
-        const t = i / 100;
-
-        const latitude =
-          0.25 + Math.sin(t * Math.PI) * 0.35;
-
-        const longitude =
-          -1.0 + t * 2.2;
-
-        const radius = 1.025;
-
-        const x =
-          radius *
-          Math.cos(latitude) *
-          Math.cos(longitude);
-
-        const y =
-          radius *
-          Math.sin(latitude);
-
-        const z =
-          radius *
-          Math.cos(latitude) *
-          Math.sin(longitude);
-
-        routePoints.push(
-          new THREE.Vector3(x, y, z)
-        );
-      }
-
-      const routeGeometry =
-        new THREE.BufferGeometry().setFromPoints(
-          routePoints
-        );
-
-      const route =
-        new THREE.Line(
-          routeGeometry,
-          routeMaterial
-        );
-
-      scene.add(route);
-
-      // Network hubs
-      const hubGeometry =
-        new THREE.SphereGeometry(
-          0.025,
-          16,
-          16
-        );
+      // -----------------------------
+      // LOGISTICS HUBS
+      // -----------------------------
 
       const hubMaterial =
         new THREE.MeshBasicMaterial({
@@ -149,41 +154,85 @@ if (canvas) {
         });
 
       const hubs = [
-        [1.0, 0.3, 0.1],
-        [-0.7, 0.45, 0.3],
-        [0.2, -0.8, 0.5],
-        [-0.2, 0.1, -0.9]
+        { lat: -1.286, lon: 36.817 },
+        { lat: 25.2048, lon: 55.2708 },
+        { lat: 51.5074, lon: -0.1278 },
+        { lat: 40.7128, lon: -74.0060 },
+        { lat: 1.3521, lon: 103.8198 }
       ];
 
-      hubs.forEach(position => {
+      function latLonToVector3(
+        lat,
+        lon,
+        radius
+      ) {
+
+        const phi =
+          (90 - lat) *
+          Math.PI /
+          180;
+
+        const theta =
+          (lon + 180) *
+          Math.PI /
+          180;
+
+        return new THREE.Vector3(
+          -radius *
+            Math.sin(phi) *
+            Math.cos(theta),
+
+          radius *
+            Math.cos(phi),
+
+          radius *
+            Math.sin(phi) *
+            Math.sin(theta)
+        );
+      }
+
+      hubs.forEach(hubData => {
+
+        const position =
+          latLonToVector3(
+            hubData.lat,
+            hubData.lon,
+            1.025
+          );
 
         const hub =
           new THREE.Mesh(
-            hubGeometry,
+            new THREE.SphereGeometry(
+              0.025,
+              16,
+              16
+            ),
             hubMaterial
           );
 
-        hub.position.set(
-          position[0],
-          position[1],
-          position[2]
-        );
-
-        hub.lookAt(0, 0, 0);
+        hub.position.copy(position);
 
         scene.add(hub);
       });
 
-      // Animation
+      // -----------------------------
+      // ROTATION
+      // -----------------------------
+
       function animate() {
 
-        requestAnimationFrame(animate);
+        requestAnimationFrame(
+          animate
+        );
 
-        earth.rotation.y += 0.0025;
+        // Actual 3D rotation
+        earth.rotation.y += 0.002;
 
-        route.rotation.y += 0.0025;
+        atmosphere.rotation.y +=
+          0.0022;
 
-        atmosphere.rotation.y += 0.002;
+        // Keep hubs attached to Earth
+        scene.rotation.y += 0.0005;
 
         renderer.render(
           scene,
@@ -193,16 +242,19 @@ if (canvas) {
 
       animate();
 
-      // Responsive resize
+      // -----------------------------
+      // RESIZE
+      // -----------------------------
+
       window.addEventListener(
         "resize",
         () => {
 
           const width =
-            canvas.clientWidth;
+            container.clientWidth;
 
           const height =
-            canvas.clientHeight;
+            container.clientHeight;
 
           camera.aspect =
             width / height;
@@ -214,6 +266,15 @@ if (canvas) {
             height
           );
         }
+      );
+    },
+
+    undefined,
+
+    function (error) {
+      console.error(
+        "SmithX: Earth texture failed to load.",
+        error
       );
     }
   );
