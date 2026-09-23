@@ -1,2019 +1,1207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#02050a">
 
-<meta name="theme-color" content="#020308">
-<meta name="description" content="SMITHX Global Logistics — Moving the world smarter.">
+  <title>SMITHX — Global Logistics</title>
 
-<title>SMITHX — Global Logistics</title>
-
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    background:#020308;
-    color:#fff;
-    font-family:Arial,Helvetica,sans-serif;
-    overflow-x:hidden;
-}
-
-button{
-    font:inherit;
-}
-
-nav{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    z-index:1000;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    padding:20px 6%;
-
-    background:rgba(2,3,8,.55);
-    backdrop-filter:blur(20px);
-
-    border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-.logo{
-    font-size:22px;
-    font-weight:900;
-    letter-spacing:5px;
-}
-
-.logo span{
-    color:#4da3ff;
-}
-
-.nav-right{
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
-
-.nav-status{
-    display:flex;
-    align-items:center;
-    gap:8px;
-
-    color:#9ba8ba;
-    font-size:12px;
-    letter-spacing:1px;
-}
-
-.status-dot{
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:#00e5ff;
-    box-shadow:0 0 15px #00e5ff;
-}
-
-.nav-btn{
-    padding:10px 18px;
-    border-radius:30px;
-
-    color:white;
-    background:rgba(255,255,255,.05);
-
-    border:1px solid rgba(255,255,255,.16);
-
-    cursor:pointer;
-}
-
-.hero{
-    min-height:100vh;
-    position:relative;
-    overflow:hidden;
-
-    display:flex;
-    align-items:center;
-
-    padding:120px 7% 80px;
-}
-
-.space{
-    position:absolute;
-    inset:0;
-
-    background:
-        radial-gradient(
-            circle at 75% 45%,
-            rgba(0,120,255,.16),
-            transparent 30%
-        ),
-        radial-gradient(
-            circle at 20% 20%,
-            rgba(0,180,255,.08),
-            transparent 25%
-        ),
-        #020308;
-}
-
-.stars{
-    position:absolute;
-    inset:0;
-
-    background-image:
-        radial-gradient(circle,#fff 1px,transparent 1px),
-        radial-gradient(circle,#fff .7px,transparent .7px);
-
-    background-size:
-        110px 110px,
-        170px 170px;
-
-    background-position:
-        20px 30px,
-        70px 100px;
-
-    opacity:.65;
-
-    animation:
-        starsMove 45s linear infinite;
-}
-
-@keyframes starsMove{
-    from{
-        transform:translateY(0);
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    to{
-        transform:translateY(-110px);
-    }
-}
-
-.hero-content{
-    width:47%;
-    position:relative;
-    z-index:20;
-}
-
-.eyebrow{
-    color:#5bb0ff;
-
-    font-size:12px;
-    font-weight:bold;
-
-    letter-spacing:4px;
-
-    margin-bottom:20px;
-}
-
-h1{
-    font-size:clamp(52px,7vw,100px);
-    line-height:.88;
-
-    letter-spacing:-6px;
-
-    margin-bottom:28px;
-}
-
-h1 span{
-    color:#5caeff;
-}
-
-.hero-description{
-    color:#aeb8c9;
-
-    font-size:18px;
-    line-height:1.7;
-
-    max-width:560px;
-}
-
-.actions{
-    display:flex;
-    gap:14px;
-
-    margin-top:35px;
-
-    flex-wrap:wrap;
-}
-
-.primary,
-.secondary{
-    padding:15px 25px;
-
-    border-radius:30px;
-
-    cursor:pointer;
-
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease;
-}
-
-.primary{
-    border:0;
-
-    background:white;
-    color:#03050a;
-
-    font-weight:bold;
-}
-
-.primary:hover{
-    transform:translateY(-3px);
-    box-shadow:0 12px 40px rgba(255,255,255,.18);
-}
-
-.secondary{
-    border:1px solid rgba(255,255,255,.2);
-
-    background:rgba(255,255,255,.05);
-
-    color:white;
-}
-
-.secondary:hover{
-    transform:translateY(-3px);
-}
-
-.stats{
-    display:flex;
-    gap:35px;
-
-    margin-top:55px;
-
-    flex-wrap:wrap;
-}
-
-.stat{
-    min-width:100px;
-}
-
-.stat-number{
-    font-size:26px;
-    font-weight:800;
-}
-
-.stat-label{
-    margin-top:5px;
-
-    color:#6f7c90;
-
-    font-size:10px;
-
-    letter-spacing:2px;
-}
-
-/* =====================================================
-   TRUE 3D EARTH
-===================================================== */
-
-.earth-stage{
-    position:absolute;
-
-    right:-5%;
-    top:50%;
-
-    transform:translateY(-50%);
-
-    width:min(64vw,800px);
-    height:min(64vw,800px);
-
-    z-index:5;
-
-    pointer-events:none;
-}
-
-#earthCanvas{
-    position:absolute;
-
-    inset:0;
-
-    width:100%;
-    height:100%;
-
-    display:block;
-}
-
-.earth-label{
-    position:absolute;
-
-    right:15%;
-    bottom:18%;
-
-    z-index:10;
-
-    padding:10px 14px;
-
-    border-radius:8px;
-
-    background:rgba(3,7,15,.7);
-
-    border:1px solid rgba(92,174,255,.2);
-
-    backdrop-filter:blur(12px);
-
-    color:#9db5d2;
-
-    font-size:10px;
-
-    letter-spacing:2px;
-}
-
-.live-ring{
-    position:absolute;
-
-    inset:5%;
-
-    border:1px solid rgba(50,160,255,.12);
-
-    border-radius:50%;
-
-    animation:
-        ringRotate 25s linear infinite;
-}
-
-.live-ring::before{
-    content:"";
-
-    position:absolute;
-
-    top:-4px;
-    left:50%;
-
-    width:8px;
-    height:8px;
-
-    border-radius:50%;
-
-    background:#00d9ff;
-
-    box-shadow:
-        0 0 15px #00d9ff,
-        0 0 35px #008cff;
-}
-
-@keyframes ringRotate{
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-/* =====================================================
-   SHIPMENT
-===================================================== */
-
-.shipment{
-    position:relative;
-
-    min-height:100vh;
-
-    padding:120px 7%;
-
-    background:
-        linear-gradient(
-            180deg,
-            #020308,
-            #030711
-        );
-}
-
-.section-eyebrow{
-    color:#4da3ff;
-
-    font-size:11px;
-
-    letter-spacing:4px;
-
-    margin-bottom:15px;
-}
-
-.section-title{
-    font-size:clamp(40px,6vw,72px);
-
-    letter-spacing:-4px;
-
-    max-width:800px;
-
-    margin-bottom:45px;
-}
-
-.shipment-panel{
-    max-width:1100px;
-
-    margin:auto;
-
-    padding:35px;
-
-    border-radius:25px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.07),
-            rgba(255,255,255,.025)
-        );
-
-    border:1px solid rgba(255,255,255,.1);
-
-    box-shadow:
-        0 30px 100px rgba(0,0,0,.35);
-}
-
-.route-header{
-    display:flex;
-
-    justify-content:space-between;
-
-    gap:20px;
-
-    margin-bottom:30px;
-
-    flex-wrap:wrap;
-}
-
-.route-title{
-    font-size:20px;
-    font-weight:bold;
-}
-
-.route-status{
-    color:#00d9ff;
-
-    font-size:11px;
-
-    letter-spacing:2px;
-}
-
-.route{
-    display:flex;
-
-    align-items:center;
-
-    gap:15px;
-}
-
-.node{
-    width:14px;
-    height:14px;
-
-    border-radius:50%;
-
-    background:#00d9ff;
-
-    box-shadow:
-        0 0 20px #00d9ff;
-}
-
-.route-line{
-    height:2px;
-
-    flex:1;
-
-    background:
-        linear-gradient(
-            90deg,
-            #00d9ff,
-            rgba(0,217,255,.1)
-        );
-}
-
-.shipment-controls{
-    display:grid;
-
-    grid-template-columns:
-        1fr 1fr auto;
-
-    gap:15px;
-
-    margin-top:35px;
-}
-
-.control{
-    padding:15px;
-
-    color:white;
-
-    background:#070b13;
-
-    border:1px solid rgba(255,255,255,.12);
-
-    border-radius:12px;
-
-    outline:none;
-}
-
-.control:focus{
-    border-color:#4da3ff;
-}
-
-.add-cart{
-    padding:15px 25px;
-
-    border:0;
-
-    border-radius:12px;
-
-    background:#fff;
-
-    color:#03050a;
-
-    font-weight:bold;
-
-    cursor:pointer;
-}
-
-/* =====================================================
-   NETWORK
-===================================================== */
-
-.network{
-    min-height:70vh;
-
-    padding:100px 7%;
-
-    background:#020308;
-}
-
-.network-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:20px;
-
-    margin-top:45px;
-}
-
-.network-card{
-    padding:30px;
-
-    min-height:180px;
-
-    border-radius:20px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.07),
-            rgba(255,255,255,.02)
-        );
-
-    border:1px solid rgba(255,255,255,.08);
-
-    transition:
-        transform .3s ease,
-        border-color .3s ease;
-}
-
-.network-card:hover{
-    transform:translateY(-7px);
-
-    border-color:
-        rgba(77,163,255,.45);
-}
-
-.network-number{
-    color:#4da3ff;
-
-    font-size:13px;
-
-    letter-spacing:2px;
-
-    margin-bottom:25px;
-}
-
-.network-card h3{
-    font-size:24px;
-
-    margin-bottom:10px;
-}
-
-.network-card p{
-    color:#7d8ba0;
-
-    line-height:1.6;
-}
-
-/* =====================================================
-   FOOTER
-===================================================== */
-
-footer{
-    padding:35px 7%;
-
-    border-top:
-        1px solid rgba(255,255,255,.08);
-
-    color:#637084;
-
-    font-size:12px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    gap:20px;
-
-    flex-wrap:wrap;
-}
-
-/* =====================================================
-   SHIPMENT OVERLAY
-===================================================== */
-
-.overlay{
-    position:fixed;
-
-    inset:0;
-
-    z-index:5000;
-
-    display:none;
-
-    align-items:center;
-    justify-content:center;
-
-    background:
-        rgba(0,0,0,.82);
-
-    backdrop-filter:blur(18px);
-}
-
-.overlay.active{
-    display:flex;
-}
-
-.overlay-card{
-    width:min(92%,600px);
-
-    padding:35px;
-
-    border-radius:25px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #0a101b,
-            #03060b
-        );
-
-    border:
-        1px solid rgba(77,163,255,.25);
-
-    box-shadow:
-        0 40px 120px rgba(0,0,0,.65);
-}
-
-.overlay-title{
-    font-size:28px;
-
-    margin-bottom:10px;
-}
-
-.overlay-subtitle{
-    color:#8290a4;
-
-    font-size:13px;
-
-    margin-bottom:30px;
-}
-
-.tracking-info{
-    display:grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:15px;
-}
-
-.info{
-    padding:18px;
-
-    border-radius:14px;
-
-    background:rgba(255,255,255,.04);
-
-    border:1px solid rgba(255,255,255,.07);
-}
-
-.info small{
-    display:block;
-
-    color:#66758a;
-
-    font-size:9px;
-
-    letter-spacing:2px;
-
-    margin-bottom:8px;
-}
-
-.info strong{
-    font-size:17px;
-}
-
-.progress{
-    height:5px;
-
-    margin-top:25px;
-
-    background:#111923;
-
-    border-radius:20px;
-
-    overflow:hidden;
-}
-
-.progress-bar{
-    width:0%;
-
-    height:100%;
-
-    background:
-        linear-gradient(
-            90deg,
-            #007cff,
-            #00e5ff
-        );
-
-    transition:
-        width 4s cubic-bezier(.2,.7,.2,1);
-}
-
-.close-overlay{
-    width:100%;
-
-    margin-top:25px;
-
-    padding:13px;
-
-    border-radius:12px;
-
-    border:1px solid rgba(255,255,255,.1);
-
-    background:rgba(255,255,255,.05);
-
-    color:white;
-
-    cursor:pointer;
-}
-
-/* =====================================================
-   RESPONSIVE
-===================================================== */
-
-@media(max-width:900px){
-
-    .hero{
-        padding-top:140px;
-
-        align-items:flex-start;
+    html {
+      scroll-behavior: smooth;
     }
 
-    .hero-content{
-        width:100%;
-
-        text-align:center;
+    body {
+      background: #02050a;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
     }
 
-    .hero p{
-        margin:auto;
+    /* BACKGROUND */
+    .stars {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(0,140,255,.12), transparent 30%),
+        radial-gradient(circle at 80% 60%, rgba(0,255,200,.08), transparent 30%),
+        #02050a;
     }
 
-    .actions{
-        justify-content:center;
+    .stars::before,
+    .stars::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.7) 1px, transparent 1px);
+      background-size: 90px 90px;
+      opacity: .25;
     }
 
-    .stats{
-        justify-content:center;
+    .stars::after {
+      background-size: 150px 150px;
+      opacity: .15;
+      transform: translate(30px, 50px);
     }
 
-    .earth-stage{
-        position:absolute;
+    /* NAVBAR */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 74px;
+      z-index: 1000;
 
-        width:90vw;
-        height:90vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-        right:-25%;
-        top:70%;
-
-        opacity:.55;
+      padding: 0 6%;
+      background: rgba(2,5,10,.72);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
     }
 
-    .shipment{
-        padding-top:100px;
+    .logo {
+      font-size: 25px;
+      font-weight: 900;
+      letter-spacing: 3px;
     }
 
-    .shipment-controls{
-        grid-template-columns:1fr;
+    .logo span {
+      color: #00eaff;
     }
 
-    .network-grid{
-        grid-template-columns:1fr;
-    }
-}
-
-@media(max-width:600px){
-
-    nav{
-        padding:17px 5%;
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
     }
 
-    .nav-status{
-        display:none;
+    .nav-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 14px;
+      transition: .25s;
     }
 
-    h1{
-        letter-spacing:-4px;
+    .nav-links a:hover {
+      color: #00eaff;
     }
 
-    .hero{
-        min-height:900px;
+    .nav-button {
+      padding: 11px 18px;
+      border: 1px solid rgba(0,234,255,.5);
+      border-radius: 30px;
+      color: #00eaff;
+      background: rgba(0,234,255,.05);
+      cursor: pointer;
     }
 
-    .earth-stage{
-        top:73%;
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      padding-top: 74px;
 
-        right:-30%;
+      display: grid;
+      grid-template-columns: 42% 58%;
+      align-items: center;
+
+      position: relative;
     }
 
-    .shipment-panel{
-        padding:22px;
+    .hero-content {
+      padding: 70px 0 70px 8%;
+      z-index: 10;
     }
 
-    .tracking-info{
-        grid-template-columns:1fr;
+    .eyebrow {
+      color: #00eaff;
+      font-size: 12px;
+      letter-spacing: 4px;
+      margin-bottom: 20px;
+      font-weight: 700;
     }
 
-    footer{
-        flex-direction:column;
+    h1 {
+      font-size: clamp(48px, 6vw, 86px);
+      line-height: .95;
+      letter-spacing: -4px;
+      margin-bottom: 25px;
     }
-}
-</style>
+
+    h1 span {
+      color: #00eaff;
+    }
+
+    .hero-text {
+      max-width: 540px;
+      color: #94a3b8;
+      font-size: 17px;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      padding: 15px 24px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+    }
+
+    .primary-btn {
+      background: #00eaff;
+      color: #001015;
+      box-shadow: 0 0 30px rgba(0,234,255,.25);
+    }
+
+    .secondary-btn {
+      color: #fff;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    /* GLOBE */
+    .globe-area {
+      height: calc(100vh - 74px);
+      min-height: 600px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #earthCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .globe-label {
+      position: absolute;
+      right: 8%;
+      bottom: 12%;
+      padding: 12px 16px;
+      border-radius: 10px;
+      background: rgba(0,10,20,.7);
+      border: 1px solid rgba(0,234,255,.2);
+      backdrop-filter: blur(10px);
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: #00eaff;
+    }
+
+    /* STATS */
+    .stats {
+      position: absolute;
+      bottom: 40px;
+      left: 8%;
+      display: flex;
+      gap: 40px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 25px;
+    }
+
+    .stat small {
+      color: #64748b;
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    /* SECTION */
+    section {
+      padding: 100px 7%;
+      position: relative;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 55px;
+    }
+
+    .section-title p {
+      color: #00eaff;
+      font-size: 11px;
+      letter-spacing: 4px;
+      margin-bottom: 12px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(35px, 5vw, 58px);
+    }
+
+    /* SHIPMENT */
+    .shipment-box {
+      max-width: 900px;
+      margin: auto;
+      padding: 35px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 20px;
+      background: rgba(255,255,255,.035);
+      backdrop-filter: blur(12px);
+    }
+
+    .shipment-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .field label {
+      display: block;
+      color: #64748b;
+      font-size: 11px;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .field select,
+    .field input {
+      width: 100%;
+      padding: 15px;
+      border-radius: 9px;
+      background: #050b12;
+      border: 1px solid rgba(255,255,255,.12);
+      color: #fff;
+      outline: none;
+    }
+
+    .create-shipment {
+      width: 100%;
+      margin-top: 25px;
+      padding: 17px;
+      border: none;
+      border-radius: 10px;
+      background: #00eaff;
+      color: #001015;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    /* NETWORK */
+    .network {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 15px;
+    }
+
+    .network-card {
+      padding: 25px 18px;
+      border-radius: 15px;
+      background: rgba(255,255,255,.035);
+      border: 1px solid rgba(255,255,255,.08);
+      text-align: center;
+    }
+
+    .network-card .dot {
+      width: 9px;
+      height: 9px;
+      background: #00eaff;
+      border-radius: 50%;
+      margin: 0 auto 15px;
+      box-shadow: 0 0 15px #00eaff;
+    }
+
+    .network-card h3 {
+      margin-bottom: 7px;
+    }
+
+    .network-card p {
+      color: #64748b;
+      font-size: 12px;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 50px 7%;
+      border-top: 1px solid rgba(255,255,255,.08);
+      color: #64748b;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    footer strong {
+      color: #fff;
+    }
+
+    /* SHIPMENT OVERLAY */
+    #shipmentOverlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(12px);
+    }
+
+    .overlay-card {
+      width: min(500px, 90%);
+      padding: 35px;
+      border-radius: 20px;
+      background: #050b12;
+      border: 1px solid rgba(0,234,255,.3);
+      text-align: center;
+      box-shadow: 0 0 80px rgba(0,234,255,.12);
+    }
+
+    .success-icon {
+      font-size: 45px;
+      margin-bottom: 15px;
+    }
+
+    .overlay-card h2 {
+      margin-bottom: 10px;
+    }
+
+    .overlay-card p {
+      color: #94a3b8;
+      margin-bottom: 25px;
+    }
+
+    .progress {
+      height: 7px;
+      background: #111827;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      width: 0;
+      height: 100%;
+      background: #00eaff;
+      transition: width 3s ease;
+    }
+
+    .close-overlay {
+      margin-top: 22px;
+      background: transparent;
+      color: #94a3b8;
+      border: 1px solid rgba(255,255,255,.12);
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-content {
+        padding: 120px 7% 30px;
+        text-align: center;
+      }
+
+      .hero-text {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .globe-area {
+        height: 600px;
+        min-height: 0;
+      }
+
+      .stats {
+        position: static;
+        justify-content: center;
+        margin: 20px 0 40px;
+      }
+
+      .network {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 50px;
+      }
+
+      .shipment-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .network {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- =====================================================
-     NAVIGATION
-===================================================== -->
+<div class="stars"></div>
 
+<!-- NAVIGATION -->
 <nav>
+  <div class="logo">SMITH<span>X</span></div>
 
-    <div class="logo">
-        SMITH<span>X</span>
-    </div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#shipment">Shipments</a></li>
+    <li><a href="#network">Network</a></li>
+  </ul>
 
-    <div class="nav-right">
-
-        <div class="nav-status">
-            <span class="status-dot"></span>
-            GLOBAL NETWORK ONLINE
-        </div>
-
-        <button
-            class="nav-btn"
-            onclick="scrollToShipment()"
-        >
-            Track Shipment
-        </button>
-
-    </div>
-
+  <button class="nav-button" onclick="scrollToShipment()">
+    Track
+  </button>
 </nav>
 
 
-<!-- =====================================================
-     HERO
-===================================================== -->
+<!-- HERO -->
+<main id="home">
 
-<section class="hero">
-
-    <div class="space"></div>
-
-    <div class="stars"></div>
+  <section class="hero">
 
     <div class="hero-content">
 
-        <div class="eyebrow">
-            SMITHX GLOBAL LOGISTICS
-        </div>
-
-        <h1>
-            Moving the
-            <span>world.</span>
-        </h1>
-
-        <p class="hero-description">
-            Intelligent logistics connecting businesses,
-            people and markets across the planet.
-            SmithX combines global transportation,
-            real-time tracking and AI-powered logistics.
-        </p>
-
-        <div class="actions">
-
-            <button
-                class="primary"
-                onclick="scrollToShipment()"
-            >
-                Start Shipment →
-            </button>
-
-            <button
-                class="secondary"
-                onclick="scrollToShipment()"
-            >
-                Track Shipment
-            </button>
-
-        </div>
-
-        <div class="stats">
-
-            <div class="stat">
-                <div
-                    class="stat-number"
-                    data-count="195"
-                >
-                    0
-                </div>
-
-                <div class="stat-label">
-                    COUNTRIES
-                </div>
-            </div>
-
-            <div class="stat">
-                <div
-                    class="stat-number"
-                    data-count="850"
-                >
-                    0
-                </div>
-
-                <div class="stat-label">
-                    GLOBAL HUBS
-                </div>
-            </div>
-
-            <div class="stat">
-                <div
-                    class="stat-number"
-                    data-count="99"
-                >
-                    0
-                </div>
-
-                <div class="stat-label">
-                    ON-TIME %
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- TRUE WEBGL EARTH -->
-
-    <div class="earth-stage">
-
-        <div class="live-ring"></div>
-
-        <canvas id="earthCanvas"></canvas>
-
-        <div class="earth-label">
-            LIVE GLOBAL NETWORK
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     SHIPMENT
-===================================================== -->
-
-<section
-    class="shipment"
-    id="shipment"
->
-
-    <div class="section-eyebrow">
-        SHIPMENT CONTROL
-    </div>
-
-    <h2 class="section-title">
-        Move anything.
-        Anywhere.
-    </h2>
-
-    <div class="shipment-panel">
-
-        <div class="route-header">
-
-            <div class="route-title">
-                NEW SHIPMENT NETWORK ONLINE
-            </div>
-
-            <div class="route-status">
-                ● SYSTEM READY
-            </div>
-
-        </div>
-
-        <div class="route">
-
-            <div
-                class="node"
-                title="Nairobi"
-            ></div>
-
-            <div class="route-line"></div>
-
-            <div
-                class="node"
-                title="Destination"
-            ></div>
-
-        </div>
-
-        <div class="shipment-controls">
-
-            <div>
-
-                <label
-                    style="
-                    display:block;
-                    color:#68778c;
-                    font-size:10px;
-                    letter-spacing:2px;
-                    margin-bottom:8px;
-                    "
-                >
-                    ORIGIN
-                </label>
-
-                <input
-                    class="control"
-                    value="Nairobi, Kenya"
-                    readonly
-                >
-
-            </div>
-
-            <div>
-
-                <label
-                    style="
-                    display:block;
-                    color:#68778c;
-                    font-size:10px;
-                    letter-spacing:2px;
-                    margin-bottom:8px;
-                    "
-                >
-                    DESTINATION
-                </label>
-
-                <select
-                    class="control"
-                    id="destination"
-                >
-
-                    <option value="Dubai">
-                        Dubai, UAE
-                    </option>
-
-                    <option value="London">
-                        London, UK
-                    </option>
-
-                    <option value="New York">
-                        New York, USA
-                    </option>
-
-                    <option value="Singapore">
-                        Singapore
-                    </option>
-
-                </select>
-
-            </div>
-
-            <div
-                style="
-                display:flex;
-                align-items:end;
-                "
-            >
-
-                <button
-                    class="add-cart"
-                    id="addCart"
-                >
-                    ADD TO CART →
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     NETWORK
-===================================================== -->
-
-<section class="network">
-
-    <div class="section-eyebrow">
-        SMITHX INFRASTRUCTURE
-    </div>
-
-    <h2 class="section-title">
-        One network.
-        One planet.
-    </h2>
-
-    <div class="network-grid">
-
-        <div class="network-card">
-
-            <div class="network-number">
-                01 / AI
-            </div>
-
-            <h3>
-                Intelligent Routing
-            </h3>
-
-            <p>
-                AI-assisted logistics planning
-                continuously optimizes routes,
-                delivery timing and transportation.
-            </p>
-
-        </div>
-
-        <div class="network-card">
-
-            <div class="network-number">
-                02 / GLOBAL
-            </div>
-
-            <h3>
-                Global Network
-            </h3>
-
-            <p>
-                Connect suppliers, businesses and
-                customers through one global
-                logistics ecosystem.
-            </p>
-
-        </div>
-
-        <div class="network-card">
-
-            <div class="network-number">
-                03 / LIVE
-            </div>
-
-            <h3>
-                Real-Time Visibility
-            </h3>
-
-            <p>
-                Track shipments and visualize
-                movement across the SmithX network.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer>
-
-    <div>
-        © 2026 SMITHX
-    </div>
-
-    <div>
-        GLOBAL LOGISTICS · AI · COMMERCE
-    </div>
-
-</footer>
-
-
-<!-- =====================================================
-     SHIPMENT OVERLAY
-===================================================== -->
-
-<div
-    class="overlay"
-    id="overlay"
->
-
-    <div class="overlay-card">
-
-        <div class="overlay-title">
-            Shipment Created
-        </div>
-
-        <div class="overlay-subtitle">
-            Your SmithX logistics network is now active.
-        </div>
-
-        <div class="tracking-info">
-
-            <div class="info">
-
-                <small>
-                    ORIGIN
-                </small>
-
-                <strong>
-                    Nairobi, Kenya
-                </strong>
-
-            </div>
-
-            <div class="info">
-
-                <small>
-                    DESTINATION
-                </small>
-
-                <strong id="overlayDestination">
-                    Dubai, UAE
-                </strong>
-
-            </div>
-
-            <div class="info">
-
-                <small>
-                    TRANSPORT
-                </small>
-
-                <strong>
-                    SmithX Global
-                </strong>
-
-            </div>
-
-            <div class="info">
-
-                <small>
-                    STATUS
-                </small>
-
-                <strong>
-                    IN TRANSIT
-                </strong>
-
-            </div>
-
-        </div>
-
-        <div class="progress">
-
-            <div
-                class="progress-bar"
-                id="progressBar"
-            ></div>
-
-        </div>
-
-        <button
-            class="close-overlay"
-            onclick="closeShipment()"
-        >
-            CLOSE
+      <div class="eyebrow">
+        GLOBAL LOGISTICS NETWORK
+      </div>
+
+      <h1>
+        MOVE THE<br>
+        <span>WORLD.</span>
+      </h1>
+
+      <p class="hero-text">
+        SmithX connects businesses, sellers and customers
+        through an intelligent global logistics network.
+        Track movement across the planet in real time.
+      </p>
+
+      <div class="hero-buttons">
+        <button class="primary-btn" onclick="scrollToShipment()">
+          CREATE SHIPMENT
         </button>
 
+        <button class="secondary-btn" onclick="scrollToNetwork()">
+          EXPLORE NETWORK
+        </button>
+      </div>
+
+      <div class="stats">
+
+        <div class="stat">
+          <strong>180+</strong>
+          <small>COUNTRIES</small>
+        </div>
+
+        <div class="stat">
+          <strong>24/7</strong>
+          <small>MONITORING</small>
+        </div>
+
+        <div class="stat">
+          <strong>LIVE</strong>
+          <small>TRACKING</small>
+        </div>
+
+      </div>
+
     </div>
+
+
+    <!-- REAL 3D EARTH -->
+    <div class="globe-area">
+      <canvas id="earthCanvas"></canvas>
+
+      <div class="globe-label">
+        ● LIVE GLOBAL NETWORK
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- SHIPMENT -->
+  <section id="shipment">
+
+    <div class="section-title">
+      <p>SHIP WITH SMITHX</p>
+      <h2>Create a Shipment</h2>
+    </div>
+
+    <div class="shipment-box">
+
+      <div class="shipment-grid">
+
+        <div class="field">
+          <label>ORIGIN</label>
+
+          <input
+            type="text"
+            value="Nairobi, Kenya"
+            readonly
+          >
+        </div>
+
+        <div class="field">
+          <label>DESTINATION</label>
+
+          <select id="destination">
+
+            <option value="Dubai, UAE">
+              Dubai, UAE
+            </option>
+
+            <option value="London, UK">
+              London, UK
+            </option>
+
+            <option value="New York, USA">
+              New York, USA
+            </option>
+
+            <option value="Singapore">
+              Singapore
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+      <button
+        class="create-shipment"
+        onclick="createShipment()"
+      >
+        CREATE LIVE SHIPMENT
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- NETWORK -->
+  <section id="network">
+
+    <div class="section-title">
+      <p>SMITHX NETWORK</p>
+      <h2>Connected Globally</h2>
+    </div>
+
+    <div class="network">
+
+      <div class="network-card">
+        <div class="dot"></div>
+        <h3>Nairobi</h3>
+        <p>East Africa Hub</p>
+      </div>
+
+      <div class="network-card">
+        <div class="dot"></div>
+        <h3>Dubai</h3>
+        <p>Middle East Hub</p>
+      </div>
+
+      <div class="network-card">
+        <div class="dot"></div>
+        <h3>London</h3>
+        <p>Europe Hub</p>
+      </div>
+
+      <div class="network-card">
+        <div class="dot"></div>
+        <h3>New York</h3>
+        <p>North America Hub</p>
+      </div>
+
+      <div class="network-card">
+        <div class="dot"></div>
+        <h3>Singapore</h3>
+        <p>Asia Hub</p>
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- SHIPMENT POPUP -->
+<div id="shipmentOverlay">
+
+  <div class="overlay-card">
+
+    <div class="success-icon">🌍</div>
+
+    <h2>Shipment Created</h2>
+
+    <p id="shipmentMessage">
+      Your SmithX shipment is being processed.
+    </p>
+
+    <div class="progress">
+      <div
+        id="progressBar"
+        class="progress-bar">
+      </div>
+    </div>
+
+    <button
+      class="close-overlay"
+      onclick="closeOverlay()">
+      CLOSE
+    </button>
+
+  </div>
 
 </div>
 
 
-<!-- =====================================================
-     THREE.JS
-===================================================== -->
+<!-- FOOTER -->
+<footer>
 
+  <div>
+    <strong>SMITHX</strong>
+    — Global Commerce & Logistics
+  </div>
+
+  <div>
+    © 2026 SmithX
+  </div>
+
+</footer>
+
+
+<!-- THREE.JS -->
 <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
 
 
 <script>
 
-/* =====================================================
-   TRUE 3D EARTH
-===================================================== */
+  /* =========================================
+     SMITHX REAL 3D EARTH
+  ========================================= */
 
-const canvas =
-    document.getElementById("earthCanvas");
+  const canvas = document.getElementById("earthCanvas");
 
-const container =
-    document.querySelector(".earth-stage");
+  const scene = new THREE.Scene();
 
-const scene =
-    new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(
+    38,
+    1,
+    0.1,
+    1000
+  );
 
-const camera =
-    new THREE.PerspectiveCamera(
-        38,
-        container.clientWidth /
-        container.clientHeight,
-        0.1,
-        100
-    );
+  camera.position.z = 3.2;
 
-camera.position.z = 3.1;
 
+  const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    antialias: true,
+    alpha: true
+  });
 
-const renderer =
-    new THREE.WebGLRenderer({
-        canvas:canvas,
-        antialias:true,
-        alpha:true
-    });
+  renderer.setPixelRatio(
+    Math.min(window.devicePixelRatio, 2)
+  );
 
-renderer.setPixelRatio(
-    Math.min(
-        window.devicePixelRatio,
-        2
-    )
-);
 
-renderer.outputColorSpace =
-    THREE.SRGBColorSpace;
+  /* RESIZE */
 
+  function resizeGlobe() {
 
-/* =====================================================
-   LIGHTING
-===================================================== */
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
 
-const ambient =
-    new THREE.AmbientLight(
-        0xffffff,
-        .45
-    );
-
-scene.add(ambient);
-
-
-const sun =
-    new THREE.DirectionalLight(
-        0xffffff,
-        3
-    );
-
-sun.position.set(
-    5,
-    2,
-    5
-);
-
-scene.add(sun);
-
-
-/* =====================================================
-   EARTH
-===================================================== */
-
-const loader =
-    new THREE.TextureLoader();
-
-loader.load(
-    "assets/earth.jpg",
-
-    function(texture){
-
-        texture.colorSpace =
-            THREE.SRGBColorSpace;
-
-
-        const earthGroup =
-            new THREE.Group();
-
-        scene.add(
-            earthGroup
-        );
-
-
-        /* EARTH SPHERE */
-
-        const earthGeometry =
-            new THREE.SphereGeometry(
-                1,
-                128,
-                128
-            );
-
-
-        const earthMaterial =
-            new THREE.MeshPhongMaterial({
-                map:texture,
-                shininess:15,
-                specular:0x333333
-            });
-
-
-        const earth =
-            new THREE.Mesh(
-                earthGeometry,
-                earthMaterial
-            );
-
-        earthGroup.add(
-            earth
-        );
-
-
-        /* =================================================
-           ATMOSPHERE
-        ================================================= */
-
-        const atmosphereGeometry =
-            new THREE.SphereGeometry(
-                1.055,
-                128,
-                128
-            );
-
-
-        const atmosphereMaterial =
-            new THREE.MeshBasicMaterial({
-                color:0x3fa9ff,
-                transparent:true,
-                opacity:.13,
-                side:THREE.BackSide
-            });
-
-
-        const atmosphere =
-            new THREE.Mesh(
-                atmosphereGeometry,
-                atmosphereMaterial
-            );
-
-        earthGroup.add(
-            atmosphere
-        );
-
-
-        /* =================================================
-           OUTER GLOW
-        ================================================= */
-
-        const glowGeometry =
-            new THREE.SphereGeometry(
-                1.12,
-                64,
-                64
-            );
-
-
-        const glowMaterial =
-            new THREE.MeshBasicMaterial({
-                color:0x168cff,
-                transparent:true,
-                opacity:.035,
-                side:THREE.BackSide
-            });
-
-
-        const glow =
-            new THREE.Mesh(
-                glowGeometry,
-                glowMaterial
-            );
-
-        earthGroup.add(
-            glow
-        );
-
-
-        /* =================================================
-           SMITHX GLOBAL HUBS
-        ================================================= */
-
-        const hubs = [
-
-            {
-                name:"Nairobi",
-                lat:-1.286389,
-                lon:36.817223
-            },
-
-            {
-                name:"Dubai",
-                lat:25.204849,
-                lon:55.270783
-            },
-
-            {
-                name:"London",
-                lat:51.507351,
-                lon:-0.127758
-            },
-
-            {
-                name:"New York",
-                lat:40.712776,
-                lon:-74.005974
-            },
-
-            {
-                name:"Singapore",
-                lat:1.352083,
-                lon:103.819836
-            }
-
-        ];
-
-
-        function latLonToVector(
-            lat,
-            lon,
-            radius
-        ){
-
-            const phi =
-                (90-lat) *
-                Math.PI /
-                180;
-
-            const theta =
-                (lon+180) *
-                Math.PI /
-                180;
-
-
-            return new THREE.Vector3(
-
-                -radius *
-                Math.sin(phi) *
-                Math.cos(theta),
-
-                radius *
-                Math.cos(phi),
-
-                radius *
-                Math.sin(phi) *
-                Math.sin(theta)
-
-            );
-        }
-
-
-        const hubGeometry =
-            new THREE.SphereGeometry(
-                .025,
-                16,
-                16
-            );
-
-
-        const hubMaterial =
-            new THREE.MeshBasicMaterial({
-                color:0x00e5ff
-            });
-
-
-        hubs.forEach(
-            hubData => {
-
-                const position =
-                    latLonToVector(
-                        hubData.lat,
-                        hubData.lon,
-                        1.025
-                    );
-
-
-                const hub =
-                    new THREE.Mesh(
-                        hubGeometry,
-                        hubMaterial
-                    );
-
-
-                hub.position.copy(
-                    position
-                );
-
-
-                earthGroup.add(
-                    hub
-                );
-
-            }
-        );
-
-
-        /* =================================================
-           ANIMATED GLOBAL ROUTES
-        ================================================= */
-
-        function createRoute(
-            start,
-            end
-        ){
-
-            const startPoint =
-                latLonToVector(
-                    start.lat,
-                    start.lon,
-                    1.03
-                );
-
-            const endPoint =
-                latLonToVector(
-                    end.lat,
-                    end.lon,
-                    1.03
-                );
-
-
-            const points = [];
-
-
-            for(
-                let i=0;
-                i<=80;
-                i++
-            ){
-
-                const t =
-                    i/80;
-
-
-                const point =
-                    new THREE.Vector3()
-                        .lerpVectors(
-                            startPoint,
-                            endPoint,
-                            t
-                        );
-
-
-                const height =
-                    Math.sin(
-                        t*Math.PI
-                    )*.12;
-
-
-                point.normalize()
-                    .multiplyScalar(
-                        1.03+height
-                    );
-
-
-                points.push(
-                    point
-                );
-
-            }
-
-
-            const geometry =
-                new THREE.BufferGeometry()
-                    .setFromPoints(
-                        points
-                    );
-
-
-            const material =
-                new THREE.LineBasicMaterial({
-                    color:0x00d9ff,
-                    transparent:true,
-                    opacity:.5
-                });
-
-
-            const line =
-                new THREE.Line(
-                    geometry,
-                    material
-                );
-
-
-            earthGroup.add(
-                line
-            );
-
-        }
-
-
-        createRoute(
-            hubs[0],
-            hubs[1]
-        );
-
-        createRoute(
-            hubs[1],
-            hubs[2]
-        );
-
-        createRoute(
-            hubs[2],
-            hubs[3]
-        );
-
-        createRoute(
-            hubs[1],
-            hubs[4]
-        );
-
-
-        /* =================================================
-           ROTATION
-        ================================================= */
-
-        function animate(){
-
-            requestAnimationFrame(
-                animate
-            );
-
-
-            // True 3D rotation
-            earthGroup.rotation.y += .0018;
-
-
-            renderer.render(
-                scene,
-                camera
-            );
-
-        }
-
-
-        animate();
-
-    },
-
-    undefined,
-
-    function(error){
-
-        console.error(
-            "SMITHX: Earth image failed to load.",
-            error
-        );
-
-    }
-);
-
-
-/* =====================================================
-   RESIZE
-===================================================== */
-
-function resizeEarth(){
-
-    const width =
-        container.clientWidth;
-
-    const height =
-        container.clientHeight;
-
-
-    camera.aspect =
-        width / height;
-
-
-    camera.updateProjectionMatrix();
-
+    if (width === 0 || height === 0) return;
 
     renderer.setSize(
-        width,
-        height,
-        false
+      width,
+      height,
+      false
     );
 
-}
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+  }
 
-
-window.addEventListener(
+  window.addEventListener(
     "resize",
-    resizeEarth
-);
+    resizeGlobe
+  );
 
-resizeEarth();
+  resizeGlobe();
 
 
-/* =====================================================
-   STATS COUNTER
-===================================================== */
+  /* LIGHT */
 
-const counters =
-    document.querySelectorAll(
-        "[data-count]"
+  const ambientLight =
+    new THREE.AmbientLight(
+      0xffffff,
+      1.8
     );
 
-
-const observer =
-    new IntersectionObserver(
-        entries => {
-
-            entries.forEach(
-                entry => {
-
-                    if(
-                        !entry.isIntersecting
-                    ){
-                        return;
-                    }
+  scene.add(ambientLight);
 
 
-                    const element =
-                        entry.target;
-
-                    const target =
-                        Number(
-                            element.dataset.count
-                        );
-
-
-                    let current = 0;
-
-                    const increment =
-                        target / 80;
-
-
-                    function count(){
-
-                        current +=
-                            increment;
-
-
-                        if(
-                            current >= target
-                        ){
-
-                            element.textContent =
-                                target;
-
-                            return;
-
-                        }
-
-
-                        element.textContent =
-                            Math.floor(
-                                current
-                            );
-
-
-                        requestAnimationFrame(
-                            count
-                        );
-
-                    }
-
-
-                    count();
-
-                    observer.unobserve(
-                        element
-                    );
-
-                }
-            );
-
-        }
+  const sunLight =
+    new THREE.DirectionalLight(
+      0xffffff,
+      3
     );
 
+  sunLight.position.set(
+    5,
+    3,
+    5
+  );
 
-counters.forEach(
-    counter => {
+  scene.add(sunLight);
 
-        observer.observe(
-            counter
+
+  /* EARTH GROUP */
+
+  const earthGroup =
+    new THREE.Group();
+
+  scene.add(earthGroup);
+
+
+  /* EARTH TEXTURE */
+
+  const textureLoader =
+    new THREE.TextureLoader();
+
+  const earthTexture =
+    textureLoader.load(
+      "assets/earth.jpg",
+      function(texture) {
+
+        texture.colorSpace =
+          THREE.SRGBColorSpace;
+
+      },
+      undefined,
+      function(error) {
+
+        console.error(
+          "SmithX Earth texture failed:",
+          error
         );
 
+      }
+    );
+
+
+  /* EARTH */
+
+  const earthGeometry =
+    new THREE.SphereGeometry(
+      1,
+      96,
+      96
+    );
+
+  const earthMaterial =
+    new THREE.MeshPhongMaterial({
+      map: earthTexture,
+      shininess: 12,
+      specular: new THREE.Color(
+        0x222222
+      )
+    });
+
+  const earth =
+    new THREE.Mesh(
+      earthGeometry,
+      earthMaterial
+    );
+
+  earthGroup.add(earth);
+
+
+  /* ATMOSPHERE */
+
+  const atmosphereGeometry =
+    new THREE.SphereGeometry(
+      1.045,
+      64,
+      64
+    );
+
+  const atmosphereMaterial =
+    new THREE.MeshBasicMaterial({
+      color: 0x159fff,
+      transparent: true,
+      opacity: 0.12,
+      side: THREE.BackSide
+    });
+
+  const atmosphere =
+    new THREE.Mesh(
+      atmosphereGeometry,
+      atmosphereMaterial
+    );
+
+  earthGroup.add(atmosphere);
+
+
+  /* OUTER GLOW */
+
+  const glowGeometry =
+    new THREE.SphereGeometry(
+      1.09,
+      64,
+      64
+    );
+
+  const glowMaterial =
+    new THREE.MeshBasicMaterial({
+      color: 0x00c8ff,
+      transparent: true,
+      opacity: 0.045,
+      side: THREE.BackSide
+    });
+
+  const glow =
+    new THREE.Mesh(
+      glowGeometry,
+      glowMaterial
+    );
+
+  earthGroup.add(glow);
+
+
+  /* =========================================
+     CITY MARKERS
+  ========================================= */
+
+  const cities = [
+
+    {
+      name: "Nairobi",
+      lat: -1.2864,
+      lon: 36.8172
+    },
+
+    {
+      name: "Dubai",
+      lat: 25.2048,
+      lon: 55.2708
+    },
+
+    {
+      name: "London",
+      lat: 51.5074,
+      lon: -0.1278
+    },
+
+    {
+      name: "New York",
+      lat: 40.7128,
+      lon: -74.006
+    },
+
+    {
+      name: "Singapore",
+      lat: 1.3521,
+      lon: 103.8198
     }
-);
+
+  ];
 
 
-/* =====================================================
-   SHIPMENT
-===================================================== */
+  function latLonToVector3(
+    lat,
+    lon,
+    radius = 1.015
+  ) {
 
-function scrollToShipment(){
+    const phi =
+      (90 - lat) *
+      Math.PI /
+      180;
+
+    const theta =
+      (lon + 180) *
+      Math.PI /
+      180;
+
+    return new THREE.Vector3(
+      -radius *
+        Math.sin(phi) *
+        Math.cos(theta),
+
+      radius *
+        Math.cos(phi),
+
+      radius *
+        Math.sin(phi) *
+        Math.sin(theta)
+    );
+
+  }
+
+
+  cities.forEach(city => {
+
+    const position =
+      latLonToVector3(
+        city.lat,
+        city.lon
+      );
+
+    const markerGeometry =
+      new THREE.SphereGeometry(
+        0.025,
+        16,
+        16
+      );
+
+    const markerMaterial =
+      new THREE.MeshBasicMaterial({
+        color: 0x00ffff
+      });
+
+    const marker =
+      new THREE.Mesh(
+        markerGeometry,
+        markerMaterial
+      );
+
+    marker.position.copy(
+      position
+    );
+
+    earthGroup.add(marker);
+
+  });
+
+
+  /* =========================================
+     ROUTES
+  ========================================= */
+
+  function createRoute(
+    cityA,
+    cityB
+  ) {
+
+    const start =
+      latLonToVector3(
+        cityA.lat,
+        cityA.lon,
+        1.025
+      );
+
+    const end =
+      latLonToVector3(
+        cityB.lat,
+        cityB.lon,
+        1.025
+      );
+
+    const middle =
+      start.clone()
+        .add(end)
+        .normalize()
+        .multiplyScalar(1.35);
+
+    const curve =
+      new THREE.QuadraticBezierCurve3(
+        start,
+        middle,
+        end
+      );
+
+    const points =
+      curve.getPoints(80);
+
+    const geometry =
+      new THREE.BufferGeometry()
+        .setFromPoints(points);
+
+    const material =
+      new THREE.LineBasicMaterial({
+        color: 0x00eaff,
+        transparent: true,
+        opacity: 0.55
+      });
+
+    const line =
+      new THREE.Line(
+        geometry,
+        material
+      );
+
+    earthGroup.add(line);
+
+  }
+
+
+  createRoute(
+    cities[0],
+    cities[1]
+  );
+
+  createRoute(
+    cities[0],
+    cities[2]
+  );
+
+  createRoute(
+    cities[0],
+    cities[3]
+  );
+
+  createRoute(
+    cities[0],
+    cities[4]
+  );
+
+
+  /* =========================================
+     ROTATION
+  ========================================= */
+
+  let rotationSpeed = 0.0018;
+
+  function animate() {
+
+    requestAnimationFrame(
+      animate
+    );
+
+    earthGroup.rotation.y +=
+      rotationSpeed;
+
+    renderer.render(
+      scene,
+      camera
+    );
+
+  }
+
+  animate();
+
+
+  /* =========================================
+     PAGE FUNCTIONS
+  ========================================= */
+
+  function scrollToShipment() {
 
     document
-        .getElementById("shipment")
-        .scrollIntoView({
-            behavior:"smooth"
-        });
+      .getElementById("shipment")
+      .scrollIntoView({
+        behavior: "smooth"
+      });
 
-}
-
-
-const addCart =
-    document.getElementById(
-        "addCart"
-    );
+  }
 
 
-const overlay =
-    document.getElementById(
-        "overlay"
-    );
+  function scrollToNetwork() {
+
+    document
+      .getElementById("network")
+      .scrollIntoView({
+        behavior: "smooth"
+      });
+
+  }
 
 
-const destination =
-    document.getElementById(
+  /* =========================================
+     CREATE SHIPMENT
+  ========================================= */
+
+  function createShipment() {
+
+    const destination =
+      document.getElementById(
         "destination"
-    );
+      ).value;
 
+    const overlay =
+      document.getElementById(
+        "shipmentOverlay"
+      );
 
-const overlayDestination =
-    document.getElementById(
-        "overlayDestination"
-    );
+    const message =
+      document.getElementById(
+        "shipmentMessage"
+      );
 
-
-const progressBar =
-    document.getElementById(
+    const progress =
+      document.getElementById(
         "progressBar"
-    );
+      );
+
+    message.textContent =
+      "Nairobi → " +
+      destination +
+      " has been added to the SmithX live network.";
+
+    overlay.style.display =
+      "flex";
+
+    progress.style.width =
+      "0%";
+
+    setTimeout(() => {
+
+      progress.style.width =
+        "100%";
+
+    }, 100);
+
+  }
 
 
-addCart.addEventListener(
-    "click",
-    function(){
+  function closeOverlay() {
 
-        overlayDestination.textContent =
-            destination.value;
+    document.getElementById(
+      "shipmentOverlay"
+    ).style.display =
+      "none";
 
-        overlay.classList.add(
-            "active"
-        );
+  }
 
-
-        progressBar.style.width =
-            "0%";
-
-
-        setTimeout(
-            () => {
-
-                progressBar.style.width =
-                    "100%";
-
-            },
-            200
-        );
-
-    }
-);
-
-
-function closeShipment(){
-
-    overlay.classList.remove(
-        "active"
-    );
-
-    progressBar.style.width =
-        "0%";
-
-}
-
-
-window.closeShipment =
-    closeShipment;
-
-window.scrollToShipment =
-    scrollToShipment;
 
 </script>
 
