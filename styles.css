@@ -1,0 +1,1780 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #030305;
+  color: #f5f5f7;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+button,
+select,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 76px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 6vw;
+
+  background: rgba(3, 3, 5, .72);
+  backdrop-filter: blur(20px);
+
+  border-bottom: 1px solid rgba(255,255,255,.06);
+
+  z-index: 100;
+}
+
+.logo {
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: .12em;
+}
+
+.logo span {
+  font-weight: 400;
+}
+
+.navbar nav {
+  display: flex;
+  gap: 30px;
+}
+
+.navbar nav a {
+  color: #85858f;
+  font-size: 12px;
+  transition: .3s;
+}
+
+.navbar nav a:hover {
+  color: white;
+}
+
+.track-button {
+  border: 1px solid #33333d;
+  background: transparent;
+  color: white;
+
+  padding: 11px 17px;
+  border-radius: 10px;
+
+  font-size: 11px;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  min-height: 820px;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  padding:
+    130px 7vw
+    80px;
+
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 5;
+
+  width: 50%;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  color: #898995;
+
+  font-size: 9px;
+  letter-spacing: .2em;
+
+  margin-bottom: 25px;
+}
+
+.eyebrow span {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #8dffba;
+
+  box-shadow:
+    0 0 15px #8dffba;
+}
+
+.hero h1 {
+  max-width: 650px;
+
+  font-size: clamp(55px, 7vw, 105px);
+
+  line-height: .9;
+
+  letter-spacing: -.07em;
+}
+
+.hero h1 em {
+  font-style: normal;
+
+  background:
+    linear-gradient(
+      90deg,
+      #fff,
+      #7774ff
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+}
+
+.hero p {
+  max-width: 520px;
+
+  margin-top: 30px;
+
+  color: #7b7b86;
+
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+
+/* =========================
+   QUICK ORDER
+========================= */
+
+.quick-order {
+  display: flex;
+  align-items: end;
+  gap: 12px;
+
+  margin-top: 35px;
+}
+
+.order-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.order-field label {
+  color: #666671;
+
+  font-size: 8px;
+  letter-spacing: .15em;
+}
+
+.order-field select {
+  min-width: 170px;
+
+  padding: 14px;
+
+  border: 1px solid #2a2a32;
+  border-radius: 10px;
+
+  outline: none;
+
+  color: white;
+  background: #0b0b0f;
+}
+
+.add-cart-button {
+  height: 46px;
+
+  padding: 0 22px;
+
+  border: none;
+  border-radius: 10px;
+
+  color: #050507;
+  background: white;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  transition: .3s;
+
+  box-shadow:
+    0 10px 35px rgba(255,255,255,.08);
+}
+
+.add-cart-button:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 15px 45px rgba(255,255,255,.15);
+}
+
+.add-cart-button span {
+  margin-right: 5px;
+}
+
+
+/* =========================
+   3D PLANET
+========================= */
+
+.logistics-visual {
+  position: absolute;
+
+  right: -5%;
+  top: 16%;
+
+  width: 58vw;
+  height: 58vw;
+
+  max-width: 760px;
+  max-height: 760px;
+
+  perspective: 1000px;
+}
+
+.planet {
+  position: absolute;
+
+  width: 55%;
+  height: 55%;
+
+  left: 22%;
+  top: 20%;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #33335c,
+      #111125 38%,
+      #05050c 72%
+    );
+
+  box-shadow:
+    inset -35px -30px 80px rgba(0,0,0,.9),
+    0 0 80px rgba(94,82,255,.15);
+
+  animation: planetFloat 7s ease-in-out infinite;
+}
+
+.planet-glow {
+  position: absolute;
+  inset: -15%;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(91,84,255,.16),
+      transparent 68%
+    );
+}
+
+.continent {
+  position: absolute;
+
+  background: rgba(125,120,255,.12);
+
+  filter: blur(2px);
+}
+
+.continent-one {
+  width: 90px;
+  height: 130px;
+
+  left: 28%;
+  top: 20%;
+
+  border-radius: 60% 40% 60% 35%;
+  transform: rotate(25deg);
+}
+
+.continent-two {
+  width: 130px;
+  height: 80px;
+
+  right: 12%;
+  top: 42%;
+
+  border-radius: 40% 60% 35% 60%;
+  transform: rotate(-25deg);
+}
+
+.continent-three {
+  width: 80px;
+  height: 100px;
+
+  left: 20%;
+  bottom: 12%;
+
+  border-radius: 60% 35% 50% 40%;
+}
+
+@keyframes planetFloat {
+  0%,100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-15px) rotate(2deg);
+  }
+}
+
+.orbit {
+  position: absolute;
+
+  left: 8%;
+  top: 31%;
+
+  width: 84%;
+  height: 34%;
+
+  border:
+    1px solid rgba(140,130,255,.18);
+
+  border-radius: 50%;
+
+  transform:
+    rotate(-20deg);
+}
+
+.orbit-two {
+  transform:
+    rotate(65deg);
+}
+
+.location {
+  position: absolute;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  color: #888895;
+
+  font-size: 9px;
+}
+
+.location span {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #8dffba;
+
+  box-shadow:
+    0 0 15px #8dffba;
+}
+
+.location-nairobi {
+  left: 28%;
+  top: 46%;
+}
+
+.location-dubai {
+  left: 58%;
+  top: 35%;
+}
+
+.location-london {
+  left: 48%;
+  top: 23%;
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 15px;
+
+  padding:
+    30px 7vw
+    100px;
+}
+
+.dashboard-card {
+  padding: 30px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #0c0c11,
+      #07070a
+    );
+
+  border:
+    1px solid #19191f;
+
+  border-radius: 18px;
+}
+
+.dashboard-card small {
+  display: block;
+
+  color: #666671;
+
+  font-size: 8px;
+  letter-spacing: .16em;
+}
+
+.dashboard-card strong {
+  display: block;
+
+  margin-top: 14px;
+
+  font-size: 35px;
+}
+
+.dashboard-card span {
+  display: block;
+
+  margin-top: 5px;
+
+  color: #555560;
+
+  font-size: 10px;
+}
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+.tracking-section,
+.network-section,
+.fleet-section {
+  padding:
+    120px 7vw;
+}
+
+.section-heading span {
+  color: #777783;
+
+  font-size: 8px;
+  letter-spacing: .2em;
+}
+
+.section-heading h2 {
+  max-width: 600px;
+
+  margin-top: 15px;
+
+  font-size: clamp(40px, 5vw, 70px);
+
+  line-height: .95;
+
+  letter-spacing: -.05em;
+}
+
+
+/* =========================
+   TRACKING
+========================= */
+
+.tracking-console {
+  display: flex;
+
+  max-width: 700px;
+
+  margin-top: 45px;
+}
+
+.tracking-console input {
+  flex: 1;
+
+  padding: 18px;
+
+  color: white;
+  background: #0a0a0e;
+
+  border:
+    1px solid #24242d;
+
+  outline: none;
+
+  border-radius:
+    12px 0 0 12px;
+}
+
+.tracking-console button {
+  padding: 0 30px;
+
+  border: none;
+
+  color: black;
+  background: white;
+
+  border-radius:
+    0 12px 12px 0;
+}
+
+.tracking-result {
+  max-width: 700px;
+
+  margin-top: 15px;
+
+  color: #858591;
+
+  font-size: 12px;
+}
+
+
+/* =========================
+   NETWORK
+========================= */
+
+.network-map {
+  position: relative;
+
+  height: 500px;
+
+  margin-top: 60px;
+
+  border:
+    1px solid #17171d;
+
+  border-radius: 25px;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(82,74,255,.09),
+      transparent 50%
+    );
+}
+
+.network-map::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.025) 1px,
+      transparent 1px
+    );
+
+  background-size: 45px 45px;
+}
+
+.network-city {
+  position: absolute;
+
+  z-index: 3;
+
+  padding: 8px 12px;
+
+  border:
+    1px solid #292932;
+
+  border-radius: 8px;
+
+  background: rgba(5,5,8,.8);
+
+  font-size: 9px;
+}
+
+.city-nairobi {
+  left: 38%;
+  top: 55%;
+}
+
+.city-dubai {
+  left: 53%;
+  top: 42%;
+}
+
+.city-london {
+  left: 46%;
+  top: 25%;
+}
+
+.city-newyork {
+  left: 18%;
+  top: 30%;
+}
+
+.city-singapore {
+  left: 75%;
+  top: 64%;
+}
+
+.network-route {
+  position: absolute;
+
+  height: 1px;
+
+  transform-origin: left;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(125,117,255,.8),
+      transparent
+    );
+
+  animation: routePulse 3s infinite;
+}
+
+.route-one {
+  width: 180px;
+
+  left: 39%;
+  top: 56%;
+
+  transform: rotate(-25deg);
+}
+
+.route-two {
+  width: 270px;
+
+  left: 40%;
+  top: 55%;
+
+  transform: rotate(-38deg);
+}
+
+.route-three {
+  width: 400px;
+
+  left: 40%;
+  top: 55%;
+
+  transform: rotate(-7deg);
+}
+
+@keyframes routePulse {
+  0%,100% {
+    opacity: .25;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+
+/* =========================
+   FLEET
+========================= */
+
+.fleet-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 15px;
+
+  margin-top: 55px;
+}
+
+.fleet-card {
+  min-height: 270px;
+
+  padding: 30px;
+
+  border:
+    1px solid #19191f;
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #0c0c11,
+      #050507
+    );
+
+  transition: .35s;
+}
+
+.fleet-card:hover {
+  transform: translateY(-8px);
+
+  border-color: #353541;
+}
+
+.fleet-card small {
+  color: #686873;
+
+  font-size: 8px;
+
+  letter-spacing: .18em;
+}
+
+.fleet-card h3 {
+  margin-top: 70px;
+
+  font-size: 28px;
+
+  letter-spacing: -.04em;
+}
+
+.fleet-card p {
+  margin-top: 12px;
+
+  color: #666671;
+
+  font-size: 12px;
+
+  line-height: 1.6;
+}
+
+
+/* =====================================================
+   CINEMATIC LOGISTICS TRANSITION
+===================================================== */
+
+.logistics-transition {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(94,82,255,.13),
+      transparent 35%
+    ),
+    #030305;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition:
+    opacity .5s ease,
+    visibility .5s ease;
+}
+
+.logistics-transition.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.transition-grid {
+  position: absolute;
+
+  inset: 0;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.025) 1px,
+      transparent 1px
+    );
+
+  background-size: 45px 45px;
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      transparent,
+      black 30%,
+      black 70%,
+      transparent
+    );
+}
+
+.transition-header {
+  position: absolute;
+
+  top: 35px;
+
+  left: 5vw;
+  right: 5vw;
+
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  opacity: 0;
+
+  transform: translateY(-15px);
+
+  transition:
+    opacity .6s .3s ease,
+    transform .6s .3s ease;
+}
+
+.logistics-transition.active
+.transition-header {
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+.transition-brand {
+  font-size: 12px;
+
+  font-weight: 900;
+
+  letter-spacing: .18em;
+}
+
+.transition-brand span {
+  font-weight: 400;
+}
+
+.transition-logo {
+  display: inline-grid;
+
+  place-items: center;
+
+  width: 27px;
+  height: 27px;
+
+  margin-right: 8px;
+
+  border: 1px solid #44444c;
+
+  border-radius: 7px;
+
+  font-size: 10px;
+}
+
+.transition-live {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color: #8dffba;
+
+  font-size: 8px;
+
+  letter-spacing: .16em;
+}
+
+.transition-live span {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: #8dffba;
+
+  box-shadow:
+    0 0 12px #8dffba;
+}
+
+
+/* ROUTE */
+
+.route-info {
+  position: absolute;
+
+  top: 19%;
+
+  left: 10%;
+  right: 10%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  z-index: 4;
+}
+
+.route-location {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+
+  min-width: 130px;
+
+  opacity: 0;
+
+  transform: translateY(15px);
+
+  transition:
+    opacity .7s .8s ease,
+    transform .7s .8s ease;
+}
+
+.logistics-transition.active
+.route-location {
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+.route-location small {
+  color: #5f5f69;
+
+  font-size: 8px;
+
+  letter-spacing: .18em;
+}
+
+.route-location strong {
+  font-size: 25px;
+
+  letter-spacing: -.04em;
+}
+
+.route-location span {
+  color: #666671;
+
+  font-size: 9px;
+}
+
+.destination {
+  text-align: right;
+
+  align-items: flex-end;
+}
+
+
+/* ROUTE LINE */
+
+.route-line-animation {
+  position: relative;
+
+  flex: 1;
+
+  height: 2px;
+
+  margin: 0 40px;
+
+  background: #202027;
+
+  overflow: hidden;
+}
+
+.route-progress {
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  width: 0%;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      white,
+      #8c7cff
+    );
+
+  box-shadow:
+    0 0 15px rgba(140,124,255,.7);
+
+  transition:
+    width 3s cubic-bezier(.4,0,.2,1);
+}
+
+.logistics-transition.active
+.route-progress {
+  width: 100%;
+}
+
+.route-dot {
+  position: absolute;
+
+  top: 50%;
+  left: 0;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: white;
+
+  transform:
+    translate(-50%,-50%);
+
+  box-shadow:
+    0 0 15px white;
+
+  transition:
+    left 3s cubic-bezier(.4,0,.2,1);
+}
+
+.logistics-transition.active
+.route-dot {
+  left: 100%;
+}
+
+
+/* ROAD */
+
+.road {
+  position: absolute;
+
+  left: -10%;
+  right: -10%;
+
+  bottom: 22%;
+
+  height: 180px;
+
+  transform:
+    perspective(600px)
+    rotateX(65deg);
+
+  background:
+    linear-gradient(
+      to bottom,
+      #08080b,
+      #111116
+    );
+
+  border-top:
+    1px solid rgba(255,255,255,.08);
+
+  border-bottom:
+    1px solid rgba(255,255,255,.04);
+}
+
+.road-line {
+  position: absolute;
+
+  height: 2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.7),
+      transparent
+    );
+
+  animation:
+    roadMove 1s linear infinite;
+}
+
+.road-line-1 {
+  width: 180px;
+  top: 40px;
+}
+
+.road-line-2 {
+  width: 280px;
+  top: 80px;
+
+  animation-delay: -.3s;
+}
+
+.road-line-3 {
+  width: 220px;
+  top: 120px;
+
+  animation-delay: -.6s;
+}
+
+@keyframes roadMove {
+
+  from {
+    left: -250px;
+  }
+
+  to {
+    left: 110%;
+  }
+
+}
+
+
+/* =========================
+   3D TRAILER
+========================= */
+
+.truck {
+  position: absolute;
+
+  left: -430px;
+
+  bottom: 55px;
+
+  width: 390px;
+  height: 100px;
+
+  transform:
+    rotateX(-4deg)
+    rotateY(-4deg);
+
+  filter:
+    drop-shadow(
+      0 30px 25px
+      rgba(0,0,0,.7)
+    );
+
+  transition:
+    left 3.8s
+    cubic-bezier(.15,.75,.2,1);
+}
+
+.logistics-transition.active
+.truck {
+  left: calc(100% + 40px);
+}
+
+.truck-trailer {
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  width: 300px;
+  height: 78px;
+
+  border-radius: 8px;
+
+  border:
+    1px solid #363640;
+
+  background:
+    linear-gradient(
+      145deg,
+      #17171d,
+      #08080b
+    );
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.08),
+    0 0 30px rgba(100,90,255,.08);
+}
+
+.trailer-logo {
+  position: absolute;
+
+  left: 28px;
+  top: 18px;
+
+  font-size: 24px;
+
+  font-weight: 900;
+
+  letter-spacing: .08em;
+}
+
+.trailer-logo span {
+  font-weight: 400;
+}
+
+.trailer-subtitle {
+  position: absolute;
+
+  left: 31px;
+  top: 49px;
+
+  color: #777782;
+
+  font-size: 7px;
+
+  letter-spacing: .25em;
+}
+
+.trailer-stripe {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 8px;
+
+  height: 2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #7770ff,
+      transparent
+    );
+}
+
+.truck-cabin {
+  position: absolute;
+
+  left: 300px;
+  top: 17px;
+
+  width: 75px;
+  height: 61px;
+
+  border-radius:
+    5px 12px 8px 5px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #282832,
+      #0b0b0f
+    );
+
+  border:
+    1px solid #363640;
+}
+
+.windshield {
+  position: absolute;
+
+  top: 8px;
+  left: 12px;
+
+  width: 48px;
+  height: 23px;
+
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #3e3d5b,
+      #080810
+    );
+
+  border:
+    1px solid #4a495b;
+}
+
+.truck-front {
+  position: absolute;
+
+  right: -3px;
+  bottom: 15px;
+
+  font-size: 7px;
+
+  font-weight: 900;
+
+  writing-mode:
+    vertical-rl;
+
+  color: #aaa8ff;
+}
+
+.truck-light {
+  position: absolute;
+
+  right: -3px;
+
+  width: 5px;
+  height: 8px;
+
+  border-radius: 2px;
+
+  background: #e8edff;
+
+  box-shadow:
+    0 0 10px #aabaff;
+}
+
+.light-one {
+  top: 28px;
+}
+
+.light-two {
+  top: 40px;
+}
+
+
+/* WHEELS */
+
+.truck-wheel {
+  position: absolute;
+
+  bottom: -18px;
+
+  width: 38px;
+  height: 38px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      #45454d 0 20%,
+      #09090b 22% 55%,
+      #202027 57% 70%,
+      #050507 72%
+    );
+
+  border:
+    2px solid #17171d;
+}
+
+.wheel-one {
+  left: 35px;
+}
+
+.wheel-two {
+  left: 235px;
+}
+
+.wheel-three {
+  left: 315px;
+}
+
+.wheel-four {
+  left: 350px;
+}
+
+
+/* DELIVERY CARD */
+
+.delivery-card {
+  position: absolute;
+
+  left: 50%;
+
+  bottom: 6%;
+
+  width: min(760px, 88%);
+
+  transform:
+    translateX(-50%)
+    translateY(30px);
+
+  padding: 25px;
+
+  border:
+    1px solid rgba(255,255,255,.1);
+
+  border-radius: 18px;
+
+  background:
+    rgba(10,10,14,.82);
+
+  backdrop-filter:
+    blur(20px);
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.5);
+
+  opacity: 0;
+
+  transition:
+    opacity .7s 2.6s ease,
+    transform .7s 2.6s ease;
+}
+
+.logistics-transition.active
+.delivery-card {
+  opacity: 1;
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+}
+
+.delivery-top {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 20px;
+}
+
+.delivery-top small {
+  color: #656570;
+
+  font-size: 7px;
+
+  letter-spacing: .16em;
+}
+
+.delivery-top h2 {
+  margin-top: 8px;
+
+  font-size: 22px;
+
+  letter-spacing: -.04em;
+}
+
+.delivery-top h2 b {
+  margin: 0 10px;
+
+  color: #7770ff;
+}
+
+.delivery-status {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  color: #8dffba;
+
+  font-size: 7px;
+
+  letter-spacing: .12em;
+}
+
+.delivery-status span {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: #8dffba;
+
+  box-shadow:
+    0 0 10px #8dffba;
+}
+
+.delivery-data {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 15px;
+
+  margin-top: 25px;
+
+  padding-top: 20px;
+
+  border-top:
+    1px solid #1e1e25;
+}
+
+.delivery-data small {
+  display: block;
+
+  color: #5d5d67;
+
+  font-size: 7px;
+
+  letter-spacing: .12em;
+}
+
+.delivery-data strong {
+  display: block;
+
+  margin-top: 7px;
+
+  font-size: 16px;
+}
+
+.delivery-progress {
+  margin-top: 22px;
+}
+
+.progress-label {
+  display: flex;
+
+  justify-content: space-between;
+
+  color: #55555f;
+
+  font-size: 7px;
+
+  letter-spacing: .1em;
+}
+
+.progress-track {
+  height: 3px;
+
+  margin-top: 8px;
+
+  background: #19191f;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+}
+
+#deliveryProgress {
+  width: 0%;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      #8dffba,
+      #7770ff
+    );
+
+  transition:
+    width 3s linear;
+}
+
+.logistics-transition.active
+#deliveryProgress {
+  width: 100%;
+}
+
+.continue-shopping {
+  position: absolute;
+
+  bottom: 2.5%;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  padding: 9px 16px;
+
+  border:
+    1px solid #292931;
+
+  border-radius: 8px;
+
+  color: #777780;
+
+  background: transparent;
+
+  font-size: 9px;
+
+  opacity: 0;
+
+  transition:
+    opacity .5s 3.2s ease;
+}
+
+.logistics-transition.active
+.continue-shopping {
+  opacity: 1;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 45px 7vw;
+
+  border-top:
+    1px solid #16161c;
+}
+
+footer p {
+  color: #555560;
+
+  font-size: 10px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 850px) {
+
+  .navbar nav {
+    display: none;
+  }
+
+  .hero {
+    min-height: 900px;
+
+    padding-top: 150px;
+  }
+
+  .hero-content {
+    width: 100%;
+  }
+
+  .logistics-visual {
+    width: 100vw;
+    height: 100vw;
+
+    right: -20%;
+    top: 50%;
+  }
+
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .fleet-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .route-info {
+    left: 5%;
+    right: 5%;
+  }
+
+  .route-line-animation {
+    margin: 0 15px;
+  }
+
+  .delivery-card {
+    width: 94%;
+  }
+
+  .truck {
+    transform: scale(.75);
+  }
+}
+
+
+@media (max-width: 520px) {
+
+  .navbar {
+    padding: 0 5vw;
+  }
+
+  .track-button {
+    display: none;
+  }
+
+  .hero {
+    padding:
+      130px 5vw
+      60px;
+  }
+
+  .hero h1 {
+    font-size: 58px;
+  }
+
+  .quick-order {
+    align-items: stretch;
+
+    flex-direction: column;
+  }
+
+  .order-field select,
+  .add-cart-button {
+    width: 100%;
+  }
+
+  .route-location strong {
+    font-size: 17px;
+  }
+
+  .route-location span {
+    display: none;
+  }
+
+  .route-line-animation {
+    margin: 0 8px;
+  }
+
+  .delivery-card {
+    bottom: 7%;
+    padding: 17px;
+  }
+
+  .delivery-top {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .delivery-data {
+    grid-template-columns: 1fr;
+  }
+
+  .delivery-data div {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+  }
+
+  .delivery-data strong {
+    margin-top: 0;
+  }
+
+  .truck {
+    transform: scale(.55);
+
+    transform-origin:
+      center bottom;
+  }
+
+  .network-map {
+    height: 400px;
+  }
+
+  footer {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 15px;
+  }
+}
