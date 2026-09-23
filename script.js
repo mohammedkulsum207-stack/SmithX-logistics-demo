@@ -1,273 +1,335 @@
+"use strict";
+
+
+/* =========================
+   DESTINATIONS
+========================= */
+
 const destinations = {
-  Dubai: {
-    distance: "4,100 km",
-    eta: "2–5 days"
+
+  Dubai:{
+    distance:"4,100 km",
+    eta:"2–5 days"
   },
 
-  Nairobi: {
-    distance: "25 km",
-    eta: "1–2 days"
+  Nairobi:{
+    distance:"25 km",
+    eta:"1–2 days"
   },
 
-  London: {
-    distance: "6,850 km",
-    eta: "4–7 days"
+  London:{
+    distance:"6,850 km",
+    eta:"4–7 days"
   },
 
-  "New York": {
-    distance: "11,800 km",
-    eta: "5–9 days"
+  "New York":{
+    distance:"11,800 km",
+    eta:"5–9 days"
   },
 
-  Singapore: {
-    distance: "7,300 km",
-    eta: "5–8 days"
+  Singapore:{
+    distance:"7,300 km",
+    eta:"5–8 days"
   }
+
 };
 
 
-let progressTimer;
+/* =========================
+   SCROLL ANIMATION
+========================= */
 
+function setupReveal(){
 
-/* --------------------------------
-   SCROLL REVEAL
--------------------------------- */
+  const elements =
+    document.querySelectorAll(".reveal");
 
-const revealObserver = new IntersectionObserver(
-  entries => {
+  const observer =
+    new IntersectionObserver(
 
-    entries.forEach(entry => {
+      function(entries){
 
-      if (entry.isIntersecting) {
+        entries.forEach(function(entry){
 
-        entry.target.classList.add("visible");
+          if(entry.isIntersecting){
 
-        revealObserver.unobserve(entry.target);
+            entry.target.classList.add("show");
 
+            observer.unobserve(entry.target);
+
+          }
+
+        });
+
+      },
+
+      {
+        threshold:0.08
       }
 
-    });
-
-  },
-  {
-    threshold: 0.12
-  }
-);
+    );
 
 
-document.querySelectorAll(".reveal")
-  .forEach(element => {
-    revealObserver.observe(element);
+  elements.forEach(function(element){
+
+    observer.observe(element);
+
   });
 
+}
 
-/* --------------------------------
-   NUMBER COUNTERS
--------------------------------- */
 
-const counterObserver = new IntersectionObserver(
-  entries => {
+/* =========================
+   COUNTERS
+========================= */
 
-    entries.forEach(entry => {
+function setupCounters(){
 
-      if (!entry.isIntersecting) return;
+  const counters =
+    document.querySelectorAll(".counter");
 
-      const element = entry.target;
-      const target = Number(element.dataset.count);
 
-      let current = 0;
+  counters.forEach(function(counter){
+
+    const target =
+      Number(counter.dataset.target);
+
+    counter.textContent = "0";
+
+    let started = false;
+
+
+    function animate(){
+
+      if(started) return;
+
+      started = true;
 
       const duration = 1600;
       const start = performance.now();
 
-      function update(now) {
 
-        const progress = Math.min(
-          (now - start) / duration,
-          1
-        );
+      function frame(now){
+
+        const progress =
+          Math.min(
+            (now - start) / duration,
+            1
+          );
+
 
         const eased =
-          1 - Math.pow(1 - progress, 3);
+          1 - Math.pow(1 - progress,3);
 
-        current = Math.floor(target * eased);
 
-        element.textContent = current;
+        counter.textContent =
+          Math.floor(target * eased);
 
-        if (progress < 1) {
-          requestAnimationFrame(update);
-        } else {
-          element.textContent = target;
+
+        if(progress < 1){
+
+          requestAnimationFrame(frame);
+
+        }else{
+
+          counter.textContent = target;
+
         }
 
       }
 
-      requestAnimationFrame(update);
 
-      counterObserver.unobserve(element);
+      requestAnimationFrame(frame);
 
-    });
-
-  },
-  {
-    threshold: .7
-  }
-);
+    }
 
 
-document.querySelectorAll("[data-count]")
-  .forEach(element => {
-    counterObserver.observe(element);
+    const observer =
+      new IntersectionObserver(
+
+        function(entries){
+
+          if(entries[0].isIntersecting){
+
+            animate();
+
+            observer.disconnect();
+
+          }
+
+        },
+
+        {
+          threshold:.5
+        }
+
+      );
+
+
+    observer.observe(counter);
+
   });
 
+}
 
-/* --------------------------------
-   START SHIPMENT
--------------------------------- */
 
-function startShipment() {
+/* =========================
+   SHIPMENT
+========================= */
+
+let progressTimer = null;
+
+
+function openShipment(){
+
+  const select =
+    document.getElementById("destination");
+
 
   const destination =
-    document.getElementById(
-      "destinationSelect"
-    ).value;
+    select ? select.value : "Dubai";
+
 
   const data =
     destinations[destination];
 
-  const overlay =
-    document.getElementById(
-      "logisticsTransition"
-    );
-
 
   document.getElementById(
     "routeDestination"
-  ).textContent = destination.toUpperCase();
+  ).textContent =
+    destination.toUpperCase();
 
 
   document.getElementById(
-    "cardDestination"
-  ).textContent = destination;
+    "deliveryDestination"
+  ).textContent =
+    destination;
 
 
   document.getElementById(
-    "deliveryDistance"
-  ).textContent = data.distance;
+    "distance"
+  ).textContent =
+    data.distance;
 
 
   document.getElementById(
-    "deliveryTime"
-  ).textContent = data.eta;
+    "eta"
+  ).textContent =
+    data.eta;
+
+
+  const overlay =
+    document.getElementById(
+      "shipmentOverlay"
+    );
 
 
   const progress =
     document.getElementById(
-      "deliveryProgress"
+      "progress"
     );
+
 
   const percent =
     document.getElementById(
-      "progressPercent"
+      "percent"
     );
+
+
+  clearInterval(progressTimer);
 
 
   progress.style.transition = "none";
   progress.style.width = "0%";
+
   percent.textContent = "0%";
 
 
   overlay.classList.remove("active");
 
+
+  /*
+    Forces browser to restart
+    the truck animation.
+  */
   void overlay.offsetWidth;
+
 
   overlay.classList.add("active");
 
-  document.body.style.overflow = "hidden";
 
+  document.body.style.overflow =
+    "hidden";
 
-  startProgress();
-}
-
-
-/* --------------------------------
-   LIVE PROGRESS
--------------------------------- */
-
-function startProgress() {
-
-  clearInterval(progressTimer);
-
-  const bar =
-    document.getElementById(
-      "deliveryProgress"
-    );
-
-  const percentage =
-    document.getElementById(
-      "progressPercent"
-    );
 
   let value = 0;
 
 
-  setTimeout(() => {
+  setTimeout(function(){
 
-    bar.style.transition =
-      "width 3.8s cubic-bezier(.22,.61,.36,1)";
+    progress.style.transition =
+      "width 4s linear";
 
-    bar.style.width = "100%";
+    progress.style.width =
+      "100%";
 
-  }, 100);
-
-
-  progressTimer = setInterval(() => {
-
-    value++;
-
-    percentage.textContent =
-      value + "%";
+  },100);
 
 
-    if (value >= 100) {
+  progressTimer =
+    setInterval(function(){
 
-      clearInterval(progressTimer);
+      value++;
 
-    }
+      percent.textContent =
+        value + "%";
 
-  }, 38);
+
+      if(value >= 100){
+
+        clearInterval(progressTimer);
+
+      }
+
+    },40);
+
 }
 
 
-/* --------------------------------
-   CLOSE ANIMATION
--------------------------------- */
+/* =========================
+   CLOSE SHIPMENT
+========================= */
 
-function closeLogisticsTransition() {
+function closeShipment(){
 
   const overlay =
     document.getElementById(
-      "logisticsTransition"
+      "shipmentOverlay"
     );
+
 
   overlay.classList.remove("active");
 
-  document.body.style.overflow = "";
+  document.body.style.overflow =
+    "";
+
 
   clearInterval(progressTimer);
+
 }
 
 
-/* --------------------------------
+/* =========================
    TRACKING
--------------------------------- */
+========================= */
 
-function trackShipment() {
+function trackShipment(){
 
   const input =
     document.getElementById(
-      "trackingInput"
+      "trackingNumber"
     );
+
 
   const result =
     document.getElementById(
@@ -275,11 +337,11 @@ function trackShipment() {
     );
 
 
-  const trackingNumber =
+  const value =
     input.value.trim();
 
 
-  if (!trackingNumber) {
+  if(!value){
 
     result.innerHTML =
       "Please enter a tracking number.";
@@ -290,18 +352,12 @@ function trackShipment() {
 
 
   result.innerHTML = `
-    Shipment <strong>${escapeHTML(
-      trackingNumber
-    )}</strong> has entered the
-    SmithX logistics network.
-
+    Shipment <strong>${escapeHTML(value)}</strong>
+    has entered the SmithX network.
     <br>
-
     Status:
     <span>In Transit</span>
-
     <br>
-
     AI Route:
     <strong>Optimizing</strong>
   `;
@@ -309,48 +365,48 @@ function trackShipment() {
 }
 
 
-/* --------------------------------
-   SAFE HTML
--------------------------------- */
+/* =========================
+   SECURITY
+========================= */
 
-function escapeHTML(value) {
+function escapeHTML(value){
 
   return value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 
 }
 
 
-/* --------------------------------
-   NAVIGATION
--------------------------------- */
+/* =========================
+   SCROLL TRACKING
+========================= */
 
-function scrollToTracking() {
+function goTracking(){
 
   document
     .getElementById("tracking")
     .scrollIntoView({
-      behavior: "smooth"
+      behavior:"smooth"
     });
 
 }
 
 
-/* --------------------------------
-   ESCAPE KEY
--------------------------------- */
+/* =========================
+   ESC KEY
+========================= */
 
 document.addEventListener(
   "keydown",
-  event => {
+  function(event){
 
-    if (event.key === "Escape") {
+    if(event.key === "Escape"){
 
-      closeLogisticsTransition();
+      closeShipment();
 
     }
 
@@ -358,93 +414,17 @@ document.addEventListener(
 );
 
 
-/* --------------------------------
-   MOUSE PARALLAX
--------------------------------- */
-
-const planet =
-  document.querySelector(".planet");
+/* =========================
+   START EVERYTHING
+========================= */
 
 document.addEventListener(
-  "mousemove",
-  event => {
+  "DOMContentLoaded",
+  function(){
 
-    if (!planet) return;
+    setupReveal();
 
-    const x =
-      (event.clientX /
-        window.innerWidth - .5) * 10;
-
-    const y =
-      (event.clientY /
-        window.innerHeight - .5) * -10;
-
-
-    planet.style.transform =
-      `translateY(${y}px)
-       rotateY(${x}deg)`;
+    setupCounters();
 
   }
 );
-
-
-/* --------------------------------
-   ACTIVE NAVIGATION
--------------------------------- */
-
-const sections =
-  document.querySelectorAll(
-    "section[id]"
-  );
-
-const navLinks =
-  document.querySelectorAll(
-    ".navbar nav a"
-  );
-
-
-const navObserver =
-  new IntersectionObserver(
-    entries => {
-
-      entries.forEach(entry => {
-
-        if (!entry.isIntersecting)
-          return;
-
-
-        navLinks.forEach(link => {
-
-          link.classList.remove(
-            "active"
-          );
-
-        });
-
-
-        const active =
-          document.querySelector(
-            `.navbar nav a[href="#${entry.target.id}"]`
-          );
-
-
-        if (active) {
-
-          active.classList.add(
-            "active"
-          );
-
-        }
-
-      });
-
-    },
-    {
-      threshold: .5
-    }
-  );
-
-
-sections.forEach(section => {
-  navObserver.observe(section);
-});
